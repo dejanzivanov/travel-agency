@@ -1,0 +1,36 @@
+osiguranik polisa
+id - number
+ime - string 250
+prezime - string 250
+vrsta
+telefon
+datum putovanja od
+datum putovanja do
+
+
+ucesnik
+id
+ime
+prezime
+tel
+datum rodjenja
+
+post
+id
+author
+created_at
+published_at
+archived_at
+title,
+description(excerpt)
+bodyText
+image(text)
+type enum vest/post
+
+users
+id
+email
+password
+type
+
+blog//
