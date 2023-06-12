@@ -18,7 +18,7 @@ CREATE TABLE IF NOT EXISTS `policy_holder` (
 
 -- Create dependents table
 CREATE TABLE IF NOT EXISTS `dependents` (
-                                            `id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
+                                            `id` INT UNSIGNED NOT NULL,
                                             `name` VARCHAR(255) NOT NULL,
     `last_name` VARCHAR(255) NOT NULL,
     `phone_number` TEXT NOT NULL,
