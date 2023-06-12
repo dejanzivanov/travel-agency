@@ -12,7 +12,6 @@ class Blog extends Model
 
     public function getAllPosts()
     {
-//        dd('hello');
         $data = DB::select((DB::raw("SELECT * FROM `posts`;")));
         return $data;
 

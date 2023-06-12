@@ -6,14 +6,11 @@ use Illuminate\Http\Request;
 use App\Models\Blog;
 
 class BlogController extends Controller
-{
-//    $blog =  new Blog();
-//    $data = $blog->getAllPosts();
-    public function getBlogDataFromController()
+{    public function getBlogDataFromController()
     {
         $blog = new Blog();
         $data = $blog->getAllPosts();
-        return $data;
+        return view('blog', ['blog' => $data]);
     }
 
 

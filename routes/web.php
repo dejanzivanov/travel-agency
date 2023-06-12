@@ -19,3 +19,5 @@ Route::get('/', function () {
 });
 
 Route::get('/blog', [BlogController::class, 'getBlogDataFromController']);
+
+
