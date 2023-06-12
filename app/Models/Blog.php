@@ -14,6 +14,5 @@ class Blog extends Model
     {
         $data = DB::select((DB::raw("SELECT * FROM `posts`;")));
         return $data;
-
     }
 }

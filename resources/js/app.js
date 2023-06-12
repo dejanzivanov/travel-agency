@@ -1,5 +1,9 @@
 import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
+import RegistrationForm from './components/RegistrationForm.vue';
+import LoginForm from './components/LoginComponent.vue';
+import InsurancePurchaseComponent from "./components/InsurancePurchaseComponent.vue";
+
 /**
  * First we will load all of this project's JavaScript dependencies which
  * includes Vue and other libraries. It is a great starting point when
@@ -22,6 +26,9 @@ window.Vue = require('vue').default;
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
 
 Vue.component('example-component', require('./components/ExampleComponent.vue').default);
+Vue.component('registration-form', RegistrationForm);
+Vue.component('login-form', LoginForm);
+Vue.component('insurancepurchase', InsurancePurchaseComponent);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to

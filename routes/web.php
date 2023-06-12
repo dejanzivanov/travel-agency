@@ -20,4 +20,16 @@ Route::get('/', function () {
 
 Route::get('/blog', [BlogController::class, 'getBlogDataFromController']);
 
+Route::get('/login', function () {
+    return view('login');
+});
+
+Route::get('/register', function () {
+    return view('register');
+});
+
+Route::get('/insurance-purchase', function () {
+    return view('insurance-purchase');
+});
+
 
