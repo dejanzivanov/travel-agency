@@ -41,6 +41,7 @@
 <body>
 <div id='app' >
     <div class="text-white">
+        <header-component></header-component>
         <registration-form></registration-form>
     </div>
 </div>

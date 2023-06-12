@@ -1,8 +1,13 @@
 import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
+import Vue from 'vue';
+
 import RegistrationForm from './components/RegistrationForm.vue';
 import LoginForm from './components/LoginComponent.vue';
 import InsurancePurchaseComponent from "./components/InsurancePurchaseComponent.vue";
+import WelcomeComponent from "./components/WelcomeComponent.vue";
+import HeaderComponent from "./components/HeaderComponent.vue";
+
 
 /**
  * First we will load all of this project's JavaScript dependencies which
@@ -14,6 +19,8 @@ require('./bootstrap');
 
 window.Vue = require('vue').default;
 
+
+
 /**
  * The following block of code may be used to automatically register your
  * Vue components. It will recursively scan this directory for the Vue
@@ -22,6 +29,8 @@ window.Vue = require('vue').default;
  * Eg. ./components/ExampleComponent.vue -> <example-component></example-component>
  */
 
+
+
 // const files = require.context('./', true, /\.vue$/i)
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
 
@@ -29,6 +38,8 @@ Vue.component('example-component', require('./components/ExampleComponent.vue').
 Vue.component('registration-form', RegistrationForm);
 Vue.component('login-form', LoginForm);
 Vue.component('insurancepurchase', InsurancePurchaseComponent);
+Vue.component('welcome-component', WelcomeComponent);
+Vue.component('header-component', HeaderComponent);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
@@ -36,6 +47,9 @@ Vue.component('insurancepurchase', InsurancePurchaseComponent);
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 
+
 const app = new Vue({
     el: '#app',
 });
+
+

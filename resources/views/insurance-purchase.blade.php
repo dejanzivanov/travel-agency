@@ -9,6 +9,8 @@
 </head>
 <body>
 <div id="app">
+    <header-component></header-component>
+
     <InsurancePurchase></InsurancePurchase>
 </div>
 <script src="{{ asset('js/app.js') }}"></script>

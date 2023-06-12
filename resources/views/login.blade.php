@@ -36,6 +36,8 @@
 
 <body>
 <div id="app">
+    <header-component></header-component>
+
     <login-form></login-form>
 </div>
 </body>
