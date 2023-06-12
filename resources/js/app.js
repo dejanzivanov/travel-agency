@@ -1,5 +1,7 @@
 import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
+import axios from 'axios';
+
 import Vue from 'vue';
 
 import RegistrationForm from './components/RegistrationForm.vue';

@@ -5174,15 +5174,28 @@ __webpack_require__.r(__webpack_exports__);
   data: function data() {
     return {
       email: '',
-      password: ''
+      password: '',
+      token: ''
     };
   },
   methods: {
     login: function login() {
       // Implement your login logic here
       // You can access the entered email and password using this.email and this.password
-      console.log('Login clicked');
+      // console.log('Login clicked');
+      var formData = new FormData();
+      formData.append('email', this.email);
+      formData.append('password', this.password);
+      axios.post('/login', formData).then(function (response) {
+        console.log(response.data);
+      })["catch"](function (error) {
+        console.log();
+      });
     }
+  },
+  mounted: function mounted() {
+    this.token = document.head.querySelector('meta[name="csrf-token"]').content;
+    axios.defaults.headers.common['X-CSRF-TOKEN'] = this.token;
   }
 });
 
@@ -5205,8 +5218,30 @@ __webpack_require__.r(__webpack_exports__);
       name: '',
       email: '',
       password: '',
-      phone: ''
+      phone: '',
+      token: ''
     };
+  },
+  methods: {
+    register: function register() {
+      // Implement your registration logic here
+      // You can access the entered name, email, password and phone using this.name, this.email, this.password and this.phone
+      // console.log('Register clicked');
+      var formData = new FormData();
+      formData.append('name', this.name);
+      formData.append('email', this.email);
+      formData.append('password', this.password);
+      formData.append('phone', this.phone);
+      axios.post('/register', formData).then(function (response) {
+        console.log(response.data);
+      })["catch"](function (error) {
+        console.log();
+      });
+    }
+  },
+  mounted: function mounted() {
+    this.token = document.head.querySelector('meta[name="csrf-token"]').content;
+    axios.defaults.headers.common['X-CSRF-TOKEN'] = this.token;
   }
 });
 
@@ -5627,13 +5662,16 @@ var render = function render() {
   }, [_vm._m(0), _vm._v(" "), _c("div", {
     staticClass: "card-body"
   }, [_c("form", {
+    attrs: {
+      method: "POST"
+    },
     on: {
       submit: function submit($event) {
         $event.preventDefault();
         return _vm.login.apply(null, arguments);
       }
     }
-  }, [_c("div", {
+  }, [_vm._v("\n                        @csrf\n                        "), _c("div", {
     staticClass: "mb-3"
   }, [_c("label", {
     staticClass: "form-label",
@@ -5737,7 +5775,17 @@ var render = function render() {
     staticClass: "card"
   }, [_vm._m(0), _vm._v(" "), _c("div", {
     staticClass: "card-body"
-  }, [_c("form", [_c("div", {
+  }, [_c("form", {
+    attrs: {
+      method: "POST"
+    },
+    on: {
+      submit: function submit($event) {
+        $event.preventDefault();
+        return _vm.register.apply(null, arguments);
+      }
+    }
+  }, [_c("div", {
     staticClass: "mb-3"
   }, [_c("label", {
     staticClass: "form-label",
@@ -5919,12 +5967,15 @@ render._withStripped = true;
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var bootstrap_dist_css_bootstrap_css__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! bootstrap/dist/css/bootstrap.css */ "./node_modules/bootstrap/dist/css/bootstrap.css");
 /* harmony import */ var bootstrap_vue_dist_bootstrap_vue_css__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! bootstrap-vue/dist/bootstrap-vue.css */ "./node_modules/bootstrap-vue/dist/bootstrap-vue.css");
-/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm.js");
-/* harmony import */ var _components_RegistrationForm_vue__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./components/RegistrationForm.vue */ "./resources/js/components/RegistrationForm.vue");
-/* harmony import */ var _components_LoginComponent_vue__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./components/LoginComponent.vue */ "./resources/js/components/LoginComponent.vue");
-/* harmony import */ var _components_InsurancePurchaseComponent_vue__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./components/InsurancePurchaseComponent.vue */ "./resources/js/components/InsurancePurchaseComponent.vue");
-/* harmony import */ var _components_WelcomeComponent_vue__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./components/WelcomeComponent.vue */ "./resources/js/components/WelcomeComponent.vue");
-/* harmony import */ var _components_HeaderComponent_vue__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./components/HeaderComponent.vue */ "./resources/js/components/HeaderComponent.vue");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm.js");
+/* harmony import */ var _components_RegistrationForm_vue__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./components/RegistrationForm.vue */ "./resources/js/components/RegistrationForm.vue");
+/* harmony import */ var _components_LoginComponent_vue__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./components/LoginComponent.vue */ "./resources/js/components/LoginComponent.vue");
+/* harmony import */ var _components_InsurancePurchaseComponent_vue__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./components/InsurancePurchaseComponent.vue */ "./resources/js/components/InsurancePurchaseComponent.vue");
+/* harmony import */ var _components_WelcomeComponent_vue__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./components/WelcomeComponent.vue */ "./resources/js/components/WelcomeComponent.vue");
+/* harmony import */ var _components_HeaderComponent_vue__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./components/HeaderComponent.vue */ "./resources/js/components/HeaderComponent.vue");
+
 
 
 
@@ -5954,12 +6005,12 @@ window.Vue = (__webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm.js
 // const files = require.context('./', true, /\.vue$/i)
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
 
-vue__WEBPACK_IMPORTED_MODULE_7__["default"].component('example-component', (__webpack_require__(/*! ./components/ExampleComponent.vue */ "./resources/js/components/ExampleComponent.vue")["default"]));
-vue__WEBPACK_IMPORTED_MODULE_7__["default"].component('registration-form', _components_RegistrationForm_vue__WEBPACK_IMPORTED_MODULE_2__["default"]);
-vue__WEBPACK_IMPORTED_MODULE_7__["default"].component('login-form', _components_LoginComponent_vue__WEBPACK_IMPORTED_MODULE_3__["default"]);
-vue__WEBPACK_IMPORTED_MODULE_7__["default"].component('insurancepurchase', _components_InsurancePurchaseComponent_vue__WEBPACK_IMPORTED_MODULE_4__["default"]);
-vue__WEBPACK_IMPORTED_MODULE_7__["default"].component('welcome-component', _components_WelcomeComponent_vue__WEBPACK_IMPORTED_MODULE_5__["default"]);
-vue__WEBPACK_IMPORTED_MODULE_7__["default"].component('header-component', _components_HeaderComponent_vue__WEBPACK_IMPORTED_MODULE_6__["default"]);
+vue__WEBPACK_IMPORTED_MODULE_8__["default"].component('example-component', (__webpack_require__(/*! ./components/ExampleComponent.vue */ "./resources/js/components/ExampleComponent.vue")["default"]));
+vue__WEBPACK_IMPORTED_MODULE_8__["default"].component('registration-form', _components_RegistrationForm_vue__WEBPACK_IMPORTED_MODULE_3__["default"]);
+vue__WEBPACK_IMPORTED_MODULE_8__["default"].component('login-form', _components_LoginComponent_vue__WEBPACK_IMPORTED_MODULE_4__["default"]);
+vue__WEBPACK_IMPORTED_MODULE_8__["default"].component('insurancepurchase', _components_InsurancePurchaseComponent_vue__WEBPACK_IMPORTED_MODULE_5__["default"]);
+vue__WEBPACK_IMPORTED_MODULE_8__["default"].component('welcome-component', _components_WelcomeComponent_vue__WEBPACK_IMPORTED_MODULE_6__["default"]);
+vue__WEBPACK_IMPORTED_MODULE_8__["default"].component('header-component', _components_HeaderComponent_vue__WEBPACK_IMPORTED_MODULE_7__["default"]);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
@@ -5967,7 +6018,7 @@ vue__WEBPACK_IMPORTED_MODULE_7__["default"].component('header-component', _compo
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 
-var app = new vue__WEBPACK_IMPORTED_MODULE_7__["default"]({
+var app = new vue__WEBPACK_IMPORTED_MODULE_8__["default"]({
   el: '#app'
 });
 
