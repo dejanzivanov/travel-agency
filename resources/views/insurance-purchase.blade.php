@@ -9,7 +9,7 @@
 </head>
 <body>
 <div id="app">
-    <header-component></header-component>
+    <header-component :authenticated="{{ auth()->check() ? 'true' : 'false' }}" :is_admin="<?php if (\App\Http\Controllers\AdminController::isAdmin()) { echo 'true'; } else { echo 'false'; }  ?>"></header-component>
 
     <InsurancePurchase></InsurancePurchase>
 </div>

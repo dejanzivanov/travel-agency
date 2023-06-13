@@ -10705,7 +10705,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.form-control {\n    background-color: #222;\n    border: none;\n    color: #fff;\n}\n.form-control:focus {\n    background-color: #333;\n    color: #fff;\n}\n.btn-primary {\n    background-color: #007bff;\n    border: none;\n}\n.btn-primary:hover {\n    background-color: #0056b3;\n}\n.form-label {\n    color: #000;\n}\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.form-control {\r\n    background-color: #222;\r\n    border: none;\r\n    color: #fff;\n}\n.form-control:focus {\r\n    background-color: #333;\r\n    color: #fff;\n}\n.btn-primary {\r\n    background-color: #007bff;\r\n    border: none;\n}\n.btn-primary:hover {\r\n    background-color: #0056b3;\n}\n.form-label {\r\n    color: #000;\n}\r\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -10729,7 +10729,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\nbody {\n    background-color: #343a40;\n    color: #fff;\n}\n.form-control {\n    background-color: #222;\n    border: none;\n    color: #fff;\n}\n.form-control:focus {\n    background-color: #333;\n    color: #fff;\n}\n.btn-primary {\n    background-color: #007bff;\n    border: none;\n}\n.btn-primary:hover {\n    background-color: #0056b3;\n}\n.form-label {\n    color: #000;\n}\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\nbody {\r\n    background-color: #343a40;\r\n    color: #fff;\n}\n.form-control {\r\n    background-color: #222;\r\n    border: none;\r\n    color: #fff;\n}\n.form-control:focus {\r\n    background-color: #333;\r\n    color: #fff;\n}\n.btn-primary {\r\n    background-color: #007bff;\r\n    border: none;\n}\n.btn-primary:hover {\r\n    background-color: #0056b3;\n}\n.form-label {\r\n    color: #000;\n}\r\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
