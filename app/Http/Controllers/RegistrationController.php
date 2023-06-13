@@ -4,39 +4,61 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
 class RegistrationController extends Controller
 {
     public function register()
     {
+        if(Auth::check())
+        {
+            return redirect(route('home'));
+        }
         return view('register');
     }
 
-    public function registerPost($request)
+    public function registerPost(Request $request)
     {
-//        return view('registration');
-        echo "Registration post";
+        $data = new \stdClass();
+        $data->message = "";
+        $data->request = "";
+        $data->link = "";
+
 
         $request->validate([
             'name' => 'required',
-            'surname' => 'required',
             'email' => 'required|email|unique:users',
             'password' => 'required',
-            'phone_number' => 'required',
+            'phone' => 'required',
         ]);
 
-        $data['name'] = $request->name;
-        $data['email'] = $request->email;
-        $data['password'] = $request->password;
-        $data['phone_number'] = Hash::make($request->phone_number);
-        $user = User::create($data);
+
+        $user = new User();
+        $user->name = $request->name;
+        $user->last_name = '';
+        $user->email = $request->email;
+        $user->password = Hash::make($request->password);
+        $user->phone_number = $request->phone;
+        $user->account_type = 'user';
+
+//        $user->email = $data['email'];
+//        $user->password = $data['password'];
+//        $user->phone_number = $data['phone'];
+        $user->save();
 
         if (!$user)
         {
-            return redirect(route('register'))->with('error', 'Something went wrong');
+            $data->message = 'Something went wrong';
+            $data->link = "register";
+            return $data;
+//            return redirect(route('register'))->with('error', 'Something went wrong');
+
         }
-        return redirect(route('login'))->with('success', 'Registration successful');
+        $data->message = 'Registration successful';
+        $data->link = "login";
+        return $data;
+//        return redirect(route('login'))->with('success', 'Registration successful');
 
 
 

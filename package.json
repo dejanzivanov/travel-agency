@@ -25,6 +25,7 @@
     },
     "dependencies": {
         "bootstrap-vue": "^2.23.1",
-        "vue-router": "^3.0.7"
+        "sweetalert2": "^11.7.12",
+        "vue-laravel-csrf": "^1.0.0"
     }
 }

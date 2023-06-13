@@ -1,3 +1,5 @@
+
+
 <template>
     <div class="container py-5">
         <div class="row justify-content-center">
@@ -8,7 +10,7 @@
                     </div>
                     <div class="card-body">
                         <form @submit.prevent="login" method="POST">
-                            @csrf
+<!--                            @csrf-->
                             <div class="mb-3">
                                 <label for="email" class="form-label">Email</label>
                                 <input type="email" class="form-control" id="email" v-model="email" required>
@@ -46,16 +48,20 @@ export default {
 
             axios.post('/login', formData)
                 .then(response => {
+                    console.log("Login successful");
                     console.log(response.data);
+                    window.location.href = response.data['link']
+
                 })
                 .catch(error => {
-                    console.log();
+                    console.log("Login failed");
+                    console.log(error.data);
                 });
         }
     },
     mounted() {
-        this.token = document.head.querySelector('meta[name="csrf-token"]').content;
-        axios.defaults.headers.common['X-CSRF-TOKEN'] = this.token;
+        // this.token = document.head.querySelector('meta[name="csrf-token"]').content;
+        // axios.defaults.headers.common['X-CSRF-TOKEN'] = this.token;
     }
 };
 </script>

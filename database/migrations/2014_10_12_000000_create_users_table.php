@@ -23,6 +23,7 @@ class CreateUsersTable extends Migration
             $table->enum('account_type', ['admin', 'user'])->default('user');
             $table->rememberToken();
             $table->timestamps();
+            $table->string('phone_number');
         });
     }
 

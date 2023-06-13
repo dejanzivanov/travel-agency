@@ -1,7 +1,7 @@
 import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
 import axios from 'axios';
-
+import Swal from 'sweetalert2';
 import Vue from 'vue';
 
 import RegistrationForm from './components/RegistrationForm.vue';
@@ -18,8 +18,8 @@ import HeaderComponent from "./components/HeaderComponent.vue";
  */
 
 require('./bootstrap');
-
 window.Vue = require('vue').default;
+
 
 
 
@@ -42,6 +42,7 @@ Vue.component('login-form', LoginForm);
 Vue.component('insurancepurchase', InsurancePurchaseComponent);
 Vue.component('welcome-component', WelcomeComponent);
 Vue.component('header-component', HeaderComponent);
+
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to

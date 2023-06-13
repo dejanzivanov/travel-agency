@@ -21,6 +21,7 @@ Route::get('/', function () {
     return view('welcome');
 })->name('home');
 
+
 Route::get('/blog', [BlogController::class, 'getBlogDataFromController']);
 
 Route::get('/login', [LoginController::class, 'login'])->name('login');
@@ -31,5 +32,18 @@ Route::post('/register', [RegistrationController::class, 'registerPost'])->name(
 
 Route::get('/insurance-purchase', [InsuranceController::class, 'insurance']);
 
+Route::get('/logout', [LoginController::class, 'logout'])->name('logout');
+Route::post('/logout', [LoginController::class, 'logoutPost'])->name('logout.post');
 
 
+//Route::group(['middleware' => 'auth'], function () {
+//    Route::get('/admin-dashboard', function () {
+//        return view('admin-dashboard');
+//    })->name('admin-dashboard');
+//});
+
+Route::group(['middleware' => ['auth', 'admin']], function () {
+    Route::get('/admin-dashboard', function () {
+        return view('admin-dashboard');
+    })->name('admin-dashboard');
+});
