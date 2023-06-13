@@ -9,6 +9,7 @@ import LoginForm from './components/LoginComponent.vue';
 import InsurancePurchaseComponent from "./components/InsurancePurchaseComponent.vue";
 import WelcomeComponent from "./components/WelcomeComponent.vue";
 import HeaderComponent from "./components/HeaderComponent.vue";
+import AdminSidebarComponent from "./components/AdminSidebarComponent.vue";
 
 
 /**
@@ -19,7 +20,12 @@ import HeaderComponent from "./components/HeaderComponent.vue";
 
 require('./bootstrap');
 window.Vue = require('vue').default;
+import { library } from '@fortawesome/fontawesome-svg-core'
+import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
+import {faBars, faChevronLeft, faChevronRight, faCog, faNewspaper, faUsers} from '@fortawesome/free-solid-svg-icons';
 
+
+library.add(faBars, faChevronRight, faChevronLeft, faNewspaper, faUsers, faCog);
 
 
 
@@ -42,6 +48,9 @@ Vue.component('login-form', LoginForm);
 Vue.component('insurancepurchase', InsurancePurchaseComponent);
 Vue.component('welcome-component', WelcomeComponent);
 Vue.component('header-component', HeaderComponent);
+Vue.component('admin-sidebar-component', AdminSidebarComponent);
+Vue.component('font-awesome-icon', FontAwesomeIcon);
+Vue.config.productionTip = false;
 
 
 /**
