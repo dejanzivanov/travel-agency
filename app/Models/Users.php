@@ -8,14 +8,5 @@ use Illuminate\Database\Eloquent\Model;
 class Users extends Model
 {
     use HasFactory;
-
-    public function loginUser()
-    {
-
-    }
-
-    public function registerUser()
-    {
-
-    }
+    protected $table = 'users';
 }

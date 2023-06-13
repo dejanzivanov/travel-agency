@@ -1,6 +1,9 @@
 <?php
 
 use App\Http\Controllers\BlogController;
+use App\Http\Controllers\InsuranceController;
+use App\Http\Controllers\LoginController;
+use App\Http\Controllers\RegistrationController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -16,20 +19,31 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('welcome');
-});
+})->name('home');
+
 
 Route::get('/blog', [BlogController::class, 'getBlogDataFromController']);
 
-Route::get('/login', function () {
-    return view('login');
+Route::get('/login', [LoginController::class, 'login'])->name('login');
+Route::post('/login', [LoginController::class, 'loginPost'])->name('login.post');
+
+Route::get('/register', [RegistrationController::class, 'register'])->name('register');
+Route::post('/register', [RegistrationController::class, 'registerPost'])->name('register.post');
+
+Route::get('/insurance-purchase', [InsuranceController::class, 'insurance']);
+
+Route::get('/logout', [LoginController::class, 'logout'])->name('logout');
+Route::post('/logout', [LoginController::class, 'logoutPost'])->name('logout.post');
+
+
+//Route::group(['middleware' => 'auth'], function () {
+//    Route::get('/admin-dashboard', function () {
+//        return view('admin-dashboard');
+//    })->name('admin-dashboard');
+//});
+
+Route::group(['middleware' => ['auth', 'admin']], function () {
+    Route::get('/admin-dashboard', function () {
+        return view('admin-dashboard');
+    })->name('admin-dashboard');
 });
-
-Route::get('/register', function () {
-    return view('register');
-});
-
-Route::get('/insurance-purchase', function () {
-    return view('insurance-purchase');
-});
-
-

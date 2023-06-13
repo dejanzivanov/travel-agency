@@ -1,3 +1,5 @@
+
+
 <template>
     <div class="container py-5">
         <div class="row justify-content-center">
@@ -7,7 +9,8 @@
                         <h3 class="card-title text-center">Login</h3>
                     </div>
                     <div class="card-body">
-                        <form @submit.prevent="login">
+                        <form @submit.prevent="login" method="POST">
+<!--                            @csrf-->
                             <div class="mb-3">
                                 <label for="email" class="form-label">Email</label>
                                 <input type="email" class="form-control" id="email" v-model="email" required>
@@ -30,15 +33,35 @@ export default {
     data() {
         return {
             email: '',
-            password: ''
+            password: '',
+            token: ''
         };
     },
     methods: {
         login() {
             // Implement your login logic here
             // You can access the entered email and password using this.email and this.password
-            console.log('Login clicked');
+            // console.log('Login clicked');
+            const formData = new FormData();
+            formData.append('email', this.email);
+            formData.append('password', this.password);
+
+            axios.post('/login', formData)
+                .then(response => {
+                    console.log("Login successful");
+                    console.log(response.data);
+                    window.location.href = response.data['link']
+
+                })
+                .catch(error => {
+                    console.log("Login failed");
+                    console.log(error.data);
+                });
         }
+    },
+    mounted() {
+        // this.token = document.head.querySelector('meta[name="csrf-token"]').content;
+        // axios.defaults.headers.common['X-CSRF-TOKEN'] = this.token;
     }
 };
 </script>
