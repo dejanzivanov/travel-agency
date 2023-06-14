@@ -10,7 +10,14 @@
 <body>
 <div id="app">
     <header-component :authenticated="{{ auth()->check() ? 'true' : 'false' }}" :is_admin="<?php if (\App\Http\Controllers\AdminController::isAdmin()) { echo 'true'; } else { echo 'false'; }  ?>"></header-component>
-    <admin-sidebar-component></admin-sidebar-component>
+    <admin-component></admin-component>
+{{--    <admin-sidebar-component></admin-sidebar-component>--}}
+{{--    <users-component></users-component>--}}
+{{--     <blog-component></blog-component>--}}
+{{--    <admin-welcome-component></admin-welcome-component>--}}
+
+
+
 
 </div>
 <script src="{{ asset('js/app.js') }}"></script>
