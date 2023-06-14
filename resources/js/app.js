@@ -10,6 +10,22 @@ import InsurancePurchaseComponent from "./components/InsurancePurchaseComponent.
 import WelcomeComponent from "./components/WelcomeComponent.vue";
 import HeaderComponent from "./components/HeaderComponent.vue";
 import AdminSidebarComponent from "./components/AdminSidebarComponent.vue";
+import BlogComponent from './components/BlogComponent.vue';
+import UsersComponent from './components/UsersComponent.vue';
+import AdminWelcomeComponent from "./components/AdminWelcomeComponent.vue";
+import AdminComponent from "./components/AdminComponent.vue";
+
+import { library } from '@fortawesome/fontawesome-svg-core'
+import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
+import {
+    faBars,
+    faChevronLeft,
+    faChevronRight,
+    faCog,
+    faHandshake,
+    faNewspaper,
+    faUsers
+} from '@fortawesome/free-solid-svg-icons';
 
 
 /**
@@ -20,12 +36,7 @@ import AdminSidebarComponent from "./components/AdminSidebarComponent.vue";
 
 require('./bootstrap');
 window.Vue = require('vue').default;
-import { library } from '@fortawesome/fontawesome-svg-core'
-import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
-import {faBars, faChevronLeft, faChevronRight, faCog, faNewspaper, faUsers} from '@fortawesome/free-solid-svg-icons';
-
-
-library.add(faBars, faChevronRight, faChevronLeft, faNewspaper, faUsers, faCog);
+library.add(faBars, faChevronRight, faChevronLeft, faNewspaper, faUsers, faCog, faHandshake);
 
 
 
@@ -50,6 +61,11 @@ Vue.component('welcome-component', WelcomeComponent);
 Vue.component('header-component', HeaderComponent);
 Vue.component('admin-sidebar-component', AdminSidebarComponent);
 Vue.component('font-awesome-icon', FontAwesomeIcon);
+Vue.component('blog-component', BlogComponent);
+Vue.component('users-component', UsersComponent);
+Vue.component('admin-welcome-component', AdminWelcomeComponent);
+Vue.component('admin-component', AdminComponent);
+
 Vue.config.productionTip = false;
 
 

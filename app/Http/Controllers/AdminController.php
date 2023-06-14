@@ -7,6 +7,9 @@ use Illuminate\Http\Request;
 class AdminController extends Controller
 {
     //
+    public static $showUserComponent = false;
+    public static $showBlogComponent = true;
+    public static $showAdminWelcomeComponent = false;
 
     public static function isAdmin(): bool
     {
@@ -22,6 +25,5 @@ class AdminController extends Controller
             }
         }
         return false;
-
     }
 }

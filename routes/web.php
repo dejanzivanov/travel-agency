@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AdminController;
 use App\Http\Controllers\BlogController;
 use App\Http\Controllers\InsuranceController;
 use App\Http\Controllers\LoginController;
@@ -46,4 +47,8 @@ Route::group(['middleware' => ['auth', 'admin']], function () {
     Route::get('/admin-dashboard', function () {
         return view('admin-dashboard');
     })->name('admin-dashboard');
+
+    Route::post('/admin-data', [AdminController::class, 'setActiveComponentPost'])->name('admin-data');
+
+
 });

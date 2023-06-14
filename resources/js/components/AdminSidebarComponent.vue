@@ -3,20 +3,24 @@
 <template>
     <div class="sidebar bg-dark text-white" :class="{ 'expanded': isExpanded }">
         <div class="sidebar-toggle" @click="toggleSidebar">
-            <i class="fas fa-bars"></i>
+            <font-awesome-icon icon="fas fa-bars"></font-awesome-icon>
         </div>
         <transition name="slide">
             <div class="sidebar-content" v-show="isExpanded">
                 <div class="sidebar-header">
-                    <i class="fas fa-chevron-right"></i>
-                    <i class="fas fa-chevron-left"></i>
+<!--                    <font-awesome-icon icon="fas fa-chevron-right"></font-awesome-icon>-->
+<!--                    <font-awesome-icon icon="fas fa-chevron-left"></font-awesome-icon>-->
                 </div>
                 <div class="sidebar-menu">
-                    <div class="sidebar-item justify-content-around">
-                        <font-awesome-icon class="ml-3 mr-5 :class={'flipped': isHovered}" icon="fas fa-newspaper"  />
-                        <span>Posts</span>
+                    <div class="sidebar-item justify-content-around" v-on:click="welcomeClick">
+                        <font-awesome-icon class="ml-3 mr-5 :class={'flipped': isHovered}" icon="handshake"  />
+                        <span>Welcome</span>
                     </div>
-                    <div class="sidebar-item justify-content-around">
+                    <div class="sidebar-item justify-content-around" v-on:click="blogClick">
+                        <font-awesome-icon class="ml-3 mr-5 :class={'flipped': isHovered}" icon="fas fa-newspaper"  />
+                        <span>Blog</span>
+                    </div>
+                    <div class="sidebar-item justify-content-around" v-on:click="usersClick">
                         <font-awesome-icon class="ml-3 mr-5" icon="fas fa-users"  />
                         <span>Users</span>
                     </div>
@@ -30,11 +34,13 @@
 </template>
 
 <script>
+import axios from 'axios';
+
+
 
 export default {
 
     components: {
-        // FontAwesomeIcon,
     },
     data() {
         return {
@@ -45,6 +51,42 @@ export default {
         toggleSidebar() {
             this.isExpanded = !this.isExpanded;
         },
+        welcomeClick(){
+            this.$emit('component-click', 'admin-welcome');
+            // const data = { 'component-name': 'admin-welcome' };
+            // axios.post('/admin-data', data)
+            //     .then(response => {
+            //         console.log(response.data);
+            //     })
+            //     .catch(error => {
+            //         console.log(error);
+            //     });
+        },
+
+        blogClick(){
+            this.$emit('component-click', 'blog');
+
+            // const data = { 'component-name': 'blog' };
+            // axios.post('/admin-data', data)
+            //     .then(response => {
+            //         console.log(response.data);
+            //     })
+            //     .catch(error => {
+            //         console.log(error);
+            //     });
+        },
+        usersClick(){
+            this.$emit('component-click', 'users');
+
+            // const data = { 'component-name': 'users' };
+            // axios.post('/admin-data', data)
+            //     .then(response => {
+            //         console.log(response.data);
+            //     })
+            //     .catch(error => {
+            //         console.log(error);
+            //     });
+            },
     },
 };
 </script>
