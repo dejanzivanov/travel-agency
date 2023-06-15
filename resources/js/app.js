@@ -1,7 +1,12 @@
-import 'bootstrap/dist/css/bootstrap.css'
-import 'bootstrap-vue/dist/bootstrap-vue.css'
+
 import axios from 'axios';
 import Swal from 'sweetalert2';
+// import { createPopper } from '@popperjs/core';
+// import 'bootstrap/dist/css/bootstrap.css'
+// import 'bootstrap-vue/dist/bootstrap-vue.css'
+// import DataTable from 'datatables.net-dt';
+// import $ from 'jquery';
+
 import Vue from 'vue';
 
 import RegistrationForm from './components/RegistrationForm.vue';

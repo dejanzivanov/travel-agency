@@ -18,7 +18,9 @@ class Blog extends Model
 
     public function deletePost($id)
     {
-        $data = DB::delete((DB::raw("DELETE FROM `posts` WHERE `id` = $id;")));
+        $arr = [];
+        array_push($arr, $id);
+        $data = DB::delete("DELETE FROM `posts` WHERE `id` = ?;", $arr);
         return $data;
     }
 }

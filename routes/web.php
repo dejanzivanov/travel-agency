@@ -52,3 +52,6 @@ Route::group(['middleware' => ['auth', 'admin']], function () {
     Route::post('/blog-data-delete', [BlogController::class, 'deleteBlogDataFromControllerPostRequest'])->name('blog-data-delete');
 
 });
+Route::get('/idiot', function () {
+    return view('idiot');
+});
