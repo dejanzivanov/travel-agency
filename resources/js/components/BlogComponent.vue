@@ -6,6 +6,10 @@
                 <button class="btn btn-dark" @click="viewAllPosts">View All Posts</button>
                 <button class="btn btn-dark" @click="createNewPost">Create New Post</button>
             </div>
+            <div class="mt-3">
+                <all-blogs-component v-if="showAllBlogs"></all-blogs-component>
+                <create-post-component v-if="showCreatePost"></create-post-component>
+            </div>
         </div>
     </div>
 
@@ -13,12 +17,24 @@
 
 <script>
 export default {
+    components: {
+        AllBlogsComponent: () => import('./AllBlogsComponent.vue'),
+        CreatePostComponent: () => import('./CreatePostComponent.vue'),
+    },
+    data() {
+        return {
+            showAllBlogs: false,
+            showCreatePost: false,
+        }
+            },
     methods: {
         viewAllPosts() {
-            console.log('view all posts');
+            this.showAllBlogs = true;
+            this.showCreatePost = false;
         },
         createNewPost() {
-            console.log('create new post');
+            this.showAllBlogs = false;
+            this.showCreatePost = true;
         },
     },
 };

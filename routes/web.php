@@ -48,7 +48,7 @@ Route::group(['middleware' => ['auth', 'admin']], function () {
         return view('admin-dashboard');
     })->name('admin-dashboard');
 
-    Route::post('/admin-data', [AdminController::class, 'setActiveComponentPost'])->name('admin-data');
-
+    Route::post('/blog-data', [BlogController::class, 'getBlogDataFromControllerPostRequest'])->name('blog-data');
+    Route::post('/blog-data-delete', [BlogController::class, 'deleteBlogDataFromControllerPostRequest'])->name('blog-data-delete');
 
 });

@@ -14,6 +14,8 @@ import BlogComponent from './components/BlogComponent.vue';
 import UsersComponent from './components/UsersComponent.vue';
 import AdminWelcomeComponent from "./components/AdminWelcomeComponent.vue";
 import AdminComponent from "./components/AdminComponent.vue";
+import AllBlogsComponent from "./components/AllBlogsComponent.vue";
+import CreatePostComponent from "./components/CreatePostComponent.vue";
 
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
@@ -65,6 +67,8 @@ Vue.component('blog-component', BlogComponent);
 Vue.component('users-component', UsersComponent);
 Vue.component('admin-welcome-component', AdminWelcomeComponent);
 Vue.component('admin-component', AdminComponent);
+Vue.component('all-blogs-component', AllBlogsComponent);
+Vue.component('create-post-component', CreatePostComponent);
 
 Vue.config.productionTip = false;
 

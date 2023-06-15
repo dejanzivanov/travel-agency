@@ -15,4 +15,10 @@ class Blog extends Model
         $data = DB::select((DB::raw("SELECT * FROM `posts`;")));
         return $data;
     }
+
+    public function deletePost($id)
+    {
+        $data = DB::delete((DB::raw("DELETE FROM `posts` WHERE `id` = $id;")));
+        return $data;
+    }
 }
