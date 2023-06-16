@@ -65,27 +65,9 @@ export default {
 
         blogClick(){
             this.$emit('component-click', 'blog');
-
-            // const data = { 'component-name': 'blog' };
-            // axios.post('/admin-data', data)
-            //     .then(response => {
-            //         console.log(response.data);
-            //     })
-            //     .catch(error => {
-            //         console.log(error);
-            //     });
         },
         usersClick(){
             this.$emit('component-click', 'users');
-
-            // const data = { 'component-name': 'users' };
-            // axios.post('/admin-data', data)
-            //     .then(response => {
-            //         console.log(response.data);
-            //     })
-            //     .catch(error => {
-            //         console.log(error);
-            //     });
             },
     },
 };

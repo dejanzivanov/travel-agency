@@ -96,18 +96,23 @@ export default {
                 columns: [
                     { title: 'ID', data: 'id' },
                     { title: 'Author', data: 'author' },
+                    { title: 'Image', data: 'image', "render": function (data, type, row, meta) {
+                            return '<a href="/'+ data + '"><img src="' + data + '" class="img-thumbnail"></a>';
+                        },
+                    },
                     { title: 'Created At', data: 'created_at' },
                     { title: 'Published At', data: 'published_at' },
                     { title: 'Archived At', data: 'archived_at' },
                     { title: 'Title', data: 'title' },
                     { title: 'Status', data: 'status' },
-                    { title: 'Body Text', data: 'bodyText' },
+                    { title: 'Type', data: 'type' },
+                    // { title: 'Description', data: 'description' },
                     {
                         title: 'Actions',
                         data: null,
                         render: function (data, type, row) {
                             return `  <div class="d-flex justify-content-around">
-                                <button class="btn btn-sm btn-primary edit_post" data-id="${data.id}">Edit</button>
+                                <a href="/blog-data-update/${data.id}"class="btn btn-sm btn-primary edit_post" data-id="${data.id}">Edit</a>
                                 <button class="btn btn-sm btn-danger ml-3 pl-3 delete_post" data-id="${data.id}">Delete</button>
                             </div>
                             `;
@@ -138,6 +143,7 @@ export default {
             <tr>
                 <th>ID</th>
                 <th>Author</th>
+                <th>Image: </th>
                 <th>Created At:</th>
                 <th>Published At:</th>
                 <th>Archived At:</th>

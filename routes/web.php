@@ -50,7 +50,7 @@ Route::group(['middleware' => ['auth', 'admin']], function () {
 
     Route::post('/blog-data', [BlogController::class, 'getBlogDataFromControllerPostRequest'])->name('blog-data');
     Route::post('/blog-data-delete', [BlogController::class, 'deleteBlogDataFromControllerPostRequest'])->name('blog-data-delete');
-
+    Route::get('/blog-data-update/{id}/', [BlogController::class, 'updateBlogDataFromControllerPostRequest'])->name('blog-data-update');
 });
 Route::get('/idiot', function () {
     return view('idiot');

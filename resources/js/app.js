@@ -8,6 +8,8 @@ import Swal from 'sweetalert2';
 // import $ from 'jquery';
 
 import Vue from 'vue';
+import Vue2Editor from "vue2-editor";
+
 
 import RegistrationForm from './components/RegistrationForm.vue';
 import LoginForm from './components/LoginComponent.vue';
@@ -21,6 +23,7 @@ import AdminWelcomeComponent from "./components/AdminWelcomeComponent.vue";
 import AdminComponent from "./components/AdminComponent.vue";
 import AllBlogsComponent from "./components/AllBlogsComponent.vue";
 import CreatePostComponent from "./components/CreatePostComponent.vue";
+import UpdateBlogComponent from "./components/UpdateBlogComponent.vue";
 
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
@@ -74,6 +77,8 @@ Vue.component('admin-welcome-component', AdminWelcomeComponent);
 Vue.component('admin-component', AdminComponent);
 Vue.component('all-blogs-component', AllBlogsComponent);
 Vue.component('create-post-component', CreatePostComponent);
+Vue.component('update-blog-component', UpdateBlogComponent);
+Vue.use(Vue2Editor);
 
 Vue.config.productionTip = false;
 
