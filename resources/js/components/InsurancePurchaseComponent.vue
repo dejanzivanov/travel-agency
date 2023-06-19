@@ -41,10 +41,15 @@
                             <label :for="'member-phone-number-' + index">Phone Number:</label>
                             <input type="text" class="form-control" :id="'member-phone-number-' + index" v-model="member.phoneNumber">
                         </div>
-                        <button type="button" class="btn btn-secondary" @click="addMember" :disabled="!isLastMemberValid">Add Member</button>
-                        <button type="button" class="btn btn-danger" @click="removeMember(index)">Remove Member</button>
+                        <button type="button" class="btn btn-secondary" @click="addMember" v-if="index === groupMembers.length - 1 && isLastMemberValid">Add Member</button>
+                        <button type="button" class="btn btn-danger" @click="removeMember(index)" v-if="index === groupMembers.length - 1 && groupMembers.length > 1">Remove Member</button>
                     </div>
                 </div>
+            </div>
+        </div>
+        <div class="row mt-5 pt-5">
+            <div class="d-flex justify-content-center align-items-center">
+                <button type="button" class="btn btn-success" @click="purchase" :disabled="isPurchaseDisabled">Purchase</button>
             </div>
         </div>
     </div>
@@ -77,6 +82,20 @@ export default {
                 lastMember.lastName.trim() !== '' &&
                 lastMember.phoneNumber.trim() !== ''
             );
+        },
+        isPurchaseDisabled() {
+            if (this.policyType === 'individual') {
+                return (
+                    this.name.trim() === '' ||
+                    this.lastName.trim() === '' ||
+                    this.phoneNumber.trim() === ''
+                );
+            } else if (this.policyType === 'group') {
+                return (
+                    this.groupMembers.every(member => member.name.trim() === '' && member.lastName.trim() === '' && member.phoneNumber.trim() === '')
+                );
+            }
+            return true;
         }
     },
     methods: {
@@ -102,6 +121,27 @@ export default {
             if (this.policyType === 'individual') {
                 this.groupMembers = [{ name: '', lastName: '', phoneNumber: '' }];
             }
+        },
+        createDataObject() {
+            return {
+                name: this.name,
+                lastName: this.lastName,
+                phoneNumber: this.phoneNumber,
+                policyType: this.policyType,
+                groupMembers: this.groupMembers,
+            }
+        },
+        purchase()
+        {
+            const data = this.createDataObject();
+
+            axios.post('/insurance-request', data)
+                .then(response => {
+                    console.log(response);
+                })
+                .catch(error => {
+                    console.log(error);
+                });
         }
     }
 };
