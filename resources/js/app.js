@@ -66,7 +66,7 @@ library.add(faBars, faChevronRight, faChevronLeft, faNewspaper, faUsers, faCog, 
 Vue.component('example-component', require('./components/ExampleComponent.vue').default);
 Vue.component('registration-form', RegistrationForm);
 Vue.component('login-form', LoginForm);
-Vue.component('insurancepurchase', InsurancePurchaseComponent);
+Vue.component('insurance-purchase', InsurancePurchaseComponent);
 Vue.component('welcome-component', WelcomeComponent);
 Vue.component('header-component', HeaderComponent);
 Vue.component('admin-sidebar-component', AdminSidebarComponent);
