@@ -1,5 +1,8 @@
 <script>
 
+import $ from 'jquery';
+import datatable from 'datatables.net';
+
 // window.editPost = function (id) {
     // console.log('Post ID:', id);
     // deleteTable();
@@ -97,7 +100,7 @@ export default {
                     { title: 'ID', data: 'id' },
                     { title: 'Author', data: 'author' },
                     { title: 'Image', data: 'image', "render": function (data, type, row, meta) {
-                            return '<a href="/'+ data + '"><img src="' + data + '" class="img-thumbnail"></a>';
+                            return '<a href="storage/uploads/' + row.id + '/' + data + '"><img src="storage/uploads/' + row.id + '/' + data + '" class="img-thumbnail"></a>';
                         },
                     },
                     { title: 'Created At', data: 'created_at' },

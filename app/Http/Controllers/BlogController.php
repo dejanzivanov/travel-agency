@@ -108,7 +108,21 @@ class BlogController extends Controller
         return $data;
     }
 
+    public function updateBlog(Request $request)
+    {
+        $data = Blog::updateBlog($request);
+        return $data;
+    }
 
+    public function saveImageName($id, $name)
+    {
+        $data = Blog::saveImageNameById($id, $name);
+        return $data;
+    }
 
-
+    public function createPost(Request $request)
+    {
+        $data = Blog::createPost($request);
+        return $data;
+    }
 }

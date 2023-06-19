@@ -1,175 +1,3 @@
-<!--<template>-->
-<!--    <div>-->
-<!--        <div class="container shaking-effect">-->
-<!--            <div>-->
-<!--                <h1 class="text-center mt-3">Edit Page</h1>-->
-<!--            </div>-->
-
-
-<!--            <div class="mb-3">-->
-<!--                <label for="title-{{ this.post.id }}" class="form-label label-white text-white">Title</label>-->
-<!--                <input type="text" class="form-control" id="title-{{ this.post.id }}" name="title"-->
-<!--                       value="{{ this.post.title }}" required>-->
-<!--            </div>-->
-<!--            <div class="mb-3">-->
-<!--                <label for="description-{{ this.post.id }}" class="form-label label-white">Description</label>-->
-<!--                <input type="text" class="form-control" id="description-{{ this.post.id }}" name="description"-->
-<!--                       value="{{ this.post.description }}" required>-->
-<!--            </div>-->
-<!--            <div class="mb-3">-->
-<!--                <label for="bodyText-{{ this.post.id }}" class="form-label label-white">Body Text</label>-->
-<!--                <textarea class="form-control" id="bodyText-{{ this.post.id }}" name="bodyText" required>{{ this.post.bodyText }}</textarea>-->
-<!--            </div>-->
-<!--            <div class="mb-3">-->
-<!--                <label for="image-{{ this.post.id }}" class="form-label label-white">Image</label>-->
-<!--                <div class="input-group">-->
-<!--                    <input type="text" class="form-control" id="image-{{ this.post.id }}" name="image"-->
-<!--                           value="{{ this.post.image }}" required>-->
-<!--                    <button class="btn btn-outline-secondary" type="button" onclick="selectImage()">Select Image-->
-<!--                    </button>-->
-<!--                </div>-->
-<!--            </div>-->
-<!--            <div class="mb-3">-->
-<!--                <label class="form-label label-white">Type</label>-->
-<!--                <div class="form-check">-->
-<!--                    <input class="form-check-input" type="radio" name="type" :id="'news-' + post.id" value="news" :checked="post.type === 'news'">-->
-<!--                    <label class="form-check-label label-white" for="news-{{ this.post.id }}">-->
-<!--                        News-->
-<!--                    </label>-->
-<!--                </div>-->
-<!--                <div class="form-check">-->
-<!--                    <input class="form-check-input" type="radio" name="type" :id="'post-' + post.id" value="post" :checked="post.type === 'post'">-->
-<!--                    <label class="form-check-label label-white" for="post-{{ this.post.id }}">-->
-<!--                        Post-->
-<!--                    </label>-->
-<!--                </div>-->
-<!--            </div>-->
-<!--            <div class="mb-4">-->
-<!--                <div class="form-group">-->
-<!--                    <label for="status-{{ this.post.id }}" class="label-white">Status:</label>-->
-<!--                    <select class="form-control" :id="'status-' + post.id" required>-->
-<!--                        <option value="In preparation">In preparation</option>-->
-<!--                        <option value="Archived">Archived</option>-->
-<!--                        <option value="Published">Published</option>-->
-<!--                    </select>-->
-<!--                </div>-->
-<!--            </div>-->
-<!--            <div class="d-flex justify-content-center">-->
-<!--                <button class="btn btn-primary" onclick="updatePost( this.post.id )">Update</button>-->
-<!--            </div>-->
-<!--        </div>-->
-
-<!--        &lt;!&ndash; Validation Error Modal &ndash;&gt;-->
-<!--        <div class="modal fade bg-dark needs-validation" id="validationModal" tabindex="-1"-->
-<!--             aria-labelledby="validationModalLabel" aria-hidden="true">-->
-<!--            <div class="modal-dialog modal-white-outline">-->
-<!--                <div class="modal-content bg-dark">-->
-<!--                    <div class="modal-header">-->
-<!--                        <h5 class="modal-title" id="validationModalLabel">Validation Error</h5>-->
-<!--                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>-->
-<!--                    </div>-->
-<!--                    <div class="modal-body text-bg-dark">-->
-<!--                        All fields are required.-->
-<!--                    </div>-->
-<!--                    <div class="modal-footer bg-dark">-->
-<!--                        <button type="button" class="btn btn-primary" data-bs-dismiss="modal">OK</button>-->
-<!--                    </div>-->
-<!--                </div>-->
-<!--            </div>-->
-<!--        </div>-->
-
-<!--        &lt;!&ndash; Confirmation Modal &ndash;&gt;-->
-<!--        <div class="modal fade bg-dark" id="confirmationModal" tabindex="-1" aria-labelledby="confirmationModalLabel"-->
-<!--             aria-hidden="true">-->
-<!--            <div class="modal-dialog modal-white-outline">-->
-<!--                <div class="modal-content bg-dark">-->
-<!--                    <div class="modal-header">-->
-<!--                        <h5 class="modal-title" id="confirmationModalLabel">Confirmation</h5>-->
-<!--                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>-->
-<!--                    </div>-->
-<!--                    <div class="modal-body text-bg-dark">-->
-<!--                        Are you sure that you want to update this post?-->
-<!--                    </div>-->
-<!--                    <div class="modal-footer bg-dark">-->
-<!--                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">No</button>-->
-<!--                        <button type="button" class="btn btn-primary" onclick="confirmUpdate()">Yes</button>-->
-<!--                    </div>-->
-<!--                </div>-->
-<!--            </div>-->
-<!--        </div>-->
-
-<!--    </div>-->
-
-<!--</template>-->
-
-<!--<script>-->
-
-<!--import $ from 'jquery';-->
-<!--export default {-->
-<!--    mounted() {-->
-<!--        console.log('post is: ', this.post);-->
-<!--    },-->
-<!--    props:-->
-<!--        {-->
-<!--            post: Object-->
-<!--        },-->
-<!--    methods: {-->
-<!--        updatePost(postId)-->
-<!--        {-->
-<!--            var title = document.getElementById('title-' + postId).value;-->
-<!--            var description = document.getElementById('description-' + postId).value;-->
-<!--            var bodyText = document.getElementById('bodyText-' + postId).value;-->
-<!--            var image = document.getElementById('image-' + postId).value;-->
-<!--            var type = document.querySelector('input[name="type"]:checked').value;-->
-<!--            var status = document.getElementById('status-' + postId).value;-->
-
-<!--            if (title.trim() === '' || description.trim() === '' || bodyText.trim() === '' || image.trim() === '') {-->
-<!--                $('#validationModal').modal('show');-->
-<!--            } else {-->
-<!--                $('#confirmationModal').modal('show');-->
-<!--            }-->
-<!--        },-->
-<!--        confirmationUpdate()-->
-<!--        {-->
-<!--            console.log('Post updated!');-->
-<!--            $('#confirmationModal').modal('hide');-->
-<!--        },-->
-<!--        selectImage()-->
-<!--        {-->
-<!--            console.log('Image selection dialog opened!');-->
-<!--        }-->
-<!--    }-->
-<!--}-->
-<!--</script>-->
-
-<!--<style scoped>-->
-<!--.modal-content {-->
-<!--    outline: 2px solid white;-->
-<!--    outline-offset: -2px;-->
-<!--}-->
-
-<!--.shaking-effect {-->
-<!--    animation: shake 0.5s;-->
-<!--}-->
-
-<!--@keyframes shake {-->
-<!--    0% {-->
-<!--        transform: translateX(0);-->
-<!--    }-->
-<!--    25% {-->
-<!--        transform: translateX(-5px);-->
-<!--    }-->
-<!--    50% {-->
-<!--        transform: translateX(5px);-->
-<!--    }-->
-<!--    75% {-->
-<!--        transform: translateX(-5px);-->
-<!--    }-->
-<!--    100% {-->
-<!--        transform: translateX(0);-->
-<!--    }-->
-<!--}-->
-<!--</style>-->
 <template>
     <div>
         <div class="container shaking-effect">
@@ -177,59 +5,110 @@
                 <h1 class="text-center mt-3">Edit Page </h1>
             </div>
 
+<!--            <div class="mb-3">-->
+<!--                <label :for="title" class="form-label label-white text-white">Title</label>-->
+<!--                <input type="text" class="form-control" :id="title" name="title"-->
+<!--                       :value="post.title" required>-->
+<!--            </div>-->
+<!--            <div class="mb-3">-->
+<!--                <label :for="description" class="form-label label-white">Description</label>-->
+<!--                <input type="text" class="form-control" :id="description" name="description"-->
+<!--                       :value="post.description" required>-->
+<!--            </div>-->
+<!--            <div class="mb-3">-->
+<!--                <label for="bodyText" class="form-label label-white">Body Text</label>-->
+<!--                <vue-editor id="bodyText" @input="logContent" v-model="post.bodyText"-->
+<!--                            :editorOptions="editorOptions"></vue-editor>-->
+<!--            </div>-->
+<!--            <div class="mb-3">-->
+<!--                <label :for="image" class="form-label label-white">Image</label>-->
+<!--                <div class="input-group">-->
+<!--                    <input type="text" class="form-control" :id="image" name="image"-->
+<!--                           :value="post.image" required>-->
+<!--                    <button class="btn btn-outline-secondary" type="button" @click="selectImage()">Select Image-->
+<!--                    </button>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--            <div class="mb-3">-->
+<!--                <label class="form-label label-white">Type</label>-->
+<!--                <div class="form-check">-->
+<!--                    <input class="form-check-input" type="radio" name="type" id="news" value="news"-->
+<!--                           :checked="post.type === 'news'">-->
+<!--                    <label class="form-check-label label-white" for="news">-->
+<!--                        News-->
+<!--                    </label>-->
+<!--                </div>-->
+<!--                <div class="form-check">-->
+<!--                    <input class="form-check-input" type="radio" name="type" :id="post" value="post"-->
+<!--                           :checked="post.type === 'post'">-->
+<!--                    <label class="form-check-label label-white" :for="post">-->
+<!--                        Post-->
+<!--                    </label>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--            <div class="mb-4">-->
+<!--                <div class="form-group">-->
+<!--                    <label :for="status" class="label-white">Status:</label>-->
+<!--                    <select class="form-control" :id="status" required>-->
+<!--                        <option value="In preparation">In preparation</option>-->
+<!--                        <option value="Archived">Archived</option>-->
+<!--                        <option value="Published">Published</option>-->
+<!--                    </select>-->
+<!--                </div>-->
+<!--            </div>-->
+
             <div class="mb-3">
-                <label :for="'title-' + post.id" class="form-label label-white text-white">Title</label>
-                <input type="text" class="form-control" :id="'title-' + post.id" name="title"
-                       :value="post.title" required>
+                <label :for="title" class="form-label label-white text-white">Title</label>
+                <input type="text" class="form-control" v-model="title" :id="title" name="title" required>
             </div>
             <div class="mb-3">
-                <label :for="'description-' + post.id" class="form-label label-white">Description</label>
-                <input type="text" class="form-control" :id="'description-' + post.id" name="description"
-                       :value="post.description" required>
+                <label :for="description" class="form-label label-white">Description</label>
+                <input type="text" class="form-control" v-model="description" :id="description" name="description" required>
             </div>
             <div class="mb-3">
-                <label :for="'bodyText-' + post.id" class="form-label label-white">Body Text</label>
-                <vue-editor id="'bodyText-' + post.id" @input="logContent" v-model="post.bodyText"
-                            :editorOptions="editorOptions"></vue-editor>
+                <label for="bodyText" class="form-label label-white">Body Text</label>
+                <vue-editor id="bodyText" @input="logContent" v-model="post.bodyText" :editorOptions="editorOptions"></vue-editor>
             </div>
             <div class="mb-3">
-                <label :for="'image-' + post.id" class="form-label label-white">Image</label>
+                <label :for="image" class="form-label label-white">Image</label>
                 <div class="input-group">
-                    <input type="text" class="form-control" :id="'image-' + post.id" name="image"
-                           :value="post.image" required>
-                    <button class="btn btn-outline-secondary" type="button" @click="selectImage()">Select Image
-                    </button>
+<!--                    <input type="text" class="form-control" v-model="image" :id="image" name="image" required v-on:change="onChange">-->
+<!--                    <button class="btn btn-outline-secondary" type="button" @click="selectImage()">Select Image</button>-->
+                    <form @submit="formSubmit" enctype="multipart/form-data">
+                        <input type="file" class="form-control" v-on:change="onChange">
+                    </form>
+
                 </div>
             </div>
             <div class="mb-3">
                 <label class="form-label label-white">Type</label>
                 <div class="form-check">
-                    <input class="form-check-input" type="radio" name="type" :id="'news-' + post.id" value="news"
-                           :checked="post.type === 'news'">
-                    <label class="form-check-label label-white" :for="'news-' + post.id">
+                    <input class="form-check-input" type="radio" name="type" id="news" value="news" v-model="type">
+                    <label class="form-check-label label-white" for="news">
                         News
                     </label>
                 </div>
                 <div class="form-check">
-                    <input class="form-check-input" type="radio" name="type" :id="'post-' + post.id" value="post"
-                           :checked="post.type === 'post'">
-                    <label class="form-check-label label-white" :for="'post-' + post.id">
+                    <input class="form-check-input" type="radio" name="type" :id="post" value="post" v-model="type">
+                    <label class="form-check-label label-white" :for="post">
                         Post
                     </label>
                 </div>
             </div>
             <div class="mb-4">
                 <div class="form-group">
-                    <label :for="'status-' + post.id" class="label-white">Status:</label>
-                    <select class="form-control" :id="'status-' + post.id" required>
-                        <option value="In preparation">In preparation</option>
-                        <option value="Archived">Archived</option>
-                        <option value="Published">Published</option>
+                    <label :for="status" class="label-white">Status:</label>
+                    <select class="form-control" v-model="status" :id="status" required>
+                        <option value="archived">Archived</option>
+                        <option value="published">Published</option>
                     </select>
                 </div>
             </div>
+
+
+
             <div class="d-flex justify-content-center">
-                <button class="btn btn-primary" @click="updatePost(post.id)">Update</button>
+                <button class="btn btn-primary" v-on:click="updatePost(post.id)">Update</button>
             </div>
         </div>
 
@@ -271,9 +150,6 @@
                 </div>
             </div>
         </div>
-        <!--        <vue-editor id="editor1" v-model="this.content" />-->
-        <div>{{ this.content }}</div>
-
     </div>
 </template>
 
@@ -281,12 +157,22 @@
 import {VueEditor} from "vue2-editor/dist/vue2-editor.core.js";
 
 import $ from 'jquery';
-
+window.jQuery = $;
+window.$ = $;
 export default {
 
     data() {
         return {
             content: this.post.bodyText,
+            title: this.post.title,
+            description: this.post.description,
+            image: this.post.image,
+            type: this.post.type,
+            status: this.post.status,
+            name: '',
+            file: '',
+            success: '',
+
             editorOptions: {
                 toolbar: [
                     ['bold', 'italic', 'underline', 'strike'],
@@ -307,49 +193,92 @@ export default {
             },
         }
     },
-    mounted() {
-        console.log('post is: ', this.post);
-        // console.log('content is: ', this.content);
+    mounted()
+    {
 
     },
     computed:
     {
-
+        // content: function () {
+        //     return this.post.bodyText;
+        //
     },
     component:
-        {
-            VueEditor
-        },
+    {
+        VueEditor
+    },
 
     props: {
         post: Object
     },
     methods: {
+        formSubmit(e)
+        {
+            // e.preventDefault();
+            let existingObj = this;
+            const config = {
+                headers: {
+                    'content-type': 'multipart/form-data'
+                }
+            }
+            let data = new FormData();
+            data.append('file', this.file);
+            data.append('id', this.post.id);
+            axios.post('/upload', data, config)
+                .then(function (res) {
+                    existingObj.success = res.data.success;
+                })
+                .catch(function (err) {
+                    existingObj.output = err;
+                });
+        },
+        onChange(e)
+        {
+            this.file = e.target.files[0];
+        },
         logContent() {
             console.log('Content is: ', this.post.bodyText)
         },
         updatePost(postId) {
-            var title = document.getElementById('title-' + postId).value;
-            var description = document.getElementById('description-' + postId).value;
-            var bodyText = document.getElementById('bodyText-' + postId).value;
-            var image = document.getElementById('image-' + postId).value;
-            var type = document.querySelector('input[name="type"]:checked').value;
-            var status = document.getElementById('status-' + postId).value;
-
-            if (title.trim() === '' || description.trim() === '' || bodyText.trim() === '' || image.trim() === '') {
+            if (
+                !this.title || this.title.trim() === '' ||
+                !this.description || this.description.trim() === '' ||
+                !this.post.bodyText || this.post.bodyText.trim() === '' ||
+                !this.image || this.image.trim() === ''
+            ) {
                 $('#validationModal').modal('show');
+
             } else {
                 $('#confirmationModal').modal('show');
+
             }
         },
         confirmUpdate() {
             console.log('Post updated!');
+            this.formSubmit();
+            this.updateBlogData();
             $('#confirmationModal').modal('hide');
         },
-        selectImage() {
-            console.log('Image selection dialog opened!');
-        },
+        updateBlogData()
+        {
+            //send axios request with all the data to the server
 
+            axios.post('/update-blog', {
+                id: this.post.id,
+                title: this.title,
+                description: this.description,
+                bodyText: this.post.bodyText,
+                image: this.file.name,
+                type: this.type,
+                status: this.status,
+            })
+                .then(function (response) {
+                    console.log(response);
+                })
+                .catch(function (error) {
+                    console.log(error);
+                });
+        }
     }
 }
 </script>

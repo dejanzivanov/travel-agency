@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\BlogController;
+use App\Http\Controllers\FileController;
 use App\Http\Controllers\InsuranceController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\RegistrationController;
@@ -51,6 +52,9 @@ Route::group(['middleware' => ['auth', 'admin']], function () {
     Route::post('/blog-data', [BlogController::class, 'getBlogDataFromControllerPostRequest'])->name('blog-data');
     Route::post('/blog-data-delete', [BlogController::class, 'deleteBlogDataFromControllerPostRequest'])->name('blog-data-delete');
     Route::get('/blog-data-update/{id}/', [BlogController::class, 'updateBlogDataFromControllerPostRequest'])->name('blog-data-update');
+    Route::post('/update-blog', [BlogController::class, 'updateBlog'])->name('update-blog');
+    Route::post('/upload', [FileController::class, 'upload'])->name('upload');
+    Route::post('/create-post', [BlogController::class, 'createPost'])->name('create-post');
 });
 Route::get('/idiot', function () {
     return view('idiot');

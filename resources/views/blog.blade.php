@@ -20,7 +20,7 @@
             @foreach($blog as $item)
                 <div class="col-md-4 pt-3 pb-3">
                     <div class="card h-100 mb-3 ">
-                        <img src="{{ asset('('.$item->id).').jpg' }}" class="card-img-top" alt="...">
+                        <img src="{{ 'storage/uploads/'.$item->id.'/'.$item->image }}" class="card-img-top" alt="...">
                         <div class="card-body d-flex flex-column">
                             <h5 class="card-title">{{ $item->title }}</h5>
                             <p class="card-text">{{ $item->description }}</p>
