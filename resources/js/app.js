@@ -1,8 +1,15 @@
-import 'bootstrap/dist/css/bootstrap.css'
-import 'bootstrap-vue/dist/bootstrap-vue.css'
+
 import axios from 'axios';
 import Swal from 'sweetalert2';
+// import { createPopper } from '@popperjs/core';
+// import 'bootstrap/dist/css/bootstrap.css'
+// import 'bootstrap-vue/dist/bootstrap-vue.css'
+// import DataTable from 'datatables.net-dt';
+// import $ from 'jquery';
+
 import Vue from 'vue';
+import Vue2Editor from "vue2-editor";
+
 
 import RegistrationForm from './components/RegistrationForm.vue';
 import LoginForm from './components/LoginComponent.vue';
@@ -14,6 +21,9 @@ import BlogComponent from './components/BlogComponent.vue';
 import UsersComponent from './components/UsersComponent.vue';
 import AdminWelcomeComponent from "./components/AdminWelcomeComponent.vue";
 import AdminComponent from "./components/AdminComponent.vue";
+import AllBlogsComponent from "./components/AllBlogsComponent.vue";
+import CreatePostComponent from "./components/CreatePostComponent.vue";
+import UpdateBlogComponent from "./components/UpdateBlogComponent.vue";
 
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
@@ -65,6 +75,10 @@ Vue.component('blog-component', BlogComponent);
 Vue.component('users-component', UsersComponent);
 Vue.component('admin-welcome-component', AdminWelcomeComponent);
 Vue.component('admin-component', AdminComponent);
+Vue.component('all-blogs-component', AllBlogsComponent);
+Vue.component('create-post-component', CreatePostComponent);
+Vue.component('update-blog-component', UpdateBlogComponent);
+Vue.use(Vue2Editor);
 
 Vue.config.productionTip = false;
 
