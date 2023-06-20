@@ -35,8 +35,10 @@
         "datatables.net-dt": "^1.13.4",
         "jquery": "^3.7.0",
         "jsdom": "^22.1.0",
+        "moment": "^2.29.4",
         "sweetalert2": "^11.7.12",
         "vue-laravel-csrf": "^1.0.0",
+        "vue2-datepicker": "^3.11.1",
         "vue2-editor": "^2.10.3"
     }
 }
