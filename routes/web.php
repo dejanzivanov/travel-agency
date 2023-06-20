@@ -33,6 +33,7 @@ Route::get('/register', [RegistrationController::class, 'register'])->name('regi
 Route::post('/register', [RegistrationController::class, 'registerPost'])->name('register.post');
 
 Route::get('/insurance-purchase', [InsuranceController::class, 'insurance']);
+Route::post('/insurance-request', [InsuranceController::class, 'insurancePurchase'])->name('insurance-purchase');
 
 Route::get('/logout', [LoginController::class, 'logout'])->name('logout');
 Route::post('/logout', [LoginController::class, 'logoutPost'])->name('logout.post');
