@@ -49,7 +49,6 @@
                         </div>
                         <div class="form-group pt-3">
                             <label :for="'member-date-birth-' + index">Date Of Birth :</label>
-<!--                            <input type="text" class="form-control" :id="'member-phone-number-' + index" v-model="member.dateOfBirth">-->
                                 <date-picker  class="form-control" v-model="member.dateOfBirth" type="date" format="DD.MM.YYYY."></date-picker>
                         </div>
                         <button type="button" class="btn btn-secondary" @click="addMember" v-if="index === groupMembers.length - 1 && isLastMemberValid">Add Member</button>
@@ -140,53 +139,6 @@ export default {
                 );
             }
             return true;
-            // if (this.policyType === 'individual') {
-            //     return (
-            //         // this.name.trim() === '' ||
-            //         // this.lastName.trim() === '' ||
-            //         // this.phoneNumber.trim() === '' ||
-            //         // this.numberOfDays.trim() === '' ||
-            //         //     this.holidayDate.trim() === '' ||
-            //         // (this.holidayDate !== '' && this.holidayDate !== null)
-            //         this.name.trim() === '' ||
-            //         this.lastName.trim() === '' ||
-            //         this.phoneNumber.trim() === '' ||
-            //         this.numberOfDays.trim() === '' ||
-            //         // (String(this.numberOfDays).trim() !== '' && this.numberOfDays !== null) ||
-            //         this.holidayDate.trim() === '' ||
-            //         (this.holidayDate[0] === '' || this.holidayDate[1] === '' || this.holidayDate === undefined || this.holidayDate === null)
-            //     // );
-            //
-            //     );
-            // // } else if (this.policyType === 'group') {
-            // //     return (
-            // //         this.groupMembers.every(member => member.name.trim() === '' && member.lastName.trim() === '' && (String(member.dateOfBirth).trim() !== '' && member.dateOfBirth !== null))
-            // //     );
-            // }
-            // else if (this.policyType === 'group') {
-            //     if(
-            //     this.name.trim() === '' ||
-            //     this.lastName.trim() === '' ||
-            //     this.phoneNumber.trim() === '' ||
-            //     this.numberOfDays === '' || this.numberOfDays === null || this.numberOfDays === undefined ||
-            //     // (String(this.numberOfDays).trim() !== '' && this.numberOfDays !== null) ||
-            //     this.holidayDate === '' ||
-            //     (this.holidayDate[0] === '' || this.holidayDate[1] === '' || this.holidayDate === undefined || this.holidayDate === null))
-            //     {
-            //         return true;
-            //
-            //     }
-            //     return this.groupMembers.every(member => (
-            //         member.name.trim() === '' ||
-            //         member.lastName.trim() === '' ||
-            //         // member.dateOfBirth.trim() === '' ||
-            //         // member.dateOfBirth === null
-            //         member.dateOfBirth === '' ||
-            //         member.dateOfBirth === null
-            //     ))
-            // }
-            // console.log('123');
-            // return true;
         }
     },
     methods: {

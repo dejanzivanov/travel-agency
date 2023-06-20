@@ -24,6 +24,7 @@ import AdminComponent from "./components/AdminComponent.vue";
 import AllBlogsComponent from "./components/AllBlogsComponent.vue";
 import CreatePostComponent from "./components/CreatePostComponent.vue";
 import UpdateBlogComponent from "./components/UpdateBlogComponent.vue";
+import InsuranceComponent from "./components/InsuranceComponent.vue";
 
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
@@ -34,7 +35,8 @@ import {
     faCog,
     faHandshake,
     faNewspaper,
-    faUsers
+    faUsers,
+    faShieldAlt
 } from '@fortawesome/free-solid-svg-icons';
 
 
@@ -46,7 +48,7 @@ import {
 
 require('./bootstrap');
 window.Vue = require('vue').default;
-library.add(faBars, faChevronRight, faChevronLeft, faNewspaper, faUsers, faCog, faHandshake);
+library.add(faBars, faChevronRight, faChevronLeft, faNewspaper, faUsers, faCog, faHandshake, faShieldAlt);
 
 
 
@@ -78,6 +80,7 @@ Vue.component('admin-component', AdminComponent);
 Vue.component('all-blogs-component', AllBlogsComponent);
 Vue.component('create-post-component', CreatePostComponent);
 Vue.component('update-blog-component', UpdateBlogComponent);
+Vue.component('insurance-component', InsuranceComponent);
 Vue.use(Vue2Editor);
 
 Vue.config.productionTip = false;
