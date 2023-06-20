@@ -14,15 +14,16 @@ class InsuranceController extends Controller
 
     public function insurancePurchase(Request $request)
     {
-//        dd($request->all());
-//       dd($request->all(), $request->policyType, $request['groupMembers']);
-//        $request->validate([
-//            'insurance' => 'required',
-//        ]);
-
         $data = Insurance::purchaseInsurance($request);
         return $data;
-        //        return redirect()->route('insurance')->with('success', 'Insurance purchased successfully.');
-
     }
+
+    public function getAllInsurancesPostRequestDataTable(Request $request)
+    {
+        $data = Insurance::getAllInsurancesPostRequestDataTable($request);
+//        dd($data);
+        return $data;
+    }
+
+
 }

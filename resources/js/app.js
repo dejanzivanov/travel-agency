@@ -25,6 +25,7 @@ import AllBlogsComponent from "./components/AllBlogsComponent.vue";
 import CreatePostComponent from "./components/CreatePostComponent.vue";
 import UpdateBlogComponent from "./components/UpdateBlogComponent.vue";
 import InsuranceComponent from "./components/InsuranceComponent.vue";
+import DependentsComponent from "./components/DependentsComponent.vue";
 
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
@@ -81,6 +82,7 @@ Vue.component('all-blogs-component', AllBlogsComponent);
 Vue.component('create-post-component', CreatePostComponent);
 Vue.component('update-blog-component', UpdateBlogComponent);
 Vue.component('insurance-component', InsuranceComponent);
+Vue.component('dependents-component', DependentsComponent);
 Vue.use(Vue2Editor);
 
 Vue.config.productionTip = false;

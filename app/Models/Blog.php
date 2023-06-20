@@ -19,7 +19,6 @@ class Blog extends Model
 
     public static function fetchDatatableResult($sorting_column, $sorting_direction, $offset, $length, $search)
     {
-//        $data = DB::select((DB::raw("SELECT * FROM `posts` WHERE `title` LIKE '%$search%' ORDER BY `$sorting_column` $sorting_direction LIMIT $offset, $length;")));
         $data = DB::table('posts')
             ->where('title', 'LIKE', '%' . $search . '%')
             ->orWhere('author', 'LIKE', '%' . $search . '%')
@@ -32,10 +31,6 @@ class Blog extends Model
             ->limit($length)
             ->get();
 
-//        dd("SELECT * FROM `posts` WHERE `title` LIKE '%$search%' ORDER BY `$sorting_column` $sorting_direction LIMIT $offset, $length;");
-//        $data_filtered = DB::select((DB::raw("SELECT * FROM `posts` WHERE `title` LIKE '%$search%' ORDER BY `$sorting_column` $sorting_direction")));
-//        $recordsTotal = count(DB::select((DB::raw("SELECT * FROM `posts`"))));
-//        dd($data);
         $data_filtered = DB::table('posts')
             ->where('title', 'LIKE', '%' . $search . '%')
             ->orWhere('author', 'LIKE', '%' . $search . '%')
@@ -59,17 +54,6 @@ class Blog extends Model
 
     public static function updateBlog(\Illuminate\Http\Request $request)
     {
-//        $arr = [];
-//        array_push($arr, Auth::user()->name);
-//        array_push($arr, $request->title);
-//        array_push($arr, $request->description);
-//        array_push($arr, $request->bodyText);
-//        array_push($arr, $request->image);
-//        array_push($arr, strtolower($request->type));
-//        array_push($arr, $request->status);
-//        array_push($arr, $request->id);
-//        $data = DB::update("UPDATE `posts` SET `author` = ?, `title` = ?, `description` = ?, `bodyText` = ?, `image` = ?, `type` = ?, `status` = ?,   WHERE `id` = ?;", $arr);
-//        return $data;
         $arr = [
             'author' => Auth::user()->name,
             'title' => $request->title,
