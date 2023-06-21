@@ -3,9 +3,12 @@
 </script>
 
 <template>
-    <div class="d-flex justify-content-center mt-3 vh-100">
-        <h1 class="text-center">Users</h1>
-    </div></template>
+    <div class="container">
+        <div class="row">
+            <h1 class="text-center">Users</h1>
+        </div>
+    </div>
+</template>
 
 <style scoped>
 

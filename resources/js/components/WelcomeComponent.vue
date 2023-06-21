@@ -1,9 +1,14 @@
+
+
 <template>
-        <div class="container mt-4">
-            <h1>Welcome to the website!</h1>
-            <p>Feel free to explore and use the provided features.</p>
+    <div class="container">
+        <div class="row">
+            <h1 class="text-center">Welcome to admin scam team</h1>
         </div>
+    </div>
 </template>
+
+
 
 <script>
 export default {

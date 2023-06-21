@@ -15,21 +15,6 @@ class BlogController extends Controller
 
     public function getBlogDataFromControllerPostRequest(Request $request)
     {
-//        dd($request->all());
-        // draw,
-
-//        $data['draw'] = $request->draw;
-//        if($request->recordsTotal == null or $request->recordsTotal== '')
-//            $data['recordsTotal'] = 1;
-//        else
-//            $data['recordsTotal'] = $request->recordsTotal;
-//
-//        if($request->recordsFiltered == null or $request->recordsFiltered == '')
-//            $data['recordsFiltered'] = 1;
-//        else
-//            $data['recordsFiltered'] = $request->recordsFiltered;
-
-
 
 
         $data['data'] = Blog::getAllPosts();

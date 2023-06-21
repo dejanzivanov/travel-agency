@@ -4,6 +4,7 @@
         <admin-welcome-component v-if="activeComponent === 'admin-welcome'"></admin-welcome-component>
         <users-component v-if="activeComponent === 'users'"></users-component>
         <blog-component v-if="activeComponent === 'blog'"></blog-component>
+        <insurance-component v-if="activeComponent === 'insurance'"></insurance-component>
     </div>
 </template>
 
@@ -12,13 +13,15 @@ import AdminSidebarComponent from './AdminSidebarComponent.vue';
 import AdminWelcomeComponent from './AdminWelcomeComponent.vue';
 import UsersComponent from './UsersComponent.vue';
 import BlogComponent from './BlogComponent.vue';
+import InsuranceComponent from './InsuranceComponent.vue';
 
 export default {
     components: {
         AdminSidebarComponent,
         AdminWelcomeComponent,
         UsersComponent,
-        BlogComponent
+        BlogComponent,
+        InsuranceComponent,
     },
     data() {
         return {

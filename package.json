@@ -22,7 +22,7 @@
         "sass-loader": "^11.0.1",
         "vue": "^2.7.14",
         "vue-loader": "^15.10.1",
-        "vue-template-compiler": "^2.6.12"
+        "vue-template-compiler": "^2.7.14"
     },
     "dependencies": {
         "@fortawesome/fontawesome-free": "^6.4.0",
@@ -39,6 +39,7 @@
         "sweetalert2": "^11.7.12",
         "vue-laravel-csrf": "^1.0.0",
         "vue2-datepicker": "^3.11.1",
-        "vue2-editor": "^2.10.3"
+        "vue2-editor": "^2.10.3",
+        "vue": "^2.7.14"
     }
 }

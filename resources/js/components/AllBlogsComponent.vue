@@ -3,36 +3,6 @@
 import $ from 'jquery';
 import datatable from 'datatables.net';
 
-// window.editPost = function (id) {
-    // console.log('Post ID:', id);
-    // deleteTable();
-    //clear whole table
-    // $('#blog-table').DataTable().clear();
-    // $.timer(5);
-
-    // $('#blog-table').DataTable().clearRows();
-    // $('#blog-table').DataTable().destroy();
-// }
-
-//
-// window.deletePost = function (id) {
-//     console.log('Overview', id);
-//
-//     const data = {'post_id': id};
-//     axios.post('/blog-data-delete', data)
-//         .then(response => {
-//             var rowToDelete = $('#blog-table').DataTable().row(`#row-${id}`);
-//             // rowToDelete.remove();
-//             // $('#blog-table').DataTable().draw();
-//             // this.blog
-//             //ovde treba filter
-//         })
-//         .catch(error => {
-//             console.log(error);
-//         });
-// }
-
-
 export default {
     data() {
         return {

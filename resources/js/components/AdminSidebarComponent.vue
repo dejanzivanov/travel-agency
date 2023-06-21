@@ -24,6 +24,11 @@
                         <font-awesome-icon class="ml-3 mr-5" icon="fas fa-users"  />
                         <span>Users</span>
                     </div>
+
+                    <div class="sidebar-item justify-content-around" v-on:click="insuranceClick">
+                        <font-awesome-icon class="ml-3 mr-5" icon="fas fa-shield-alt"  />
+                        <span>Insurance</span>
+                    </div>
                 </div>
             </div>
         </transition>
@@ -51,24 +56,23 @@ export default {
         toggleSidebar() {
             this.isExpanded = !this.isExpanded;
         },
-        welcomeClick(){
+        welcomeClick()
+        {
             this.$emit('component-click', 'admin-welcome');
-            // const data = { 'component-name': 'admin-welcome' };
-            // axios.post('/admin-data', data)
-            //     .then(response => {
-            //         console.log(response.data);
-            //     })
-            //     .catch(error => {
-            //         console.log(error);
-            //     });
         },
 
-        blogClick(){
+        blogClick()
+        {
             this.$emit('component-click', 'blog');
         },
-        usersClick(){
+        usersClick()
+        {
             this.$emit('component-click', 'users');
-            },
+        },
+        insuranceClick()
+        {
+            this.$emit('component-click', 'insurance');
+        }
     },
 };
 

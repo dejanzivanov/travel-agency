@@ -4,59 +4,6 @@
             <div>
                 <h1 class="text-center mt-3">Edit Page </h1>
             </div>
-
-<!--            <div class="mb-3">-->
-<!--                <label :for="title" class="form-label label-white text-white">Title</label>-->
-<!--                <input type="text" class="form-control" :id="title" name="title"-->
-<!--                       :value="post.title" required>-->
-<!--            </div>-->
-<!--            <div class="mb-3">-->
-<!--                <label :for="description" class="form-label label-white">Description</label>-->
-<!--                <input type="text" class="form-control" :id="description" name="description"-->
-<!--                       :value="post.description" required>-->
-<!--            </div>-->
-<!--            <div class="mb-3">-->
-<!--                <label for="bodyText" class="form-label label-white">Body Text</label>-->
-<!--                <vue-editor id="bodyText" @input="logContent" v-model="post.bodyText"-->
-<!--                            :editorOptions="editorOptions"></vue-editor>-->
-<!--            </div>-->
-<!--            <div class="mb-3">-->
-<!--                <label :for="image" class="form-label label-white">Image</label>-->
-<!--                <div class="input-group">-->
-<!--                    <input type="text" class="form-control" :id="image" name="image"-->
-<!--                           :value="post.image" required>-->
-<!--                    <button class="btn btn-outline-secondary" type="button" @click="selectImage()">Select Image-->
-<!--                    </button>-->
-<!--                </div>-->
-<!--            </div>-->
-<!--            <div class="mb-3">-->
-<!--                <label class="form-label label-white">Type</label>-->
-<!--                <div class="form-check">-->
-<!--                    <input class="form-check-input" type="radio" name="type" id="news" value="news"-->
-<!--                           :checked="post.type === 'news'">-->
-<!--                    <label class="form-check-label label-white" for="news">-->
-<!--                        News-->
-<!--                    </label>-->
-<!--                </div>-->
-<!--                <div class="form-check">-->
-<!--                    <input class="form-check-input" type="radio" name="type" :id="post" value="post"-->
-<!--                           :checked="post.type === 'post'">-->
-<!--                    <label class="form-check-label label-white" :for="post">-->
-<!--                        Post-->
-<!--                    </label>-->
-<!--                </div>-->
-<!--            </div>-->
-<!--            <div class="mb-4">-->
-<!--                <div class="form-group">-->
-<!--                    <label :for="status" class="label-white">Status:</label>-->
-<!--                    <select class="form-control" :id="status" required>-->
-<!--                        <option value="In preparation">In preparation</option>-->
-<!--                        <option value="Archived">Archived</option>-->
-<!--                        <option value="Published">Published</option>-->
-<!--                    </select>-->
-<!--                </div>-->
-<!--            </div>-->
-
             <div class="mb-3">
                 <label :for="title" class="form-label label-white text-white">Title</label>
                 <input type="text" class="form-control" v-model="title" :id="title" name="title" required>
