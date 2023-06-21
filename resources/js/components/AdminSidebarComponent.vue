@@ -1,9 +1,9 @@
 
 
 <template>
-    <div class="sidebar bg-dark text-white" :class="{ 'expanded': isExpanded }">
+    <div class="sidebar text-white" :class="{ 'expanded': isExpanded }">
         <div class="sidebar-toggle" @click="toggleSidebar">
-            <font-awesome-icon icon="fas fa-bars"></font-awesome-icon>
+            <font-awesome-icon icon="fas fa-bars" class="sidebar-toggle-icon"></font-awesome-icon>
         </div>
         <transition name="slide">
             <div class="sidebar-content" v-show="isExpanded">
@@ -32,9 +32,9 @@
                 </div>
             </div>
         </transition>
-        <button class="btn btn-dark sidebar-button" @click="toggleSidebar">
-            <i class="fas fa-cog"></i> Settings
-        </button>
+<!--        <button class="btn btn-dark sidebar-button" @click="toggleSidebar">-->
+<!--            <i class="fas fa-cog"></i> Settings-->
+<!--        </button>-->
     </div>
 </template>
 
@@ -91,10 +91,29 @@ export default {
     transition: transform 0.3s ease;
     display: flex;
     flex-direction: column;
+    z-index: 100;
+}
+
+.sidebar::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #212529;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    pointer-events: none;
+    z-index: -1;
 }
 
 .expanded {
     transform: translateX(0);
+}
+
+.expanded::before {
+    opacity: 1;
 }
 
 .sidebar-toggle {
@@ -119,6 +138,10 @@ export default {
     display: flex;
     flex-direction: column;
     margin-bottom: 20px;
+}
+
+.sidebar-toggle-icon {
+    font-size: 24px; /* Adjust the font size as desired */
 }
 
 .sidebar-item {

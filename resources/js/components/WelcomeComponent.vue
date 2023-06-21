@@ -3,7 +3,7 @@
 <template>
     <div class="container">
         <div class="row">
-            <h1 class="text-center">Welcome to admin scam team</h1>
+            <h2 class="text-center  pt-3">Welcome to Deki Insurance Website(totally not a scam)</h2>
         </div>
     </div>
 </template>
