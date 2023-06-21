@@ -7,6 +7,7 @@ use App\Http\Controllers\FileController;
 use App\Http\Controllers\InsuranceController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\RegistrationController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -59,7 +60,13 @@ Route::group(['middleware' => ['auth', 'admin']], function () {
     Route::post('/create-post', [BlogController::class, 'createPost'])->name('create-post');
     Route::post('/insurance-data', [InsuranceController::class, 'getAllInsurancesPostRequestDataTable'])->name('insurance-data-table-request');
     Route::get('dependents/{id}', [DependentsController::class, 'dependentsView'])->name('dependents');
+    Route::post('/users-data', [UserController::class, 'getAllUsersPostRequestDataTable'])->name('users-data-table-request');
+    Route::post('/user-delete', [UserController::class, 'deleteUser'])->name('user-delete');
+    Route::post('/create-user', [UserController::class, 'createUser'])->name('create-user');
+    Route::post('/user/{id}', [UserController::class, 'getUserDataById'])->name('user-data');
+    Route::post('/update-user', [UserController::class, 'updateUser'])->name('update-user');
 });
+
 Route::get('/idiot', function () {
     return view('idiot');
 });
