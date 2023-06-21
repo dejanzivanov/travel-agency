@@ -31,23 +31,11 @@ export default
 {
     mounted: function()
     {
-        // console.log('Component mounted.')
-        this.initTable();
         var self = this;
 
-        $(document).on('click', '.policy_type', function()
-        {
-            // let data_id = $(this).data('id');
-            // console.log(data_id);
-            //     console.log(response.data);
-            //     self.insurances = response.data;
-            //     self.destroyTable();
-            //     self.initTable();
-            // })
-            // .catch(error => {
-            //     console.log(error);
-            // });
-        });
+        // console.log('Component mounted.')
+        this.initTable();
+
     },
     data(){
         return{
