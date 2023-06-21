@@ -114,7 +114,7 @@ export default {
                     this.name.trim() === '' ||
                     this.lastName.trim() === '' ||
                     this.phoneNumber.trim() === '' ||
-                    this.numberOfDays.trim() === '' ||
+                    this.numberOfDays === '' ||
                     !this.holidayDate ||
                     this.holidayDate[0] === null ||
                     this.holidayDate[1] === null
