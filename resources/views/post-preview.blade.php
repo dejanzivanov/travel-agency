@@ -42,7 +42,7 @@
                     <h1 class="post-title pt-3 pb-4">{{ session('title') }}</h1>
                 </div>
                 <div class="col-md-8 offset-md-2 pt-4">
-                    <img src="{{ '/storage/uploads/'. session('id') .'/'. session('image_name') }}" class="post-image img-fluid" alt="Post Image">
+                    <img src="{{ session('image_path') }}" class="post-image img-fluid" alt="Post Image">
                     <p class="post-description pt-4">{{ session('description') }}</p>
                     <div class="post-meta pt-3">
                         <p>Author: {{ session('author') }}</p>

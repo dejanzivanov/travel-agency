@@ -82,6 +82,7 @@ Route::post('/post-preview1/', function(Request $request) {
         $type = $request->input('type');
         $status = $request->input('status');
         $file = $request->input('file');
+        $image_path = $request->input('image_path');
 
 //        session(['$title' => $title]);
 //        session(['$description' => $description]);
@@ -95,6 +96,7 @@ Route::post('/post-preview1/', function(Request $request) {
         $request->session()->put('description', $description);
         $request->session()->put('bodyText', $bodyText);
         $request->session()->put('image_name', $image_name);
+        $request->session()->put('image_path', $image_path);
         $request->session()->put('type', $type);
         $request->session()->put('file', $file);
         $request->session()->put('status', $status);

@@ -265,6 +265,7 @@ export default {
                 'description' : this.description,
                 'bodyText' : this.content,
                 'image_name' : this.file.name,
+                'image_path' : URL.createObjectURL(this.file),
                 'type' : this.type,
                 'status' : this.status,
                 'file' : this.file,
