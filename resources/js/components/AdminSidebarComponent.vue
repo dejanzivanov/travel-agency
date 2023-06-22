@@ -1,8 +1,8 @@
 
 
 <template>
-    <div class="sidebar text-white" :class="{ 'expanded': isExpanded }">
-        <div class="sidebar-toggle" @click="toggleSidebar">
+    <div class="sidebar text-white" :class="{ 'expanded': isExpanded, }">
+        <div :class="{ 'sidebar-toggle': true, 'sidebar-open': sidebarOpen   }" @click="toggleSidebar" style="transition: all 0.3s ease !important;">
             <font-awesome-icon icon="fas fa-bars" class="sidebar-toggle-icon"></font-awesome-icon>
         </div>
         <transition name="slide">
@@ -32,9 +32,6 @@
                 </div>
             </div>
         </transition>
-<!--        <button class="btn btn-dark sidebar-button" @click="toggleSidebar">-->
-<!--            <i class="fas fa-cog"></i> Settings-->
-<!--        </button>-->
     </div>
 </template>
 
@@ -50,11 +47,13 @@ export default {
     data() {
         return {
             isExpanded: false,
+            sidebarOpen: false,
         };
     },
     methods: {
         toggleSidebar() {
             this.isExpanded = !this.isExpanded;
+            this.sidebarOpen = !this.sidebarOpen;
         },
         welcomeClick()
         {
@@ -110,6 +109,13 @@ export default {
 
 .expanded {
     transform: translateX(0);
+
+}
+
+.sidebar-open
+{
+    //transition: all 0.3s ease !important;
+    left:calc(100% - 33px)!important;
 }
 
 .expanded::before {
@@ -121,6 +127,10 @@ export default {
     justify-content: flex-start;
     padding: 10px;
     cursor: pointer;
+    position: absolute;
+    top: 47%;
+    left: -7px;
+    transition: all 0.3s ease !important;
 }
 
 .sidebar-header {
@@ -191,4 +201,6 @@ export default {
 .slide-leave-to {
     transform: translateX(-100%);
 }
+
+
 </style>

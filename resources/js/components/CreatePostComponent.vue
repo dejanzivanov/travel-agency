@@ -40,18 +40,6 @@
                     </label>
                 </div>
             </div>
-            <div class="mb-4">
-                <div class="form-group">
-                    <label :for="status" class="label-white">Status:</label>
-                    <select class="form-control" v-model="status" :id="status" required>
-                        <option value="in_preparation">In Preparation</option>
-                        <option value="archived">Archived</option>
-                        <option value="published">Published</option>
-                    </select>
-                </div>
-            </div>
-
-
 
             <div class="d-flex justify-content-center">
                 <button class="btn btn-primary" v-on:click="createPost()">Create Post</button>
@@ -115,7 +103,7 @@ export default {
             description: '',
             image: '',
             type: '',
-            status: '',
+            status: 'in_preparation',
             name: '',
             file: '',
             success: '',
@@ -145,15 +133,12 @@ export default {
 
     },
     computed:
-        {
-            // content: function () {
-            //     return this.post.bodyText;
-            //
-        },
+    {
+    },
     component:
-        {
-            VueEditor
-        },
+    {
+        VueEditor
+    },
     methods: {
         formSubmit(e)
         {
@@ -164,29 +149,12 @@ export default {
                     'content-type': 'multipart/form-data'
                 }
             }
-            // let data = new FormData();
-            // data.append('file', this.file);
-            // data.append('id', this.post.id);
-            // axios.post('/upload', data, config)
-            //     .then(function (res) {
-            //         existingObj.success = res.data.success;
-            //     })
-            //     .catch(function (err) {
-            //         existingObj.output = err;
-            //     });
         },
         onChange(e)
         {
             this.file = e.target.files[0];
         },
         createPost() {
-            // console.log('Title', this.title);
-            // console.log('Description', this.description);
-            // console.log('Body Text', this.content);
-            // console.log('Image', this.file.name);
-            // console.log('Type', this.type);
-            // console.log('Status', this.status);
-            // console.log('Post updated!');
             if (
                 !this.title || this.title.trim() === '' ||
                 !this.description || this.description.trim() === '' ||
@@ -202,18 +170,17 @@ export default {
             }
         },
         confirmUpdate() {
-            // console.log('Title', this.title);
-            // console.log('Description', this.description);
-            // console.log('Body Text', this.content);
-            // console.log('Image', this.file.name);
-            // console.log('Type', this.type);
-            // console.log('Status', this.status);
-
-
-            // console.log('Post updated!');
             this.formSubmit();
             this.createNewPost();
-            // $('#confirmationModal').modal('hide');
+            $('#confirmationModal').modal('hide');
+
+            //settimer of 100 milisec
+
+            this.showSuccessToast('Post Created Successfully');
+
+
+            this.$emit('publish-post');
+
         },
         createNewPost()
         {
@@ -240,6 +207,44 @@ export default {
                 .catch(function (error) {
                     console.log(error);
                 });
+        },
+        showSuccessToast(message)
+        {
+            this.$toast.success(message, {
+                transition: "Vue-Toastification__fade",
+                position: "top-right",
+                timeout: 2000,
+                closeOnClick: true,
+                pauseOnFocusLoss: false,
+                pauseOnHover: true,
+                draggable: true,
+                draggablePercent: 0.6,
+                showCloseButtonOnHover: false,
+                hideProgressBar: false,
+                closeButton: "button",
+                newestOnTop: true,
+                icon: true,
+                rtl: false,
+            });
+        },
+        showWarningToast(message)
+        {
+            this.$toast.success(message, {
+                transition: "Vue-Toastification__fade",
+                position: "top-right",
+                timeout: 2000,
+                closeOnClick: true,
+                pauseOnFocusLoss: false,
+                pauseOnHover: true,
+                draggable: true,
+                draggablePercent: 0.6,
+                showCloseButtonOnHover: false,
+                hideProgressBar: false,
+                closeButton: "button",
+                newestOnTop: true,
+                icon: true,
+                rtl: false,
+            });
         }
     }
 }

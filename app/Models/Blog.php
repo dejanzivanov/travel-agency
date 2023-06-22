@@ -106,12 +106,6 @@ class Blog extends Model
 
         switch($request->status)
         {
-            case 'published':
-                $status_field = 'published_at';
-                break;
-            case 'archived':
-                $status_field = 'archived_at';
-                break;
             case 'in_preparation':
                 $status_field = 'created_at';
                 break;
@@ -128,7 +122,6 @@ class Blog extends Model
             'status' => $request->status,
             $status_field => Carbon::now()->toDateTimeString()
         ]);
-
         $request->id = $id;
 
         FileController::upload($request);

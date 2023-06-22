@@ -8,7 +8,7 @@
             </div>
             <div class="mt-3">
                 <all-blogs-component v-if="showAllBlogs"></all-blogs-component>
-                <create-post-component v-if="showCreatePost"></create-post-component>
+                <create-post-component @publish-post='publishPost' v-if="showCreatePost"></create-post-component>
             </div>
         </div>
     </div>
@@ -16,6 +16,8 @@
 </template>
 
 <script>
+import CreatePostComponent from "./CreatePostComponent.vue";
+
 export default {
     components: {
         AllBlogsComponent: () => import('./AllBlogsComponent.vue'),
@@ -36,6 +38,11 @@ export default {
             this.showAllBlogs = false;
             this.showCreatePost = true;
         },
+        publishPost()
+        {
+            this.showAllBlogs = true;
+            this.showCreatePost = false;
+        }
     },
 };
 </script>

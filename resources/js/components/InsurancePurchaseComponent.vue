@@ -43,7 +43,7 @@
                             <label :for="'member-name-' + index">Name:</label>
                             <input type="text" class="form-control" :id="'member-name-' + index" v-model="member.name">
                         </div>
-                        <div class="form-group">
+                        <div class="form-group pt-3">
                             <label :for="'member-last-name-' + index">Last Name:</label>
                             <input type="text" class="form-control" :id="'member-last-name-' + index" v-model="member.lastName">
                         </div>
@@ -51,9 +51,11 @@
                             <label :for="'member-date-birth-' + index">Date Of Birth :</label>
                                 <date-picker  class="form-control" v-model="member.dateOfBirth" type="date" format="DD.MM.YYYY."></date-picker>
                         </div>
-                        <button type="button" class="btn btn-secondary" @click="addMember" v-if="index === groupMembers.length - 1 && isLastMemberValid">Add Member</button>
-                        <button type="button" class="btn btn-danger" @click="removeMember(index)" v-if="index === groupMembers.length - 1 && groupMembers.length > 1">Remove Member</button>
+                        <button type="button" class="btn btn-secondary mt-3" @click="addMember" v-if="index === groupMembers.length - 1 && isLastMemberValid">Add Member</button>
+                        <button type="button" class="btn btn-danger mt-3" @click="removeMember(index)" v-if="index === groupMembers.length - 1 && groupMembers.length > 1">Remove Member</button>
+
                     </div>
+
                 </div>
             </div>
         </div>
@@ -196,14 +198,37 @@ export default {
                     }).then((result) => {
                         if (result.isConfirmed) {
                             // Redirect the user to the desired page
-                            window.location.href = '/';
+                            this.showSuccessToast('Your Deki Scam Insurance Purchase was successfull!')
+                            this.isPurchaseDisabled = true;
+                            setTimeout(() => {
+                                window.location.href = '/';
+                            }, 1000);
                         }
                     })
                 })
                 .catch(error => {
                     console.log(error);
                 });
-        }
+        },
+        showSuccessToast(message)
+        {
+            this.$toast.success(message, {
+                transition: "Vue-Toastification__fade",
+                position: "top-right",
+                timeout: 2000,
+                closeOnClick: true,
+                pauseOnFocusLoss: false,
+                pauseOnHover: true,
+                draggable: true,
+                draggablePercent: 0.6,
+                showCloseButtonOnHover: false,
+                hideProgressBar: false,
+                closeButton: "button",
+                newestOnTop: true,
+                icon: true,
+                rtl: false,
+            });
+        },
     }
 };
 </script>

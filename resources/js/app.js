@@ -1,12 +1,3 @@
-
-import axios from 'axios';
-import Swal from 'sweetalert2';
-// import { createPopper } from '@popperjs/core';
-// import 'bootstrap/dist/css/bootstrap.css'
-// import 'bootstrap-vue/dist/bootstrap-vue.css'
-// import DataTable from 'datatables.net-dt';
-// import $ from 'jquery';
-
 import Vue from 'vue';
 import Vue2Editor from "vue2-editor";
 
@@ -94,6 +85,16 @@ Vue.config.productionTip = false;
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 
+import Toast from "vue-toastification";
+// Import the CSS or use your own!
+import "vue-toastification/dist/index.css";
+
+const options = {
+    // You can set your default options here
+};
+
+
+Vue.use(Toast, options);
 
 const app = new Vue({
     el: '#app',

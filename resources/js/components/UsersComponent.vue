@@ -121,6 +121,7 @@
 import $ from 'jquery';
 import datatable from 'datatables.net';
 import Swal from 'sweetalert2';
+import moment from "moment/moment";
 
 export default
 {
@@ -226,7 +227,15 @@ export default
                     },
                     { title: 'Account Type', data: 'account_type'},
                     { title: 'Phone Number', data: 'phone_number'},
-                    { title: 'Created At', data: 'created_at'},
+                    { title: 'Created At',
+                        data: 'created_at', render: function(data, type, row) {
+                            if(data != null) {
+                                return '<span class="created_at" title="' + data + '">' + moment(data).format('d.m.Y') + '</span>';
+                            }
+                            else
+                                return data;
+                        },
+                    },
                     { title: 'Actions', data: 'id', render: function (data, type, row)
                         {
                             return '<div class="d-flex justify-content-around"><button class="btn btn-danger dugme" data-id="' + data + '">Delete</button><button class="btn btn-dark edit-dugme" data-id="' + data + '">Edit</button></div>';

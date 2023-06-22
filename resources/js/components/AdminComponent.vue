@@ -30,6 +30,7 @@ export default {
     },
     methods: {
         setActiveComponent(componentName) {
+            console.log(123)
             this.activeComponent = componentName;
         },
     }

@@ -13,8 +13,13 @@
 
 <body>
 <div id="app">
-        <header-component :authenticated="{{ auth()->check() ? 'true' : 'false' }}"></header-component>
-    <?php $data = \App\Http\Controllers\DependentsController::getDependentsByID($id); //dd(($data)) ?><!---->
+        <header-component
+            :authenticated="{{ auth()->check() ? 'true' : 'false' }}"
+            :is_admin="<?php if (\App\Http\Controllers\AdminController::isAdmin()) { echo 'true'; } else { echo 'false'; }  ?>">
+        </header-component>
+<p>{{ auth()->check() ? 'true' : 'false' }}</p>
+
+<?php $data = \App\Http\Controllers\DependentsController::getDependentsByID($id); //dd(($data)) ?><!---->
         <dependents-component :data="{{ json_encode($data) }}"></dependents-component>
 
 </div>

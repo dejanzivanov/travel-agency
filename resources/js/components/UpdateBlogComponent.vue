@@ -9,15 +9,15 @@
                 <input type="text" class="form-control" v-model="title" :id="title" name="title" required>
             </div>
             <div class="mb-3">
-                <label :for="description" class="form-label label-white">Description</label>
+                <label :for="description" class="form-label label-white text-white">Description</label>
                 <input type="text" class="form-control" v-model="description" :id="description" name="description" required>
             </div>
             <div class="mb-3">
-                <label for="bodyText" class="form-label label-white">Body Text</label>
+                <label for="bodyText" class="form-label label-white text-white">Body Text</label>
                 <vue-editor id="bodyText" @input="logContent" v-model="post.bodyText" :editorOptions="editorOptions"></vue-editor>
             </div>
             <div class="mb-3">
-                <label :for="image" class="form-label label-white">Image</label>
+                <label :for="image" class="form-label label-white text-white">Image</label>
                 <div class="input-group">
 <!--                    <input type="text" class="form-control" v-model="image" :id="image" name="image" required v-on:change="onChange">-->
 <!--                    <button class="btn btn-outline-secondary" type="button" @click="selectImage()">Select Image</button>-->
@@ -28,7 +28,7 @@
                 </div>
             </div>
             <div class="mb-3">
-                <label class="form-label label-white">Type</label>
+                <label class="form-label label-white text-white">Type</label>
                 <div class="form-check">
                     <input class="form-check-input" type="radio" name="type" id="news" value="news" v-model="type">
                     <label class="form-check-label label-white" for="news">
@@ -55,7 +55,7 @@
 
 
             <div class="d-flex justify-content-center">
-                <button class="btn btn-primary" v-on:click="updatePost(post.id)">Update</button>
+                <button class="btn btn-primary" v-on:click="updatePost(post.id)" :disabled="this.updateDisabled">Update</button>
             </div>
         </div>
 
@@ -116,6 +116,10 @@ export default {
             image: this.post.image,
             type: this.post.type,
             status: this.post.status,
+            created_at: this.post.created_at,
+            updated_at: this.post.updated_at,
+            published_at: this.post.published_at,
+            updateDisabled: false,
             name: '',
             file: '',
             success: '',
@@ -142,13 +146,14 @@ export default {
     },
     mounted()
     {
+        console.log(this.created_at);
+        console.log(this.archived_at);
+        console.log(this.published_at);
 
     },
     computed:
     {
-        // content: function () {
-        //     return this.post.bodyText;
-        //
+
     },
     component:
     {
@@ -187,6 +192,27 @@ export default {
             console.log('Content is: ', this.post.bodyText)
         },
         updatePost(postId) {
+            if(this.created_at != '' || this.created_at != null || this.created_at != undefined)
+            {
+               if (this.published_at == '' || this.published_at == null || this.published_at == undefined)
+               {
+                   if(this.status == 'archived')
+                   {
+                       this.showWarningToast('Publish First');
+                       return;
+                   }
+               }
+            }
+
+            if(this.file === '' || this.file === null || this.file === undefined || this.file.name === 'undefined')
+            {
+                this.showWarningToast('Upload Image First');
+                return;
+            }
+
+            // this.formSubmit();
+            // this.updateBlogData();
+            $('#confirmationModal').modal('hide');
             if (
                 !this.title || this.title.trim() === '' ||
                 !this.description || this.description.trim() === '' ||
@@ -201,14 +227,21 @@ export default {
             }
         },
         confirmUpdate() {
-            console.log('Post updated!');
             this.formSubmit();
             this.updateBlogData();
             $('#confirmationModal').modal('hide');
+            this.showSuccessToast('Post Updated Successfully');
+            this.updateDisabled = true
+            setTimeout(() => {
+                window.location.href = '/admin-dashboard';
+            }, 1000);
+
+
         },
         updateBlogData()
         {
             //send axios request with all the data to the server
+
 
             axios.post('/update-blog', {
                 id: this.post.id,
@@ -225,6 +258,45 @@ export default {
                 .catch(function (error) {
                     console.log(error);
                 });
+        },
+        showWarningToast(message)
+        {
+            this.$toast.warning(message, {
+                transition: "Vue-Toastification__fade",
+                position: "top-right",
+                timeout: 2000,
+                closeOnClick: true,
+                pauseOnFocusLoss: false,
+                pauseOnHover: true,
+                draggable: true,
+                draggablePercent: 0.6,
+                showCloseButtonOnHover: false,
+                hideProgressBar: false,
+                closeButton: "button",
+                newestOnTop: true,
+                icon: true,
+                rtl: false,
+            });
+        },
+
+        showSuccessToast(message)
+        {
+            this.$toast.success(message, {
+                transition: "Vue-Toastification__fade",
+                position: "top-right",
+                timeout: 2000,
+                closeOnClick: true,
+                pauseOnFocusLoss: false,
+                pauseOnHover: true,
+                draggable: true,
+                draggablePercent: 0.6,
+                showCloseButtonOnHover: false,
+                hideProgressBar: false,
+                closeButton: "button",
+                newestOnTop: true,
+                icon: true,
+                rtl: false,
+            });
         }
     }
 }

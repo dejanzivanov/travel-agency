@@ -19,21 +19,7 @@ class FileController extends Controller
         ]);
 
         $fileUpload = new FileUpload;
-//        dd($request->all());
 
-//        if($request->file()) {
-//            $file_name = time().'_'.$request->file->getClientOriginalName();
-//            $file_path = $request->file('file')->storeAs('uploads', $file_name, 'public');
-//
-//            $fileUpload->name = time().'_'.$request->file->getClientOriginalName();
-//            $fileUpload->path = '/storage/' .$request->id.'/'. $file_path;
-//            if(!Storage::exists('/storage/' .$request->id))
-//            {
-//                Storage::makeDirectory('/storage/' .$request->id);
-//            }
-//            $fileUpload->save();
-//            return response()->json(['success'=>'File uploaded successfully.']);
-//        }
         if ($request->file()) {
             $file_name = time() . '_' . $request->file->getClientOriginalName();
             $file_path = $request->file('file')->storeAs('uploads/' . $request->id, $file_name, 'public');
@@ -48,4 +34,5 @@ class FileController extends Controller
             return response()->json(['success' => 'File uploaded successfully.']);
         }
     }
+
 }
