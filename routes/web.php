@@ -6,8 +6,11 @@ use App\Http\Controllers\DependentsController;
 use App\Http\Controllers\FileController;
 use App\Http\Controllers\InsuranceController;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\PostController;
+use App\Http\Controllers\PostPreviewController;
 use App\Http\Controllers\RegistrationController;
 use App\Http\Controllers\UserController;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -66,6 +69,40 @@ Route::group(['middleware' => ['auth', 'admin']], function () {
     Route::post('/user/{id}', [UserController::class, 'getUserDataById'])->name('user-data');
     Route::post('/update-user', [UserController::class, 'updateUser'])->name('update-user');
 });
+
+Route::get('/post/{id}', [PostController::class, 'getPostById'])->name('post');
+Route::get('/post-preview/', [PostController::class, 'returnViewPost'])->name('post');
+Route::post('/post-preview1/', function(Request $request) {
+
+
+        $title = $request->input('title');
+        $description = $request->input('description');
+        $bodyText = $request->input('bodyText');
+        $image_name = $request->input('file.name');
+        $type = $request->input('type');
+        $status = $request->input('status');
+        $file = $request->input('file');
+
+//        session(['$title' => $title]);
+//        session(['$description' => $description]);
+//        session(['$bodyText' => $bodyText]);
+//        session(['$image_name' => $image_name]);
+//        session(['$type' => $type]);
+//        session(['$file' => $file]);
+//        session(['$status' => $status]);
+
+        $request->session()->put('title', $title);
+        $request->session()->put('description', $description);
+        $request->session()->put('bodyText', $bodyText);
+        $request->session()->put('image_name', $image_name);
+        $request->session()->put('type', $type);
+        $request->session()->put('file', $file);
+        $request->session()->put('status', $status);
+//        dd(session('$bodyText'));
+//            return view('post-preview');
+        return response()->json(['message' => 'Variable added to session']);
+});
+
 
 Route::get('/idiot', function () {
     return view('idiot');

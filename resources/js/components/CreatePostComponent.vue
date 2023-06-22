@@ -9,15 +9,15 @@
                 <input type="text" class="form-control" v-model="title" :id="title" name="title" required>
             </div>
             <div class="mb-3">
-                <label :for="description" class="form-label label-white">Description</label>
+                <label :for="description" class="form-label label-white text-white">Description</label>
                 <input type="text" class="form-control" v-model="description" :id="description" name="description" required>
             </div>
             <div class="mb-3">
-                <label for="content" class="form-label label-white">Body Text</label>
+                <label for="content" class="form-label label-white text-white">Body Text</label>
                 <vue-editor id="content" v-model="content" :editorOptions="editorOptions"></vue-editor>
             </div>
             <div class="mb-3">
-                <label :for="image" class="form-label label-white">Image</label>
+                <label :for="image" class="form-label label-white text-white">Image</label>
                 <div class="input-group">
                     <form @submit="formSubmit" enctype="multipart/form-data">
                         <input type="file" class="form-control" v-on:change="onChange">
@@ -26,7 +26,7 @@
                 </div>
             </div>
             <div class="mb-3">
-                <label class="form-label label-white">Type</label>
+                <label class="form-label label-white text-white">Type</label>
                 <div class="form-check">
                     <input class="form-check-input" type="radio" name="type" id="news" value="news" v-model="type">
                     <label class="form-check-label label-white" for="news">
@@ -41,8 +41,9 @@
                 </div>
             </div>
 
-            <div class="d-flex justify-content-center">
-                <button class="btn btn-primary" v-on:click="createPost()">Create Post</button>
+            <div class="d-flex justify-content-evenly">
+                <button class="btn btn-primary pr-2" v-on:click="createPost()">Create Post</button>
+                <a   class="btn btn-warning pl-2" v-on:click="submitPreview()">Preview Post</a>
             </div>
         </div>
 
@@ -229,7 +230,7 @@ export default {
         },
         showWarningToast(message)
         {
-            this.$toast.success(message, {
+            this.$toast.warning(message, {
                 transition: "Vue-Toastification__fade",
                 position: "top-right",
                 timeout: 2000,
@@ -245,6 +246,39 @@ export default {
                 icon: true,
                 rtl: false,
             });
+        },
+        submitPreview()
+        {
+            if (
+                !this.title || this.title.trim() === '' ||
+                !this.description || this.description.trim() === '' ||
+                !this.content || this.content.trim() === '' ||
+                !this.file || this.file.name.trim() === ''
+            ) {
+                this.showWarningToast('Please fill all the fields');
+
+            } else {
+                // $('#confirmationModal').modal('show');
+                console.log('mlem', this.content)
+                let data = {
+                'title' : this.title,
+                'description' : this.description,
+                'bodyText' : this.content,
+                'image_name' : this.file.name,
+                'type' : this.type,
+                'status' : this.status,
+                'file' : this.file,
+                };
+
+                axios.post('/post-preview1', data)
+                    .then(function (response) {
+                        window.open("/post-preview", "_blank");
+                    })
+                    .catch(function (error) {
+                        console.log(error);
+                    });
+            }
+
         }
     }
 }

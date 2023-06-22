@@ -128,6 +128,8 @@ export default {
                             return `  <div class="d-flex justify-content-around">
                                 <a href="/blog-data-update/${data.id}"class="btn btn-sm btn-primary edit_post" data-id="${data.id}">Edit</a>
                                 <button class="btn btn-sm btn-danger ml-3 pl-3 delete_post " data-id="${data.id}">Delete</button>
+                                <a href="/post/${data.id}"class="btn btn-sm btn-warning">View</a>
+
                             </div>
                             `;
                         },

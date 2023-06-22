@@ -30,9 +30,8 @@
                             <li class="list-group-item">Published At: {{ $item->published_at }}</li>
                             <li class="list-group-item">Status: {{ $item->status }}</li>
                         </ul>
-                        <div class="card-body">
-                            <a href="#" class="card-link">Card link</a>
-                            <a href="#" class="card-link">Another link</a>
+                        <div class="card-body d-flex justify-content-center align-content-center">
+                            <a href="/post/{{ $item->id }}" class="card-link">Card link</a>
                         </div>
                     </div>
                 </div>
