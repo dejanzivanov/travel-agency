@@ -1,3 +1,20 @@
+<?php
+use Illuminate\Support\Facades\Auth;
+use App\Models\User;
+
+if (!Auth::check() || !User::find(Auth::id())->isAdmin()) {
+    if(isset($_SESSION['title']) && !empty($_SESSION['title']) || isset($_SESSION['image_path']) && !empty($_SESSION['image_path']) || isset($_SESSION['description']) && !empty($_SESSION['description']) || isset($_SESSION['author']) && !empty($_SESSION['author']) || isset($_SESSION['published_at']) && !empty($_SESSION['published_at']) || isset($_SESSION['status']) && !empty($_SESSION['status']))  {
+    echo 'mlem';
+    } else {
+        echo '<script>window.location.href = "/";</script>';
+    }
+} else {
+    echo '<script>window.location.href = "/";</script>';
+}
+
+?>
+
+
 <!doctype html>
 <html lang="en">
 <head>
@@ -14,28 +31,10 @@
     <header-component :authenticated="{{ auth()->check() ? 'true' : 'false' }}" :is_admin="<?php if (\App\Http\Controllers\AdminController::isAdmin()) { echo 'true'; } else { echo 'false'; }  ?>"></header-component>
     <div class="container">
 
-{{--                @dd(session()->all())--}}
-{{--        <div class="row">--}}
-{{--            <div class="d-flex  justify-content-center align-content-center">--}}
-{{--                <h1 class="post-title pt-3 pb-4">{{ $post->title }}</h1>--}}
-{{--            </div>--}}
 
-{{--            <div class="col-md-8 offset-md-2 pt-4">--}}
-{{--                <img src="{{ '/storage/uploads/'.$post->id.'/'.$post->image }}" class="post-image img-fluid" alt="Post Image">--}}
-{{--                <p class="post-description pt-4">{{ $post->description }}</p>--}}
-{{--                <div class="post-meta pt-3">--}}
-{{--                    <p>Author: {{ $post->author }}</p>--}}
-{{--                    <p>Published At: {{ \Carbon\Carbon::parse( $post->published_at)->format('d.m.Y') }}</p>--}}
-{{--                    <p>Status: {{ $post->status }}</p>--}}
-{{--                </div>--}}
-{{--                <div class="d-flex justify-content-center align-content-center pt-3 pb-3">--}}
-{{--                    <p>{{ $post->descritpion }}</p>--}}
-{{--                </div>--}}
-{{--                <div class="d-flex align-content-center justify-content-center">--}}
-{{--                    <p>{{ $post->bodyText }}</p>--}}
-{{--                </div>--}}
-{{--            </div>--}}
-{{--        </div>--}}
+
+
+
         <div class="container">
             <div class="row">
                 <div class="d-flex justify-content-center align-content-center">

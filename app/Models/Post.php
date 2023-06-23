@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
 class Post extends Model
@@ -16,6 +17,5 @@ class Post extends Model
         return $post = DB::table('posts')
             ->where('id', $request->id)
             ->get();
-
     }
 }

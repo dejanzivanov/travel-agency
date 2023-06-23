@@ -144,4 +144,9 @@ class User extends Authenticatable
             ]);
         return $data;
     }
+
+    public function isAdmin()
+    {
+        return $this->account_type === 'admin';
+    }
 }

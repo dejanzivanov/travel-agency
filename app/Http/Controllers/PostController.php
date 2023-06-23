@@ -11,4 +11,10 @@ class PostController extends Controller
     {
         return view('post-preview');
     }
+
+    public static function getPostById(Request $request)
+    {
+        $post = Post::getPostById($request);
+        return view('post', ['post' => $post]);
+    }
 }
