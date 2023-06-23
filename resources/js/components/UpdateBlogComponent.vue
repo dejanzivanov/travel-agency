@@ -233,7 +233,7 @@ export default {
             this.showSuccessToast('Post Updated Successfully');
             this.updateDisabled = true
             setTimeout(() => {
-                window.location.href = '/admin-dashboard';
+                window.location.href = '/post/' + this.post.id;
             }, 1000);
 
 

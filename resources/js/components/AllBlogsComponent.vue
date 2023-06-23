@@ -101,7 +101,8 @@ export default {
                         data: 'published_at',
                         render: function(data, type, row) {
                         if(data != null) {
-                            return '<span class="published_at" title="' + data + '">' + moment(data).format('d.m.Y') + '</span>';
+                            console.log('id je, ' + row.id + 'data je ' + data)
+                            return '<span class="published_at" title="' + data + '">' + moment(data).format('d.M.Y') + '</span>';
                         }
                         else
                             return data;

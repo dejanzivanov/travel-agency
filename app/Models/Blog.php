@@ -66,7 +66,8 @@ class Blog extends Model
 
         $status = $request->status;
         $currentTime = Carbon::now();
-        $formated_time = $currentTime->toDateTimeString();
+        $formated_time = Carbon::parse($currentTime)->toDateTimeString();
+//        dd($formated_time);
 
 
         switch ($request->status) {
