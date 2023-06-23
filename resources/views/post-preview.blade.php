@@ -1,16 +1,49 @@
 <?php
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
+//dd(User::find(Auth::id())->isAdmin());
 
-if (!Auth::check() || !User::find(Auth::id())->isAdmin()) {
-    if(isset($_SESSION['title']) && !empty($_SESSION['title']) || isset($_SESSION['image_path']) && !empty($_SESSION['image_path']) || isset($_SESSION['description']) && !empty($_SESSION['description']) || isset($_SESSION['author']) && !empty($_SESSION['author']) || isset($_SESSION['published_at']) && !empty($_SESSION['published_at']) || isset($_SESSION['status']) && !empty($_SESSION['status']))  {
-    echo 'mlem';
-    } else {
+
+if (Auth::check())
+{
+    if(User::find(Auth::id())->isAdmin())
+    {
+            $title = session('title');
+            $image_path = session('image_path');
+            $description = session('description');
+            $author = session('author');
+            $published_at = session('published_at');
+            $status = session('status');
+            $bodyText = session('bodyText');
+
+
+            if (isset($title) && !empty($title) ||
+                isset($image_path) && !empty($image_path) ||
+                isset($description) && !empty($description) ||
+                isset($author) && !empty($author) ||
+                isset($published_at) && !empty($published_at) ||
+                isset($status) && !empty($status) ||
+                isset($bodyText) && !empty($bodyText))
+            {
+
+            }
+            else
+            {
+                echo '<script>window.location.href = "/";</script>';
+            }
+
+    }
+    else
+    {
         echo '<script>window.location.href = "/";</script>';
     }
-} else {
+}
+else
+{
     echo '<script>window.location.href = "/";</script>';
 }
+
+
 
 ?>
 
@@ -52,7 +85,7 @@ if (!Auth::check() || !User::find(Auth::id())->isAdmin()) {
                         <p>{{ session('description') }}</p>
                     </div>
                     <div class="d-flex align-content-center justify-content-center">
-                        <p>{{ session('bodyText') }}</p>
+                        <p>{!! html_entity_decode($bodyText) !!}</p>
                     </div>
                 </div>
             </div>

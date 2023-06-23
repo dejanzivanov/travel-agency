@@ -178,8 +178,6 @@ export default {
             //settimer of 100 milisec
 
             this.showSuccessToast('Post Created Successfully');
-
-
             this.$emit('publish-post');
 
         },
@@ -203,10 +201,13 @@ export default {
 
             axios.post('/create-post', data, config)
                 .then(function (response) {
-                    console.log(response);
+                    console.log(response.message);
+                    console.log(response.code);
                 })
                 .catch(function (error) {
-                    console.log(error);
+                    console.log(error.code);
+                    console.log(error.message);
+
                 });
         },
         showSuccessToast(message)

@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Carbon\Carbon;
+use Symfony\Component\HttpFoundation\Response;
 
 
 class Blog extends Model
@@ -100,9 +101,7 @@ class Blog extends Model
 
     public static function createPost(\Illuminate\Http\Request $request)
     {
-//        dd($request->all());
         $blog = new Blog();
-
         $status_field = '';
 
         switch($request->status)
@@ -126,9 +125,49 @@ class Blog extends Model
         $request->id = $id;
 
         FileController::upload($request);
+
+
+
+//        $responseData = [
+//            'name' => 'John Doe',
+//            'email' => 'johndoe@example.com'
+//        ];
+
+//        Throw
+//        http_response_code(400);
+
+//        try
+//        {
+//        $response = [
+//            'code' => http_response_code(201),// Get the current HTTP response code
+////            'message' => Blog::getServerMessage(http_response_code()), // Retrieve the server message based on the code
+//            'message' => Response::$statusTexts[http_response_code()], // Retrieve the server message based on the code
+//            'data' => $responseData
+//        ];
+//        return response()->json($response);
+
+
+//                try
+//        {
+////            $post = Post::getPostById($request);
+//                            $responseData = [
+//            'name' => 'John Doe',
+//            'email' => 'johndoe@example.com'
+//        ];
+//            return response()->json([
+//                'message' => 'success',
+////                200,
+//                http_response_code()->,
+//                'data' => $responseData
+//            ]);
+//        } catch (\Exception $ex) {
+//            return response()->json([
+//                'message' => $ex->getMessage(),
+//                $ex->getCode()
+//            ]);
+//        }
+
     }
-
-
 
     public function getAllPosts()
     {

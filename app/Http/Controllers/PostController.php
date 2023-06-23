@@ -15,14 +15,14 @@ class PostController extends Controller
     public static function getPostById(Request $request)
     {
         $post = Post::getPostById($request);
-        if($post)
-        {
-            return response()->json([
-                'message' => 'success',
-                200
-
-            ]);
-        }
+//        if($post)
+//        {
+//            return response()->json([
+//                'message' => 'success',
+//                200
+//
+//            ]);
+//        }
 
 
 //        try
@@ -38,9 +38,6 @@ class PostController extends Controller
 //                $ex->getCode()
 //            ]);
 //        }
-
-
-
 
         return view('post', ['post' => $post]);
     }

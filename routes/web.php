@@ -92,6 +92,15 @@ Route::post('/post-preview1/', function(Request $request) {
 //        session(['$file' => $file]);
 //        session(['$status' => $status]);
 
+        session(['title' => '']);
+        session(['description' => '']);
+        session(['bodyText' => '']);
+        session(['image_name' => '']);
+        session(['image_path' => '']);
+        session(['type' => '']);
+        session(['file' => '']);
+        session(['status' => '']);
+
         $request->session()->put('title', $title);
         $request->session()->put('description', $description);
         $request->session()->put('bodyText', $bodyText);
