@@ -1,0 +1,12 @@
+login forma, pogresni podaci ispisi gresku, ostati na formi
+validacija polja
+fonrt/back validacija
+validacija proslosti datretime picker polisa
+
+moment-malo m-velikom-Useri
+kolona '', proveri tabelu datum
+ne ispisuj arhivirane postove
+obrisi bootstrap kalse single post
+slika ne mora da se uploaduje ako vec ima psotojeca, preview slike
+sredi sidebar pretvori ga u dropdown
+ispisati razlog greske, malo specificnije informacije
