@@ -108,6 +108,7 @@ export default {
             name: '',
             file: '',
             success: '',
+            published: false,
 
             editorOptions: {
                 toolbar: [
@@ -162,8 +163,28 @@ export default {
                 !this.content || this.content.trim() === '' ||
                 !this.file || this.file.name.trim() === ''
             ) {
-                console.log('Validation Error')
-                $('#validationModal').modal('show');
+                // console.log('Validation Error')
+                // $('#validationModal').modal('show');
+                if(!this.title || this.title.trim() === '')
+                {
+                    this.showWarningToast('Title is required');
+                }
+                if(!this.description || this.description.trim() === '')
+                {
+                    this.showWarningToast('Description is required');
+                }
+                if(!this.content || this.content.trim() === '')
+                {
+                    this.showWarningToast('Content is required');
+                }
+                if(!this.file || this.file.name.trim() === '')
+                {
+                    this.showWarningToast('Image is required');
+                }
+                if(!this.type || this.type.trim() === '')
+                {
+                    this.showWarningToast('Type is required');
+                }
 
             } else {
                 $('#confirmationModal').modal('show');
@@ -198,6 +219,7 @@ export default {
             data.append('image_name', this.file.name);
             data.append('type', this.type);
             data.append('status', this.status);
+            data.append('published', this.published);
 
             axios.post('/create-post', data, config)
                 .then(function (response) {

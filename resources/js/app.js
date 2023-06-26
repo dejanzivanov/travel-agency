@@ -94,7 +94,7 @@ const options = {
 };
 
 
-// Vue.use(Toast, options);
+Vue.use(Toast, options);
 
 const app = new Vue({
     el: '#app',
