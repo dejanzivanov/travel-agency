@@ -30,6 +30,17 @@
                     <li class="nav-item" v-if="is_admin">
                         <a class="nav-link" href="/admin-dashboard">Admin Dashboard</a>
                     </li>
+                    <li class="nav-item dropdown" v-if="is_admin">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Admin Options
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item" href="/admin-blog">Blog</a>
+                            <a class="dropdown-item" href="/admin-users">Users</a>
+                            <a class="dropdown-item" href="/admin-insurance">Insurance</a>
+
+                        </div>
+                    </li>
 
                 </ul>
             </div>
@@ -45,6 +56,7 @@
 
 <script>
 import Swal from "sweetalert2";
+import $ from 'jquery';
 
 export default {
     name: 'Header',
@@ -57,6 +69,14 @@ export default {
             type: Boolean,
             default: false,
         },
+    },
+    mounted()
+    {
+
+        $(document).on('click', '.dropdown-toggle', function () {
+            $(this).siblings('.dropdown-menu').toggle();
+        });
+
     },
     methods: {
         logout() {

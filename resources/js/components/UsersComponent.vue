@@ -3,7 +3,7 @@
 <template>
     <div class="container">
         <div class="row">
-            <h1 class="text-center pt-4">Users</h1>
+            <h1 class="text-center pt-4 text-white">Users</h1>
         </div>
         <div class="d-flex justify-content-end py-3">
             <button class="btn btn-dark my-auto create-new-user" data-bs-toggle="modal" data-bs-target="#createUserModal">Create new user</button>

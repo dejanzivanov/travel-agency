@@ -2,7 +2,7 @@
     <div>
         <div class="container shaking-effect">
             <div>
-                <h1 class="text-center mt-3">Create New Post</h1>
+                <h1 class="text-center mt-3 text-white">Create New Post</h1>
             </div>
             <div class="mb-3">
                 <label :for="title" class="form-label label-white text-white">Title</label>
@@ -29,13 +29,13 @@
                 <label class="form-label label-white text-white">Type</label>
                 <div class="form-check">
                     <input class="form-check-input" type="radio" name="type" id="news" value="news" v-model="type">
-                    <label class="form-check-label label-white" for="news">
+                    <label class="form-check-label label-white text-white" for="news">
                         News
                     </label>
                 </div>
                 <div class="form-check">
                     <input class="form-check-input" type="radio" name="type" id="post" value="post" v-model="type">
-                    <label class="form-check-label label-white"  for="post">
+                    <label class="form-check-label label-white text-white"  for="post">
                         Post
                     </label>
                 </div>

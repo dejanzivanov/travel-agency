@@ -68,6 +68,19 @@ Route::group(['middleware' => ['auth', 'admin']], function () {
     Route::post('/create-user', [UserController::class, 'createUser'])->name('create-user');
     Route::post('/user/{id}', [UserController::class, 'getUserDataById'])->name('user-data');
     Route::post('/update-user', [UserController::class, 'updateUser'])->name('update-user');
+
+    Route::get('/admin-blog', function () {
+        return view('admin-blog');
+    });
+
+
+    Route::get('/admin-insurance', function () {
+        return view('admin-insurance');
+    });
+
+    Route::get('/admin-users', function () {
+        return view('admin-users');
+    });
 });
 
 Route::get('/post/{id}', [PostController::class, 'getPostById'])->name('post');
