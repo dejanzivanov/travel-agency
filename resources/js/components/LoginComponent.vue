@@ -9,6 +9,11 @@
                         <h3 class="card-title text-center">Login</h3>
                     </div>
                     <div class="card-body">
+                        <div v-if="this.errors.length > 0" class="alert alert-danger">
+                            <ul>
+                                <li v-for="error in this.errors" :key="error">{{ error }}</li>
+                            </ul>
+                        </div>
                         <form @submit.prevent="login" method="POST">
 <!--                            @csrf-->
                             <div class="mb-3">
@@ -34,29 +39,94 @@ export default {
         return {
             email: '',
             password: '',
-            token: ''
+            token: '',
+            errors: [],
         };
     },
     methods: {
         login() {
-            // Implement your login logic here
-            // You can access the entered email and password using this.email and this.password
-            // console.log('Login clicked');
-            const formData = new FormData();
-            formData.append('email', this.email);
-            formData.append('password', this.password);
+            this.errors = [];
+            if (this.email === '') {
+                this.errors.push('Email is required.');
+            }
+            if (this.password === '') {
+                this.errors.push('Password is required.');
+            }
+            if (!this.isValidEmail(this.email)) {
+                this.errors.push('Please enter a valid email address.');
+            }
+            if (this.password.length < 8) {
+                this.errors.push('Password should be at least 8 characters long.');
+            }
+            if (this.password.length > 20) {
+                this.errors.push('Password should not exceed 20 characters.');
+            }
+            if (this.password.toLowerCase() === 'password') {
+                this.errors.push('Please choose a stronger password.');
+            }
+            if (!this.hasUppercase(this.password)) {
+                this.errors.push('Password should contain at least one uppercase letter.');
+            }
+            if (!this.hasLowercase(this.password)) {
+                this.errors.push('Password should contain at least one lowercase letter.');
+            }
+            if (!this.hasNumber(this.password)) {
+                this.errors.push('Password should contain at least one numeric digit.');
+            }
+            if (!this.hasSpecialChar(this.password)) {
+                this.errors.push('Password should contain at least one special character.');
+            }
+            if (this.password.includes(this.email)) {
+                this.errors.push('Password should not contain the email address.');
+            }
+            if (!this.isStrongPassword(this.password)) {
+                this.errors.push('Password is not strong enough.');
+            }
+            if (this.errors.length === 0) {
+                const formData = new FormData();
+                formData.append('email', this.email);
+                formData.append('password', this.password);
 
-            axios.post('/login', formData)
-                .then(response => {
-                    console.log("Login successful");
-                    console.log(response.data);
-                    window.location.href = response.data['link']
+                axios.post('/login', formData)
+                    .then(response => {
+                        console.log("Login successful");
+                        console.log(response.data);
+                        window.location.href = response.data['link']
 
-                })
-                .catch(error => {
-                    console.log("Login failed");
-                    console.log(error.data);
-                });
+                    })
+                    .catch(error => {
+                        console.log("Login failed");
+                        console.log(error.data);
+                    });
+            }
+
+        },
+        isValidEmail(email) {
+            // Basic email validation regex pattern
+            const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            return emailPattern.test(email);
+        },
+        hasUppercase(str) {
+            return /[A-Z]/.test(str);
+        },
+        hasLowercase(str) {
+            return /[a-z]/.test(str);
+        },
+        hasNumber(str) {
+            return /\d/.test(str);
+        },
+        hasSpecialChar(str) {
+            return /[!@#$%^&*(),.?":{}|<>]/.test(str);
+        },
+        isStrongPassword(str) {
+            // Additional password strength validation rules
+            const hasUppercase = /[A-Z]/.test(str);
+            const hasLowercase = /[a-z]/.test(str);
+            const hasNumber = /\d/.test(str);
+            const hasSpecialChar = /[!@#$%^&*(),.?":{}|<>]/.test(str);
+            const isLongEnough = str.length >= 10;
+
+            return hasUppercase && hasLowercase && hasNumber && hasSpecialChar && isLongEnough;
         }
     },
     mounted() {

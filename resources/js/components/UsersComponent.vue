@@ -9,7 +9,7 @@
             <button class="btn btn-dark my-auto create-new-user" data-bs-toggle="modal" data-bs-target="#createUserModal">Create new user</button>
         </div>
         <div>
-            <table id="users-table" class="display">
+            <table id="users-table" class="display text-white">
                 <thead>
                 <tr>
                     <th>ID</th>

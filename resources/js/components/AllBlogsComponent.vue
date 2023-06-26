@@ -151,7 +151,7 @@ export default {
 
 <template>
     <div>
-        <table id="blog-table" class="display">
+        <table id="blog-table" class="display text-white">
             <thead>
             <tr>
                 <th>ID</th>

@@ -3,19 +3,19 @@
 <template>
 <div class="container">
     <div class="row">
-        <h1 class="text-center">Insurance</h1>
+        <h1 class="text-center text-white">Insurance</h1>
     </div>
     <div>
-        <table id="insurance-table" class="display">
+        <table id="insurance-table" class="display text-white">
             <thead>
             <tr>
-                <th>ID</th>
-                <th>Name</th>
-                <th>Last Name</th>
-                <th>Phone</th>
-                <th>Start Date</th>
-                <th>End Date</th>
-                <th>Policy Type</th>
+                <th class="text-white">ID</th>
+                <th class="text-white">Name</th>
+                <th class="text-white">Last Name</th>
+                <th class="text-white">Phone</th>
+                <th class="text-white">Start Date</th>
+                <th class="text-white">End Date</th>
+                <th class="text-white">Policy Type</th>
             </tr>
             </thead>
         </table>

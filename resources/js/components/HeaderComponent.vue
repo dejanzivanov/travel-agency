@@ -21,7 +21,7 @@
                     <li class="nav-item" v-if="!authenticated">
                         <a class="nav-link" href="/login">Login</a>
                     </li>
-                    <li class="nav-item" v-if="!authenticated">
+                    <li class="nav-item" v-if="!authenticated && 5 === 7">
                         <a class="nav-link" href="/register">Register</a>
                     </li>
                     <li class="nav-item">
