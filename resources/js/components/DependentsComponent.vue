@@ -26,6 +26,7 @@ import $ from 'jquery';
 window.jQuery = $;
 window.$ = $;
 import datatable from 'datatables.net';
+import moment from "moment/moment";
 
 export default {
     props:
@@ -53,7 +54,14 @@ export default {
                             {title: 'ID', data: 'id'},
                             {title: 'Name', data: 'name'},
                             {title: 'Last Name', data: 'last_name'},
-                            {title: 'Date Of Birth', data: 'date_of_birth'},
+                            {title: 'Date Of Birth', orderable: false, data: 'date_of_birth', render: function(data, type, row) {
+                                    if(data != null) {
+                                        return '<span class="start_date" title="' + data + '">' + moment(data).format('DD.MM.YYYY') + '</span>';
+                                    }
+                                    else
+                                        return data;
+                                },
+                            },
                         ]
                 });
             }

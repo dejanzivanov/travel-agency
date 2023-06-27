@@ -2,7 +2,7 @@
     <div>
         <div class="container shaking-effect">
             <div>
-                <h1 class="text-center mt-3">Create New Post</h1>
+                <h1 class="text-center mt-3 text-white">Create New Post</h1>
             </div>
             <div class="mb-3">
                 <label :for="title" class="form-label label-white text-white">Title</label>
@@ -29,13 +29,13 @@
                 <label class="form-label label-white text-white">Type</label>
                 <div class="form-check">
                     <input class="form-check-input" type="radio" name="type" id="news" value="news" v-model="type">
-                    <label class="form-check-label label-white" for="news">
+                    <label class="form-check-label label-white text-white" for="news">
                         News
                     </label>
                 </div>
                 <div class="form-check">
                     <input class="form-check-input" type="radio" name="type" id="post" value="post" v-model="type">
-                    <label class="form-check-label label-white"  for="post">
+                    <label class="form-check-label label-white text-white"  for="post">
                         Post
                     </label>
                 </div>
@@ -108,6 +108,7 @@ export default {
             name: '',
             file: '',
             success: '',
+            published: false,
 
             editorOptions: {
                 toolbar: [
@@ -162,8 +163,28 @@ export default {
                 !this.content || this.content.trim() === '' ||
                 !this.file || this.file.name.trim() === ''
             ) {
-                console.log('Validation Error')
-                $('#validationModal').modal('show');
+                // console.log('Validation Error')
+                // $('#validationModal').modal('show');
+                if(!this.title || this.title.trim() === '')
+                {
+                    this.showWarningToast('Title is required');
+                }
+                if(!this.description || this.description.trim() === '')
+                {
+                    this.showWarningToast('Description is required');
+                }
+                if(!this.content || this.content.trim() === '')
+                {
+                    this.showWarningToast('Content is required');
+                }
+                if(!this.file || this.file.name.trim() === '')
+                {
+                    this.showWarningToast('Image is required');
+                }
+                if(!this.type || this.type.trim() === '')
+                {
+                    this.showWarningToast('Type is required');
+                }
 
             } else {
                 $('#confirmationModal').modal('show');
@@ -198,6 +219,7 @@ export default {
             data.append('image_name', this.file.name);
             data.append('type', this.type);
             data.append('status', this.status);
+            data.append('published', this.published);
 
             axios.post('/create-post', data, config)
                 .then(function (response) {

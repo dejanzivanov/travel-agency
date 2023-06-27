@@ -84,7 +84,7 @@ else
                     <div class="d-flex justify-content-center align-content-center pt-3 pb-3">
                         <p>{{ session('description') }}</p>
                     </div>
-                    <div class="d-flex align-content-center justify-content-center">
+                    <div class="">
                         <p>{!! html_entity_decode($bodyText) !!}</p>
                     </div>
                 </div>

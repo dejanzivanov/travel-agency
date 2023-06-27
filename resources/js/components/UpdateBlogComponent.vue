@@ -22,10 +22,13 @@
 <!--                    <input type="text" class="form-control" v-model="image" :id="image" name="image" required v-on:change="onChange">-->
 <!--                    <button class="btn btn-outline-secondary" type="button" @click="selectImage()">Select Image</button>-->
                     <form @submit="formSubmit" enctype="multipart/form-data">
-                        <input type="file" class="form-control" v-on:change="onChange">
+                        <input type="file" class="form-control"  :src=" this.stagod.image " width="100" height="100" v-on:change="onChange">
                     </form>
-
                 </div>
+            </div>
+
+            <div v-if="this.stagod.image != null || this.stagod.image != undefined || this.stagod.image != '' || this.file != null || this.file != undefined || this.file != ''    ">
+                <img :src="this.stagod.image" width="200" height="100">
             </div>
             <div class="mb-3">
                 <label class="form-label label-white text-white">Type</label>
@@ -46,7 +49,7 @@
                 <div class="form-group">
                     <label :for="status" class="label-white">Status:</label>
                     <select class="form-control" v-model="status" :id="status" required>
-                        <option value="archived">Archived</option>
+                        <option value="archived" v-if="this.published">Archived</option>
                         <option value="published">Published</option>
                     </select>
                 </div>
@@ -120,9 +123,13 @@ export default {
             updated_at: this.post.updated_at,
             published_at: this.post.published_at,
             updateDisabled: false,
+            published: this.post.published,
             name: '',
             file: '',
             success: '',
+            stagod: this.post,
+            imageHasBeenSelected: false,
+            // image: this.post.image,
 
             editorOptions: {
                 toolbar: [
@@ -146,9 +153,15 @@ export default {
     },
     mounted()
     {
-        console.log(this.created_at);
-        console.log(this.archived_at);
-        console.log(this.published_at);
+        // console.log(this.created_at);
+        // console.log(this.archived_at);
+        // console.log(this.published_at);
+        // console.log("Image is", this.stagod);
+        if(this.published === 0)
+        {
+            console.log(this.published)
+
+        }
 
     },
     computed:
@@ -187,11 +200,49 @@ export default {
         onChange(e)
         {
             this.file = e.target.files[0];
+            // this.stagod.image = e.target.files[0];
+            this.stagod.image = URL.createObjectURL(e.target.files[0]);
+            console.log(123)
+            this.imageHasBeenSelected = true;
         },
         logContent() {
             console.log('Content is: ', this.post.bodyText)
         },
         updatePost(postId) {
+            if(this.title === '' || this.title === null || this.title === undefined)
+            {
+                this.showWarningToast('Title is required');
+                return;
+            }
+            if(this.description === '' || this.description === null || this.description === undefined)
+            {
+                this.showWarningToast('Description is required');
+                return;
+            }
+            if(this.content === '' || this.content === null || this.content === undefined)
+            {
+                this.showWarningToast('Content is required');
+                return;
+            }
+            if(this.type === '' || this.type === null || this.type === undefined)
+            {
+                this.showWarningToast('Type is required');
+                return;
+            }
+            if(this.status === '' || this.status === null || this.status === undefined)
+            {
+                this.showWarningToast('Status is required');
+                return;
+            }
+
+            if(this.image === '' || this.image === null || this.image === undefined)
+            {
+                this.showWarningToast('Image is required');
+                return;
+            }
+
+
+            // console.log(this.title);
             if(this.created_at != '' || this.created_at != null || this.created_at != undefined)
             {
                if (this.published_at == '' || this.published_at == null || this.published_at == undefined)
@@ -204,11 +255,11 @@ export default {
                }
             }
 
-            if(this.file === '' || this.file === null || this.file === undefined || this.file.name === 'undefined')
-            {
-                this.showWarningToast('Upload Image First');
-                return;
-            }
+            // if(this.file === '' || this.file === null || this.file === undefined || this.file.name === 'undefined')
+            // {
+            //     this.showWarningToast('Upload Image First');
+            //     return;
+            // }
 
             // this.formSubmit();
             // this.updateBlogData();
@@ -225,12 +276,23 @@ export default {
                 $('#confirmationModal').modal('show');
 
             }
+
+
         },
         confirmUpdate() {
-            this.formSubmit();
+
+            if(this.imageHasBeenSelected)
+            {
+                this.formSubmit();
+            }
+
+
             this.updateBlogData();
             $('#confirmationModal').modal('hide');
-            this.showSuccessToast('Post Updated Successfully');
+            if(this.published == 1)
+                this.showSuccessToast('Post Updated Successfully');
+            else
+                this.showWarningToast('Post Archived Successfully');
             this.updateDisabled = true
             setTimeout(() => {
                 window.location.href = '/post/' + this.post.id;
@@ -241,7 +303,14 @@ export default {
         updateBlogData()
         {
             //send axios request with all the data to the server
-
+            if(this.status === 'published')
+            {
+                this.published = 1;
+            }
+            else
+            {
+                this.published = 0;
+            }
 
             axios.post('/update-blog', {
                 id: this.post.id,
@@ -251,6 +320,7 @@ export default {
                 image: this.file.name,
                 type: this.type,
                 status: this.status,
+                published: this.published
             })
                 .then(function (response) {
                     console.log(response);
@@ -302,7 +372,27 @@ export default {
 }
 </script>
 
-<style scoped>
+<style>
+
+@import "~vue2-editor/dist/vue2-editor.css";
+@import '~quill/dist/quill.core.css';
+@import '~quill/dist/quill.bubble.css';
+@import '~quill/dist/quill.snow.css';
+
+.quillWrapper
+{
+    background: white;
+}
+
+
+.quillWrapper > ql-editor {
+    color: black!important;
+}
+
+#bodyText > div.ql-editor
+{
+    color: black!important;
+}
 .modal-content {
     outline: 2px solid white;
     outline-offset: -2px;
@@ -330,12 +420,10 @@ export default {
     }
 }
 
-@import "~vue2-editor/dist/vue2-editor.css";
+
 
 /* Import the Quill styles you want */
-@import '~quill/dist/quill.core.css';
-@import '~quill/dist/quill.bubble.css';
-@import '~quill/dist/quill.snow.css';
+
 
 </style>
 

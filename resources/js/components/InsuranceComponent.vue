@@ -3,19 +3,19 @@
 <template>
 <div class="container">
     <div class="row">
-        <h1 class="text-center">Insurance</h1>
+        <h1 class="text-center text-white">Insurance</h1>
     </div>
     <div>
-        <table id="insurance-table" class="display">
+        <table id="insurance-table" class="display text-white">
             <thead>
             <tr>
-                <th>ID</th>
-                <th>Name</th>
-                <th>Last Name</th>
-                <th>Phone</th>
-                <th>Start Date</th>
-                <th>End Date</th>
-                <th>Policy Type</th>
+                <th class="text-white">ID</th>
+                <th class="text-white">Name</th>
+                <th class="text-white">Last Name</th>
+                <th class="text-white">Phone</th>
+                <th class="text-white">Start Date</th>
+                <th class="text-white">End Date</th>
+                <th class="text-white">Policy Type</th>
             </tr>
             </thead>
         </table>
@@ -27,6 +27,7 @@
 
 import $ from 'jquery';
 import datatable from 'datatables.net';
+import moment from "moment";
 export default
 {
     mounted: function()
@@ -65,8 +66,22 @@ export default
                     {title: 'Name', data: 'name'},
                     {title: 'Last Name', data: 'last_name'},
                     {title: 'Phone', data: 'phone_number'},
-                    {title: 'Start Date', data: 'journey_start'},
-                    {title: 'End Date', data: 'journey_end'},
+                    {title: 'Start Date', orderable: false, data: 'journey_start', render: function(data, type, row) {
+                            if(data != null) {
+                                return '<span class="start_date" title="' + data + '">' + moment(data).format('DD.MM.YYYY') + '</span>';
+                            }
+                            else
+                                return data;
+                        },
+                    },
+                    {title: 'End Date', orderable: false, data: 'journey_end', render: function(data, type, row) {
+                            if(data != null) {
+                                return '<span class="end_date" title="' + data + '">' + moment(data).format('DD.MM.YYYY') + '</span>';
+                            }
+                            else
+                                return data;
+                        },
+                    },
                     {title: 'Policy Type', data: 'type', 'render': function (data, type, row)
                         {
                             if(data === 'group')

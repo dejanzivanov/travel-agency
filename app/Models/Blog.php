@@ -55,15 +55,19 @@ class Blog extends Model
 
     public static function updateBlog(\Illuminate\Http\Request $request)
     {
+//        dd($request->all());
+
+
         $arr = [
             'author' => Auth::user()->name,
             'title' => $request->title,
             'description' => $request->description,
             'bodyText' => $request->bodyText,
-            'image' => $request->image,
             'type' => strtolower($request->type),
             'status' => $request->status,
+            'published' => $request->published,
         ];
+
 
         $status = $request->status;
         $currentTime = Carbon::now();
@@ -191,6 +195,11 @@ class Blog extends Model
             ->where('id', '=', $arr)
             ->get()
         ->toArray();
+        $filename = $data[0]->image;
+//        dd($filename);
+        $publicPath = asset('/storage/uploads/' . $data[0]->id . '/' .  $filename);
+        $data[0]->image = $publicPath;
+//        dd($publicPath);
         return $data;
     }
 }

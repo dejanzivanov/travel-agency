@@ -3,13 +3,13 @@
 <template>
     <div class="container">
         <div class="row">
-            <h1 class="text-center pt-4">Users</h1>
+            <h1 class="text-center pt-4 text-white">Users</h1>
         </div>
         <div class="d-flex justify-content-end py-3">
             <button class="btn btn-dark my-auto create-new-user" data-bs-toggle="modal" data-bs-target="#createUserModal">Create new user</button>
         </div>
         <div>
-            <table id="users-table" class="display">
+            <table id="users-table" class="display text-white">
                 <thead>
                 <tr>
                     <th>ID</th>
@@ -230,7 +230,7 @@ export default
                     { title: 'Created At',
                         data: 'created_at', render: function(data, type, row) {
                             if(data != null) {
-                                return '<span class="created_at" title="' + data + '">' + moment(data).format('d.m.Y') + '</span>';
+                                return '<span class="created_at" title="' + data + '">' + moment(data).format('DD.MM.YYYY') + '</span>';
                             }
                             else
                                 return data;

@@ -1,7 +1,7 @@
 <template>
     <div>
         <div class="d-flex flex-column align-items-center mt-3">
-            <h1 class="text-center">Admin Blog Dashboard</h1>
+            <h1 class="text-center text-white">Admin Blog Dashboard</h1>
             <div class="mt-3 d-flex justify-content-between w-50">
                 <button class="btn btn-dark" @click="viewAllPosts">View All Posts</button>
                 <button class="btn btn-dark" @click="createNewPost">Create New Post</button>
@@ -45,8 +45,14 @@ export default {
         }
     },
 };
+
 </script>
 
+
+
 <style scoped>
-/* Add your custom styles here */
+#blog-table > thead > tr
+ {
+    color: white!important;
+}
 </style>
