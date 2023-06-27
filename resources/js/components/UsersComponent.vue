@@ -230,7 +230,7 @@ export default
                     { title: 'Created At',
                         data: 'created_at', render: function(data, type, row) {
                             if(data != null) {
-                                return '<span class="created_at" title="' + data + '">' + moment(data).format('d.m.Y') + '</span>';
+                                return '<span class="created_at" title="' + data + '">' + moment(data).format('DD.MM.YYYY') + '</span>';
                             }
                             else
                                 return data;

@@ -27,6 +27,7 @@
 
 import $ from 'jquery';
 import datatable from 'datatables.net';
+import moment from "moment";
 export default
 {
     mounted: function()
@@ -65,8 +66,22 @@ export default
                     {title: 'Name', data: 'name'},
                     {title: 'Last Name', data: 'last_name'},
                     {title: 'Phone', data: 'phone_number'},
-                    {title: 'Start Date', data: 'journey_start'},
-                    {title: 'End Date', data: 'journey_end'},
+                    {title: 'Start Date', orderable: false, data: 'journey_start', render: function(data, type, row) {
+                            if(data != null) {
+                                return '<span class="start_date" title="' + data + '">' + moment(data).format('DD.MM.YYYY') + '</span>';
+                            }
+                            else
+                                return data;
+                        },
+                    },
+                    {title: 'End Date', orderable: false, data: 'journey_end', render: function(data, type, row) {
+                            if(data != null) {
+                                return '<span class="end_date" title="' + data + '">' + moment(data).format('DD.MM.YYYY') + '</span>';
+                            }
+                            else
+                                return data;
+                        },
+                    },
                     {title: 'Policy Type', data: 'type', 'render': function (data, type, row)
                         {
                             if(data === 'group')

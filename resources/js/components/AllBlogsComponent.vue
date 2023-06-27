@@ -83,15 +83,16 @@ export default {
                 columns: [
                     { title: 'ID', data: 'id' },
                     { title: 'Author', data: 'author' },
-                    { title: 'Image', data: 'image', "render": function (data, type, row, meta) {
+                    { title: 'Image', orderable: false, data: 'image', "render": function (data, type, row, meta) {
                             return '<a href="storage/uploads/' + row.id + '/' + data + '"><img src="storage/uploads/' + row.id + '/' + data + '" class="img-thumbnail slika"></a>';
                         },
                     },
                     { title: 'Created At',
                         data: 'created_at',
+                        orderable: false,
                         render: function(data, type, row) {
                         if(data != null) {
-                            return '<span class="created_at" title="' + data + '">' + moment(data).format('d.m.Y') + '</span>';
+                            return '<span class="created_at" title="' + data + '">' + moment(data).format('DD.MM.YYYY') + '</span>';
                         }
                         else
                             return data;
@@ -99,6 +100,7 @@ export default {
                     },
                     { title: 'Published At',
                         data: 'published_at',
+                        orderable: false,
                         render: function(data, type, row) {
                         if(data != null) {
                             console.log('id je, ' + row.id + 'data je ' + data)
@@ -110,6 +112,7 @@ export default {
                     },
                     { title: 'Archived At',
                         data: 'archived_at',
+                        orderable: false,
                         render: function(data, type, row) {
                             if (data != null) {
                                 return '<span class="archived_at" title="' + data + '">' + moment(data).format('d.m.Y') + '</span>';
