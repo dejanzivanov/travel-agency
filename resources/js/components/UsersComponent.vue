@@ -6,7 +6,7 @@
             <h1 class="text-center pt-4 text-white">Users</h1>
         </div>
         <div class="d-flex justify-content-end py-3">
-            <button class="btn btn-dark my-auto create-new-user" data-bs-toggle="modal" data-bs-target="#createUserModal">Create new user</button>
+            <button class="btn btn-dark my-auto create-new-user" :disabled="createNewUserButton" data-bs-toggle="modal" data-bs-target="#createUserModal">Create new user</button>
         </div>
         <div>
             <table id="users-table" class="display text-white">
@@ -36,30 +36,50 @@
                         <form id="createUserForm">
                             <div class="mb-3">
                                 <label for="name" class="form-label">Name</label>
-                                <input type="text" class="form-control" id="name" name="name" required>
+                                <input type="text" v-on:keydown="resetCreateNameErrors" v-model="newUserName" class="form-control" id="name" name="name" required>
+                                <div v-for="error in createNameErrors" :key="error">
+                                    <span class="text-red">{{ error }}</span>
+                                </div>
                             </div>
                             <div class="mb-3">
                                 <label for="lastName" class="form-label">Last Name</label>
-                                <input type="text" class="form-control form-control-dark" id="lastName" name="lastName" required>
+                                <input type="text" v-on:keydown="resetCreateLastNameErrors" v-model="newUserLastName" class="form-control form-control-dark" id="lastName" name="lastName" required>
+                                <div v-for="error in createLastNameErrors" :key="error">
+                                    <span class="text-red">{{ error }}</span>
+                                </div>
                             </div>
                             <div class="mb-3">
                                 <label for="email" class="form-label">Email</label>
-                                <input type="email" class="form-control form-control-dark" id="email" name="email" required>
+                                <input type="email" v-on:keydown="resetCreateEmailErrors"  v-model="newUserEmail" class="form-control form-control-dark" id="email" name="email" required>
+                                <div v-for="error in createEmailErrors" :key="error">
+                                    <span class="text-red">{{ error }}</span>
+                                </div>
+
                             </div>
                             <div class="mb-3">
                                 <label for="password" class="form-label">Password</label>
-                                <input type="password" class="form-control" id="password" name="password" required>
+                                <input type="password" v-on:keydown="resetCreatePasswordErrors" v-model="newUserPassword" class="form-control" id="password" name="password" required>
+                                <div v-for="error in createPasswordErrors" :key="error">
+                                    <span class="text-red">{{ error }}</span>
+                                </div>
+
                             </div>
                             <div class="mb-3">
                                 <label for="accountType" class="form-label">Account Type</label>
-                                <select class="form-select form-control-dark" id="accountType" name="accountType" required>
+                                <select class="form-select form-control-dark" v-model="newUserAccountType" id="accountType" name="accountType" required>
                                     <option value="admin">Admin</option>
                                     <option value="user">User</option>
                                 </select>
+                                <div v-for="error in createAccountTypeErrors" :key="error">
+                                    <span class="text-red">{{ error }}</span>
+                                </div>
                             </div>
                             <div class="mb-3">
                                 <label for="phoneNumber" class="form-label">Phone Number</label>
-                                <input type="text" class="form-control" id="phoneNumber" name="phoneNumber" required>
+                                <input type="text" v-on:keydown="resetCreatePhoneNumberErrors" v-model="newUserPhoneNumber" class="form-control" id="phoneNumber" name="phoneNumber" required>
+                                <div v-for="error in createPhoneNumberErrors" :key="error">
+                                    <span class="text-red">{{ error }}</span>
+                                </div>
                             </div>
                         </form>
                     </div>
@@ -82,26 +102,50 @@
                             <input type="hidden" id="editUserId" name="userId">
                             <div class="mb-3">
                                 <label for="editName" class="form-label">Name</label>
-                                <input type="text" class="form-control" id="editName" name="name" required>
+                                <input type="text" v-on:keydown="resetUpdateName" v-model="updateUserName" class="form-control" id="editName" name="name" required>
+                                <div v-for="error in updateNameErrors" :key="error">
+                                    <span class="text-red">{{ error }}</span>
+                                </div>
                             </div>
                             <div class="mb-3">
                                 <label for="editLastName" class="form-label">Last Name</label>
-                                <input type="text" class="form-control form-control-dark" id="editLastName" name="lastName" required>
+                                <input type="text"  v-on:keydown="resetUpdateLastName" v-model="updateUserLastName" class="form-control form-control-dark" id="editLastName" name="lastName" required>
+                                <div v-for="error in updateLastNameErrors" :key="error">
+                                    <span class="text-red">{{ error }}</span>
+                                </div>
                             </div>
                             <div class="mb-3">
                                 <label for="editEmail" class="form-label">Email</label>
-                                <input type="email" class="form-control form-control-dark" id="editEmail" name="email" required>
+                                <input type="email" v-on:keydown="resetUpdateEmail"  v-model="updateUserEmail" class="form-control form-control-dark" id="editEmail" name="email" required>
+
+
+                                <div v-for="error in updateEmailErrors" :key="error">
+                                    <span class="text-red">{{ error }}</span>
+                                </div>
+                            </div>
+                            <div class="mb-3">
+                                <label for="editPassword" class="form-label">Password</label>
+                                <input type="password"  v-on:keydown="resetUpdatePassword" v-model="updateUserPassword" class="form-control form-control-dark" id="editPassword" name="password" required>
+                                <div v-for="error in updatePasswordErrors" :key="error">
+                                    <span class="text-red">{{ error }}</span>
+                                </div>
                             </div>
                             <div class="mb-3">
                                 <label for="editAccountType" class="form-label">Account Type</label>
-                                <select class="form-select form-control-dark" id="editAccountType" name="accountType" required>
+                                <select class="form-select form-control-dark" v-model="updateUserAccountType" id="editAccountType" name="accountType" required>
                                     <option value="admin">Admin</option>
                                     <option value="user">User</option>
                                 </select>
+                                <div v-for="error in updateAccountTypeErrors" :key="error">
+                                    <span class="text-red">{{ error }}</span>
+                                </div>
                             </div>
                             <div class="mb-3">
-                                <label for="editPhoneNumber" class="form-label">Phone Number</label>
-                                <input type="text" class="form-control" id="editPhoneNumber" name="phoneNumber" required>
+                                <label for="editPhoneNumber"  class="form-label">Phone Number</label>
+                                <input type="text" v-on:keydown="resetUpdatePhoneNumber" v-model="updateUserPhoneNumber" class="form-control" id="editPhoneNumber" name="phoneNumber" required>
+                                <div v-for="error in updatePhoneNumberErrors" :key="error">
+                                    <span class="text-red">{{ error }}</span>
+                                </div>
                             </div>
                         </form>
                     </div>
@@ -157,11 +201,13 @@ export default
         });
 
         $(document).on('click', '.create-new-user', function() {
+            console.log('create user');
             $('#createUserModal').modal('show'); // Show the modal
         });
 
         // Create user button click event
         $(document).on('click', '.create-user2', function() {
+
             self.createUser();
         });
 
@@ -181,19 +227,94 @@ export default
             self.openEditUserModal(userId);
         });
         $(document).on('click', '.edit-user2', function () {
+
             self.saveChanges();
             // self.destroyTable();
             // self.initTable();
         });
+
+        // $('#createUserModal').on('hidden.bs.modal', function (e) {
+        //     // self.createNewUserButton = false;
+        //
+        // })
     },
     data()
     {
         return {
             users: [],
+            createNewUserButton: false,
+            newUserName: '',
+            newUserLastName: '',
+            newUserEmail: '',
+            newUserPassword: '',
+            newUserAccountType: '',
+            newUserPhoneNumber: '',
+
+            updateUserName: '',
+            updateUserLastName: '',
+            updateUserEmail: '',
+            updateUserPassword: '',
+            updateUserAccountType: '',
+            updateUserPhoneNumber: '',
+
+            updateEmailErrors: [],
+            updateNameErrors: [],
+            updateLastNameErrors: [],
+            updatePasswordErrors: [],
+            updateAccountTypeErrors: [],
+            updatePhoneNumberErrors: [],
+
+            createEmailErrors: [],
+            createPasswordErrors: [],
+            createLastNameErrors: [],
+            createNameErrors: [],
+            createAccountTypeErrors: [],
+            createPhoneNumberErrors: [],
         };
     },
     methods:
     {
+        resetUpdateEmail()
+        {
+            this.updateEmailErrors = [];
+        },
+        resetUpdateName()
+        {
+            this.updateNameErrors = [];
+        },
+        resetUpdateLastName()
+        {
+            this.updateLastNameErrors = [];
+        },
+        resetUpdatePassword()
+        {
+            this.updatePasswordErrors = [];
+        },
+        resetUpdatePhoneNumber()
+        {
+            this.updatePhoneNumberErrors = [];
+        },
+        resetCreateNameErrors()
+        {
+            this.createNameErrors = [];
+        },
+        resetCreateLastNameErrors()
+        {
+            this.createLastNameErrors = [];
+        },
+        resetCreateEmailErrors()
+        {
+            this.createEmailErrors = [];
+        },
+        resetCreatePasswordErrors()
+        {
+            this.createPasswordErrors = [];
+        },
+        resetCreatePhoneNumberErrors()
+        {
+            this.createPhoneNumberErrors = [];
+        },
+
         initTable()
         {
             const self = this;
@@ -236,7 +357,7 @@ export default
                                 return data;
                         },
                     },
-                    { title: 'Actions', data: 'id', render: function (data, type, row)
+                    { title: 'Actions', orderable: false, data: 'id', render: function (data, type, row)
                         {
                             return '<div class="d-flex justify-content-around"><button class="btn btn-danger dugme" data-id="' + data + '">Delete</button><button class="btn btn-dark edit-dugme" data-id="' + data + '">Edit</button></div>';
                         }
@@ -263,18 +384,160 @@ export default
         createUser() {
             const form = document.getElementById('createUserForm');
             const formData = new FormData(form);
+            if(this.newUserName === null || this.newUserName === '' || this.newUserName === undefined)
+            {
+                // this.showWarningToast('Name is required!');
+                // return;
+                if (!this.createNameErrors.includes('Name is required')) {
+                    this.createNameErrors.push('Name is required');
+                }
+                return;
+            }
+            if(this.newUserLastName === null || this.newUserLastName === '' || this.newUserLastName === undefined)
+            {
+                // this.showWarningToast('Last Name is required');
+                // return;
+                if (!this.createLastNameErrors.includes('Last Name is required')) {
+                    this.createLastNameErrors.push('Last Name is required');
+                }
+                return;
+            }
+            if(this.newUserEmail === null || this.newUserEmail === '' || this.newUserEmail === undefined)
+            {
+                // this.showWarningToast('Email is required');
+                // return;
+                if (!this.createEmailErrors.includes('Email is required')) {
+                    this.createEmailErrors.push('Email is required');
+                }
+                return;
+            }
+            else
+            {
+                const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+                if (!emailRegex.test(this.updateUserEmail)) {
+                    // this.showWarningToast('Email is invalid');
+                    // return;
+                    if (!this.createEmailErrors.includes('Email is invalid')) {
+                        this.createEmailErrors.push('Email is invalid');
+                    }
+                    return;
+                }
+            }
+            if(this.newUserPassword)
+            {
+                // Password rules
+                const passwordRules = [
+                    // Rule 1: Minimum length of 8 characters
+                    {
+                        rule: this.newUserPassword.length >= 8,
+                        message: 'Password should have a minimum length of 8 characters.',
+                    },
+                    // Rule 2: Contains at least one uppercase letter
+                    {
+                        rule: /[A-Z]/.test(this.newUserPassword),
+                        message: 'Password should contain at least one uppercase letter.',
+                    },
+                    // Rule 3: Contains at least one lowercase letter
+                    {
+                        rule: /[a-z]/.test(this.newUserPassword),
+                        message: 'Password should contain at least one lowercase letter.',
+                    },
+                    // Rule 4: Contains at least one digit
+                    {
+                        rule: /[0-9]/.test(this.newUserPassword),
+                        message: 'Password should contain at least one digit.',
+                    },
+                    // Rule 5: Contains at least one special character
+                    {
+                        rule: /[!@#$%^&*]/.test(this.newUserPassword),
+                        message: 'Password should contain at least one special character.',
+                    },
+                    // Rule 6: Does not contain spaces
+                    {
+                        rule: !/\s/.test(this.newUserPassword),
+                        message: 'Password should not contain spaces.',
+                    },
+                    // Rule 7: Does not start or end with whitespace
+                    {
+                        rule: !/^\s|\s$/.test(this.newUserPassword),
+                        message: 'Password should not start or end with whitespace.',
+                    },
+                    // Rule 8: Does not match the user's name or last name
+                    {
+                        rule:
+                            this.newUserPassword.toLowerCase().indexOf(this.newUserName.toLowerCase()) === -1 &&
+                            this.newUserPassword.toLowerCase().indexOf(this.newUserLastName.toLowerCase()) === -1,
+                        message: 'Password should not match your name or last name.',
+                    },
+                    // Rule 9: Does not contain sequences of repeated characters (e.g., "aaa" or "111")
+                    {
+                        rule: !/(.)\1\1/.test(this.newUserPassword),
+                        message: 'Password should not contain sequences of repeated characters.',
+                    },
+                    // Rule 10: Add your custom rule here
+                    // Example: At least one special character from a specific set
+                    {
+                        rule: /[!@#$%^&*]/.test(this.newUserPassword),
+                        message: 'Password should contain at least one special character from the set: !@#$%^&*',
+                    },
+                ];
+
+                // Check each password rule and show toast for failed rules
+                const failedRules = passwordRules.filter(rule => !rule.rule);
+                if (failedRules.length > 0) {
+                    failedRules.forEach(rule => {
+                        // this.showWarningToast(rule.message);
+                        if (!this.createPasswordErrors.includes(rule.message)) {
+                            this.createPasswordErrors.push(rule.message);
+                        }
+                    });
+                    return;
+                }
+            }
+            if(this.newUserPassword === '' || this.newUserPassword === null || this.newUserPassword === undefined)
+            {
+                // this.showWarningToast('Password is required');
+                // return;
+                if (!this.createPasswordErrors.includes('Password is required')) {
+                    this.createPasswordErrors.push('Password is required');
+                }
+                return;
+            }
+            if(this.newUserAccountType === '' || this.newUserAccountType === null || this.newUserAccountType === undefined)
+            {
+                // this.showWarningToast('Account Type is required');
+                // return;
+                if (!this.createAccountTypeErrors.includes('Account Type is required')) {
+                    this.createAccountTypeErrors.push('Account Type is required');
+                }
+                return;
+            }
+            if(this.newUserPhoneNumber === '' || this.newUserPhoneNumber === null || this.newUserPhoneNumber === undefined)
+            {
+                // this.showWarningToast('Phone Number is required');
+                // return;
+                if (!this.createPhoneNumberErrors.includes('Phone Number is required')) {
+                    this.createPhoneNumberErrors.push('Phone Number is required');
+                }
+                return;
+            }
+
 
             // Check if any required fields are empty
             let hasEmptyFields = false;
             for (const value of formData.values()) {
+                console.log(formData.get('name'));
+
                 if (!value) {
                     hasEmptyFields = true;
-                    break;
+                    // break;
                 }
             }
 
             if (hasEmptyFields) {
                 $('#createUserModal').addClass('shake'); // Add the shake class to the modal
+                // this.showWarningToast('All fields are required!'); // Show a warning toast
 
                 // Remove the shake class after the animation completes
                 setTimeout(() => {
@@ -293,31 +556,52 @@ export default
                 axios.post('/create-user', userData)
                     .then(response => {
                         // User creation successful, show success message
+
+
+                        // Close the modal and reset the form
+                        if (response.data.error && response.data.error.startsWith('SQLSTATE[23000]')) {
+                            this.showWarningToast('Duplicate email');
+                            return;
+                        }
+                       else if(response.status == 500)
+                        {
+                            this.showWarningToast('There has been an error1');
+                            return;
+                        }
+                        else if(response.status == 200)
+                        {
+                            this.showSuccessToast('User created successfully.2');
+                            this.createNewUserButton = true;
+
+
+                        }
+                        else
+                        {
+                            this.showWarningToast('There has been an error3');
+                            return;
+                        }
+
+
                         Swal.fire({
                             title: 'Success',
                             text: 'User created successfully.',
                             icon: 'success',
                         });
 
-                        // Close the modal and reset the form
-                        $('#createUserModal').modal('hide');
-
 
                         form.reset();
+                        $('#createUserModal').modal('hide');
 
                         // Refresh the table to display the updated user list
                         this.destroyTable();
                         this.initTable();
+                        this.createNewUserButton = true;
+
+                        setTimeout(() => {
+                            this.createNewUserButton = false;
+
+                        }, 5000);
                     })
-                    .catch(error => {
-                        // Error occurred during user creation, show error message
-                        Swal.fire({
-                            title: 'Error',
-                            text: 'Failed to create a new user.',
-                            icon: 'error',
-                        });
-                        console.error(error);
-                    });
             }
         },
         openEditUserModal(userId) {
@@ -327,23 +611,22 @@ export default
                     const userData = response.data;
                     console.log("mlem", userData);
                     console.log("mlem", userData[0].id);
-                    // console.log(userDataid);
+                    const self = this;
 
-                    // Populate the form fields in the edit modal with the user data
-                    // await new Promise(resolve => setTimeout(resolve, 500)); // Adjust the delay as needed
-                    // setTimeout(() => {
                     $('#editUserModal').modal('show');
 
                     $('#editUserModal').on('shown.bs.modal', function () {
-                        // setTimeout(function() {
 
-                            $('#editUserId').val(userData[0].id);
-                        $('#editName').val(userData[0].name);
-                        $('#editLastName').val(userData[0].last_name);
-                        $('#editEmail').val(userData[0].email);
-                        $('#editAccountType').val(userData[0].account_type);
-                        $('#editPhoneNumber').val(userData[0].phone_number);
-                        // }, 500);
+                        $('#editUserId').val(userData[0].id);
+                        self.updateUserName = userData[0].name;
+                        self.updateUserLastName = userData[0].last_name;
+                        self.updateUserEmail = userData[0].email;
+                        self.updateUserAccountType = userData[0].account_type;
+                        self.updateUserPhoneNumber = userData[0].phone_number;
+
+
+
+
                         $('#editUserModal').off('shown.bs.modal');
                     });
 
@@ -355,17 +638,135 @@ export default
                 });
         },
         saveChanges() {
+
+
+
+            if (this.updateUserName === null || this.updateUserName === '' || this.updateUserName === undefined) {
+                if (!this.updateNameErrors.includes('Name is required')) {
+                    this.updateNameErrors.push('Name is required');
+                }
+                return;
+            }
+
+            if (this.updateUserLastName === null || this.updateUserLastName === '' || this.updateUserLastName === undefined) {
+                // this.showWarningToast('Last Name is required');
+                if (!this.updateLastNameErrors.includes('Last Name is required')) {
+                    this.updateLastNameErrors.push('Last Name is required');
+                }
+                return;
+            }
+
+            if (this.updateUserEmail === null || this.updateUserEmail === '' || this.updateUserEmail === undefined) {
+                // this.showWarningToast('Email is required');
+                if (!this.updateEmailErrors.includes('Email is required')) {
+                    this.updateEmailErrors.push('Email is required');
+                }
+                return;
+            } else {
+                const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+                if (!emailRegex.test(this.updateUserEmail)) {
+                    // this.showWarningToast('Email is invalid');
+                    if (!this.updateEmailErrors.includes('Email is invalid')) {
+                        this.updateEmailErrors.push('Email is invalid');
+                    }
+                    return;
+                }
+            }
+
+            if (this.updateUserPassword) {
+                const passwordRules = [
+                    {
+                        rule: this.updateUserPassword.length >= 8,
+                        message: 'Password should have a minimum length of 8 characters.',
+                    },
+                    {
+                        rule: /[A-Z]/.test(this.updateUserPassword),
+                        message: 'Password should contain at least one uppercase letter.',
+                    },
+                    {
+                        rule: /[a-z]/.test(this.updateUserPassword),
+                        message: 'Password should contain at least one lowercase letter.',
+                    },
+                    {
+                        rule: /[0-9]/.test(this.updateUserPassword),
+                        message: 'Password should contain at least one digit.',
+                    },
+                    {
+                        rule: /[!@#$%^&*]/.test(this.updateUserPassword),
+                        message: 'Password should contain at least one special character.',
+                    },
+                    {
+                        rule: !/\s/.test(this.updateUserPassword),
+                        message: 'Password should not contain spaces.',
+                    },
+                    {
+                        rule: !/^\s|\s$/.test(this.updateUserPassword),
+                        message: 'Password should not start or end with whitespace.',
+                    },
+                    {
+                        rule:
+                            this.updateUserPassword.toLowerCase().indexOf(this.updateUserName.toLowerCase()) === -1 &&
+                            this.updateUserPassword.toLowerCase().indexOf(this.updateUserLastName.toLowerCase()) === -1,
+                        message: 'Password should not match your name or last name.',
+                    },
+                    {
+                        rule: !/(.)\1\1/.test(this.updateUserPassword),
+                        message: 'Password should not contain sequences of repeated characters.',
+                    },
+                    {
+                        rule: /[!@#$%^&*]/.test(this.updateUserPassword),
+                        message: 'Password should contain at least one special character from the set: !@#$%^&*',
+                    },
+                ];
+
+                const failedPasswordRules = passwordRules.filter(rule => !rule.rule);
+                if (failedPasswordRules.length > 0) {
+                    failedPasswordRules.forEach(rule => {
+                        // this.showWarningToast(rule.message);
+                        if (!this.updatePasswordErrors.includes(rule.message)) {
+                            this.updatePasswordErrors.push(rule.message);
+                        }
+                    });
+                    return;
+                }
+            }
+
+            // if (this.updateUserPassword === '' || this.updateUserPassword === null || this.updateUserPassword === undefined) {
+            //     this.showWarningToast('Password is required');
+            //     return;
+            // }
+
+            if (this.updateUserAccountType === '' || this.updateUserAccountType === null || this.updateUserAccountType === undefined) {
+                // this.showWarningToast('Account Type is required');
+                // return;
+                if (!this.updateAccountTypeErrors.includes('Account Type is required')) {
+                    this.updateAccountTypeErrors.push('Account Type is required');
+                }
+                return;
+            }
+
+            if (this.updateUserPhoneNumber === '' || this.updateUserPhoneNumber === null || this.updateUserPhoneNumber === undefined) {
+                // this.showWarningToast('Phone Number is required');
+                // return;
+                if (!this.updatePhoneNumberErrors.includes('Phone Number is required')) {
+                    this.updatePhoneNumberErrors.push('Phone Number is required');
+                }
+                return;
+            }
+
+
             const form = document.getElementById('editUserForm');
             const formData = new FormData(form);
 
             // Check if any required fields are empty
             let hasEmptyFields = false;
-            for (const value of formData.values()) {
-                if (!value) {
-                    hasEmptyFields = true;
-                    break;
-                }
-            }
+            // for (const value of formData.values()) {
+            //     if (!value) {
+            //         hasEmptyFields = true;
+            //         break;
+            //     }
+            // }
 
             if (hasEmptyFields) {
                 $('#editUserModal').addClass('shake'); // Add the shake class to the modal
@@ -393,8 +794,15 @@ export default
                             text: 'User updated successfully.',
                             icon: 'success',
                         });
+                            this.updateEmailErrors = [];
+                            this.updateNameErrors = [];
+                            this.updateLastNameErrors = [];
+                            this.updatePasswordErrors = [];
+                           this.updateAccountTypeErrors = [];
+                           this.updatePhoneNumberErrors = [];
 
-                        // Close the modal
+
+                            // Close the modal
                         $('#editUserModal').modal('hide');
 
                         // Refresh the table to display the updated user list
@@ -411,6 +819,44 @@ export default
                         console.error(error);
                     });
             }
+        },
+        showSuccessToast(message)
+        {
+            this.$toast.success(message, {
+                transition: "Vue-Toastification__fade",
+                position: "top-right",
+                timeout: 2000,
+                closeOnClick: true,
+                pauseOnFocusLoss: false,
+                pauseOnHover: true,
+                draggable: true,
+                draggablePercent: 0.6,
+                showCloseButtonOnHover: false,
+                hideProgressBar: false,
+                closeButton: "button",
+                newestOnTop: true,
+                icon: true,
+                rtl: false,
+            });
+        },
+        showWarningToast(message)
+        {
+            this.$toast.warning(message, {
+                transition: "Vue-Toastification__fade",
+                position: "top-right",
+                timeout: 2000,
+                closeOnClick: true,
+                pauseOnFocusLoss: false,
+                pauseOnHover: true,
+                draggable: true,
+                draggablePercent: 0.6,
+                showCloseButtonOnHover: false,
+                hideProgressBar: false,
+                closeButton: "button",
+                newestOnTop: true,
+                icon: true,
+                rtl: false,
+            });
         },
 
     },
@@ -439,6 +885,11 @@ export default
     100% {
         transform: translateX(0);
     }
+}
+
+.text-red
+{
+    color: red!important;
 }
 
 .black-text

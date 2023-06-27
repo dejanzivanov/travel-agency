@@ -108,16 +108,28 @@ class User extends Authenticatable
     public static function createUser(\Illuminate\Http\Request $request)
     {
 //        dd($request->all());
-        $user = User::create([
-            'name' => $request->name,
-            'last_name' => $request->lastName,
-            'account_type' => $request->accountType,
-            'email' => $request->email,
-            'phone_number' => $request->phoneNumber,
-            'password' => bcrypt($request->password),
-        ]);
 
-        return $user;
+        try
+        {
+            $user = User::create([
+                'name' => $request->name,
+                'last_name' => $request->lastName,
+                'account_type' => $request->accountType,
+                'email' => $request->email,
+
+
+                'phone_number' => $request->phoneNumber,
+                'password' => bcrypt($request->password),
+            ]);
+        }
+        catch(\Exception $e)
+        {
+            return response()->json(['error' => $e->getMessage()], 200);
+
+        }
+
+
+        return response()->json(['data' => $user], 200);
     }
 
     public static function getUserDataById(\Illuminate\Http\Request $request)
@@ -130,8 +142,27 @@ class User extends Authenticatable
     public static function updateUser(\Illuminate\Http\Request $request)
     {
         $id = $request->userId;
+//
 //        dd($request->all());
-        $data = DB::table('users')
+        if($request->password != null)
+        {
+            $password = bcrypt($request->password);
+            $data = DB::table('users')
+                ->where('id', $id)
+                ->update([
+                    'name' => $request->name,
+                    'last_name' => $request->lastName,
+                    'account_type' => $request->accountType,
+                    'email' => $request->email,
+                    'phone_number' => $request->phoneNumber,
+                    'password' => $password,
+                    'updated_at' => Carbon::parse(Carbon::now())->format('Y-m-d H:i:s')
+                ]);
+
+        }
+        else
+        {
+           $data = DB::table('users')
             ->where('id', $id)
             ->update([
                 'name' => $request->name,
@@ -139,9 +170,11 @@ class User extends Authenticatable
                 'account_type' => $request->accountType,
                 'email' => $request->email,
                 'phone_number' => $request->phoneNumber,
-                'password' => bcrypt($request->password),
                 'updated_at' => Carbon::parse(Carbon::now())->format('Y-m-d H:i:s')
             ]);
+        }
+
+//        dd($data);
         return $data;
     }
 
