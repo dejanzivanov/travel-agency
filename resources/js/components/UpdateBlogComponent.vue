@@ -2,7 +2,7 @@
     <div>
         <div class="container shaking-effect border-edge mt-3 p-4">
             <div>
-                <h1 class="text-center ">Edit Page </h1>
+                <h1 class="text-center text-white">Edit Page </h1>
             </div>
             <div class="mb-3">
                 <label :for="title" class="form-label label-white text-white">Title</label>
@@ -45,14 +45,14 @@
             <div class="mb-3">
                 <label class="form-label label-white text-white">Type</label>
                 <div class="form-check">
-                    <input class="form-check-input" @change="resetTypeErrors" type="radio" name="type" id="news" value="news" v-model="type">
-                    <label class="form-check-label label-white" for="news">
+                    <input class="form-check-input text-white" @change="resetTypeErrors" type="radio" name="type" id="news" value="news" v-model="type">
+                    <label class="form-check-label label-white text-white" for="news">
                         News
                     </label>
                 </div>
                 <div class="form-check">
-                    <input class="form-check-input" @change="resetTypeErrors" type="radio" name="type" :id="post" value="post" v-model="type">
-                    <label class="form-check-label label-white" :for="post">
+                    <input class="form-check-input text-white" @change="resetTypeErrors" type="radio" name="type" :id="post" value="post" v-model="type">
+                    <label class="form-check-label label-white text-white" :for="post">
                         Post
                     </label>
                 </div>
@@ -61,7 +61,7 @@
                 </div>
             </div>
             <div class="mb-4">
-                <div class="form-group">
+                <div class="form-group text-white">
                     <label :for="status" class="label-white">Status:</label>
                     <select class="form-control" v-model="status" :id="status" required>
                         <option value="archived" v-if="this.published">Archived</option>

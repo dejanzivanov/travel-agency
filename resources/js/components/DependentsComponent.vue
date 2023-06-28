@@ -2,13 +2,13 @@
     <div class="container">
         <div class="row">
             <div class="col-9 pt-5" >
-                <table id="dependents-table" class="display">
-                    <thead>
-                    <tr>
-                        <th>ID</th>
-                        <th>Name</th>
-                        <th>Last Name</th>
-                        <th>Date Of Birth</th>
+                <table id="dependents-table" class="display text-white">
+                    <thead class="text-white">
+                    <tr class="text-white">
+                        <th class="text-white">>ID</th>
+                        <th class="text-white">>Name</th>
+                        <th class="text-white">>Last Name</th>
+                        <th class="text-white">>Date Of Birth</th>
                     </tr>
                     </thead>
                 </table>
@@ -73,7 +73,7 @@ export default {
 </script>
 
 
-<style>
+<style scoped>
 
 #blog-table > tbody > tr > td.sorting_1 {
     background-color: #999292 !important;

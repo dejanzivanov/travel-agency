@@ -185,9 +185,38 @@ export default {
         // axios.defaults.headers.common['X-CSRF-TOKEN'] = this.token;
     }
 };
+
+//body {
+//    background-color: #343a40;
+//    color: #fff;
+//}
+//
+//.form-control {
+//    background-color: #222;
+//    border: none;
+//    color: #fff;
+//}
+//
+//.form-control:focus {
+//    background-color: #333;
+//    color: #fff;
+//}
+//
+//.btn-primary {
+//    background-color: #007bff;
+//    border: none;
+//}
+//
+//.btn-primary:hover {
+//    background-color: #0056b3;
+//}
 </script>
 
-<style>
+<style scoped>
+
+
+
+
 .form-control {
     background-color: #222;
     border: none;

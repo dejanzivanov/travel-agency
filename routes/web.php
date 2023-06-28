@@ -44,16 +44,7 @@ Route::get('/logout', [LoginController::class, 'logout'])->name('logout');
 Route::post('/logout', [LoginController::class, 'logoutPost'])->name('logout.post');
 
 
-//Route::group(['middleware' => 'auth'], function () {
-//    Route::get('/admin-dashboard', function () {
-//        return view('admin-dashboard');
-//    })->name('admin-dashboard');
-//});
-
 Route::group(['middleware' => ['auth', 'admin']], function () {
-    Route::get('/admin-dashboard', function () {
-        return view('admin-dashboard');
-    })->name('admin-dashboard');
 
     Route::post('/blog-data', [BlogController::class, 'getBlogDataFromControllerPostRequest'])->name('blog-data');
     Route::post('/blog-data-delete', [BlogController::class, 'deleteBlogDataFromControllerPostRequest'])->name('blog-data-delete');
@@ -122,12 +113,7 @@ Route::post('/post-preview1/', function(Request $request) {
         $request->session()->put('type', $type);
         $request->session()->put('file', $file);
         $request->session()->put('status', $status);
-//        dd(session('$bodyText'));
-//            return view('post-preview');
+
         return response()->json(['message' => 'Variable added to session']);
 });
 
-
-Route::get('/idiot', function () {
-    return view('idiot');
-});

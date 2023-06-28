@@ -104,7 +104,7 @@ export default
 
 </script>
 
-<style>
+<style scoped>
 
 .policy_type{
     color: #0000EE;

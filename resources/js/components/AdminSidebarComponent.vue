@@ -78,7 +78,7 @@ export default {
 
 </script>
 
-<style>
+<style scoped>
 .sidebar {
     width: 200px;
     height: 94vh;

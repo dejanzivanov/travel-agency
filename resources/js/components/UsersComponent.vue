@@ -864,7 +864,7 @@ export default
 
 </script>
 
-<style>
+<style scoped>
 .shake {
     animation: shake 0.5s;
 }

@@ -3,7 +3,7 @@
 <template>
     <div class="container">
         <div class="row">
-            <h2 class="text-center  pt-3">Welcome to Deki Insurance Website(totally not a scam)</h2>
+            <h2 class="text-center  pt-3 text-white">Welcome to Deki Insurance Website(totally not a scam)</h2>
         </div>
     </div>
 </template>
@@ -16,7 +16,7 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 body {
     background-color: #343a40;
 }

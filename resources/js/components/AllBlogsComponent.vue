@@ -173,7 +173,7 @@ export default {
     </div>
 </template>
 
-<style>
+<style scoped>
 
 #blog-table > tbody > tr > td.sorting_1 {
     background-color: #999292 !important;
