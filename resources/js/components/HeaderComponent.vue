@@ -27,9 +27,9 @@
                     <li class="nav-item">
                         <a class="nav-link" href="/blog">Blog</a>
                     </li>
-                    <li class="nav-item" v-if="is_admin">
-                        <a class="nav-link" href="/admin-dashboard">Admin Dashboard</a>
-                    </li>
+<!--                    <li class="nav-item" v-if="is_admin">-->
+<!--                        <a class="nav-link" href="/admin-dashboard">Admin Dashboard</a>-->
+<!--                    </li>-->
                     <li class="nav-item dropdown" v-if="is_admin">
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             Admin Options

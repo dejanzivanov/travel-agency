@@ -19,28 +19,55 @@ class LoginController extends Controller
 
     public function loginPost(Request $request)
     {
-//        return redirect(route('/home'));
-        $data = new \stdClass();
-        $data->message = "";
-        $data->request = "";
-        $data->link = "";
+////        return redirect(route('/home'));
+//        $data = new \stdClass();
+//        $data->message = "";
+//        $data->request = "";
+//        $data->link = "";
+//
+//        $request->validate([
+//            'email' => 'required',
+//            'password' => 'required'
+//        ]);
+//
+//        $credentials = $request->only('email', 'password');
+//
+//        if (Auth::attempt($credentials)) {
+//            $data->message = "Login successful";
+//            $data->link = "/";
+//            return $data;
+//            echo "Login successfuldsaaaaaaaaaaaaaa";
+//        }
+//        else
+//        {
+////            $data->error = "Login fail";
+////            $data->link = "register";
+//
+//            return response()->json(['error' => 'Wrong Credentials'], 401);
+//        }
+        $response = [
+            'message' => '',
+            'link' => '',
+        ];
 
         $request->validate([
             'email' => 'required',
-            'password' => 'required'
+            'password' => 'required',
         ]);
 
         $credentials = $request->only('email', 'password');
 
         if (Auth::attempt($credentials)) {
-            $data->message = "Login successful";
-            $data->link = "/";
-            return $data;
+            $response['message'] = 'Login successful';
+            $response['link'] = '/admin-dashboard';
+            return response()->json($response, 200);
+        } else {
+            $response['error'] = 'Wrong credentials';
+            return response()->json($response, 401);
         }
 
-        $data->message = "Login fail";
-        $data->link = "register";
-        return $data;
+
+
 
     }
 

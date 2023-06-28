@@ -9,20 +9,22 @@
                         <h3 class="card-title text-center">Login</h3>
                     </div>
                     <div class="card-body">
-                        <div v-if="this.errors.length > 0" class="alert alert-danger">
-                            <ul>
-                                <li v-for="error in this.errors" :key="error">{{ error }}</li>
-                            </ul>
-                        </div>
+
                         <form @submit.prevent="login" method="POST">
 <!--                            @csrf-->
                             <div class="mb-3">
                                 <label for="email" class="form-label">Email</label>
-                                <input type="email" class="form-control" id="email" v-model="email" required>
+                                <input v-on:keydown="resetEmailErrors" type="email" class="form-control" id="email" v-model="email" required>
+                                <div v-for="error in this.emailErrors" :key="error">
+                                    <span class="text-red">{{ error }}</span>
+                                </div>
                             </div>
                             <div class="mb-3">
                                 <label for="password" class="form-label">Password</label>
-                                <input type="password" class="form-control" id="password" v-model="password" required>
+                                <input v-on:keydown="resetPasswordErrors"  type="password" class="form-control" id="password" v-model="password" required>
+                                <div v-for="error in this.paswordErrors" :key="error">
+                                   <span class="text-red">{{ error }}</span>
+                                </div>
                             </div>
                             <button type="submit" class="btn btn-primary">Login</button>
                         </form>
@@ -34,69 +36,112 @@
 </template>
 
 <script>
+import Swal from "sweetalert2";
+
 export default {
+
     data() {
         return {
             email: '',
             password: '',
             token: '',
-            errors: [],
+            emailErrors: [],
+            paswordErrors: [],
         };
     },
     methods: {
         login() {
-            this.errors = [];
+            // this.errors = [];
             if (this.email === '') {
-                this.errors.push('Email is required.');
+                if (!this.emailErrors.includes('Email is required.'))
+                        this.emailErrors.push('Email is required.');
             }
             if (this.password === '') {
-                this.errors.push('Password is required.');
+                if (!this.paswordErrors.includes('Password is required.'))
+                    this.paswordErrors.push('Password is required.');
             }
             if (!this.isValidEmail(this.email)) {
-                this.errors.push('Please enter a valid email address.');
+                if (!this.emailErrors.includes('Please enter a valid email address.'))
+                    this.emailErrors.push('Please enter a valid email address.');
             }
             if (this.password.length < 8) {
-                this.errors.push('Password should be at least 8 characters long.');
-            }
-            if (this.password.length > 20) {
-                this.errors.push('Password should not exceed 20 characters.');
+                if (!this.paswordErrors.includes('Password should be at least 8 characters long.'))
+                    this.paswordErrors.push('Password should be at least 8 characters long.');
             }
             if (this.password.toLowerCase() === 'password') {
-                this.errors.push('Please choose a stronger password.');
+                if (!this.paswordErrors.includes('Please choose a stronger password.'))
+                    this.paswordErrors.push('Please choose a stronger password.');
             }
             if (!this.hasUppercase(this.password)) {
-                this.errors.push('Password should contain at least one uppercase letter.');
+                if (!this.paswordErrors.includes('Password should contain at least one uppercase letter.'))
+                    this.paswordErrors.push('Password should contain at least one uppercase letter.');
             }
             if (!this.hasLowercase(this.password)) {
-                this.errors.push('Password should contain at least one lowercase letter.');
+                if (!this.paswordErrors.includes('Password should contain at least one lowercase letter.'))
+                this.paswordErrors.push('Password should contain at least one lowercase letter.');
             }
             if (!this.hasNumber(this.password)) {
-                this.errors.push('Password should contain at least one numeric digit.');
+                if (!this.paswordErrors.includes('Password should contain at least one numeric digit.'))
+                    this.paswordErrors.push('Password should contain at least one numeric digit.');
             }
             if (!this.hasSpecialChar(this.password)) {
-                this.errors.push('Password should contain at least one special character.');
+                if (!this.paswordErrors.includes('Password should contain at least one special character.'))
+                    this.paswordErrors.push('Password should contain at least one special character.');
             }
             if (this.password.includes(this.email)) {
-                this.errors.push('Password should not contain the email address.');
+                if (!this.paswordErrors.includes('Password should not contain the email address.'))
+                    this.paswordErrors.push('Password should not contain the email address.');
             }
             if (!this.isStrongPassword(this.password)) {
-                this.errors.push('Password is not strong enough.');
+                if (!this.paswordErrors.includes('Password is not strong enough.'))
+                    this.paswordErrors.push('Password is not strong enough.');
             }
-            if (this.errors.length === 0) {
+            if(this.paswordErrors.length > 0) {
+                return;
+            }
+
+            if (this.paswordErrors.length === 0 || this.emailErrors.length === 0) {
                 const formData = new FormData();
                 formData.append('email', this.email);
                 formData.append('password', this.password);
 
+
                 axios.post('/login', formData)
                     .then(response => {
                         console.log("Login successful");
-                        console.log(response.data);
-                        window.location.href = response.data['link']
-
+                        console.log(response);
+                        // Access the response data
+                        const responseData = response.data;
+                        const message = responseData.message;
+                        const link = responseData.link;
+                        // Perform actions based on the response
+                        if (message === 'Login successful') {
+                            console.log("Redirecting to:", link);
+                            // Redirect to the provided link
+                            Swal.fire({
+                                icon: 'success',
+                                title: 'Good job!',
+                                text: 'You are logged in now!',
+                                confirmButtonText: 'Proceed to Admin Dashboard',
+                                allowOutsideClick: false,
+                            }).then((result) => {
+                                if (result.isConfirmed) {
+                                    window.location.href = '/';
+                                }
+                            })
+                            ;
+                            // window.location.href = link;
+                        } else {
+                            console.log("Error:", message);
+                            // Handle error message
+                        }
                     })
                     .catch(error => {
                         console.log("Login failed");
-                        console.log(error.data);
+                        console.log(error.response.data.error);
+                        if(error.response.data.error === 'Wrong credentials') {
+                            this.paswordErrors.push('Invalid credentials.');
+                        }
                     });
             }
 
@@ -127,6 +172,12 @@ export default {
             const isLongEnough = str.length >= 10;
 
             return hasUppercase && hasLowercase && hasNumber && hasSpecialChar && isLongEnough;
+        },
+        resetEmailErrors() {
+            this.emailErrors = [];
+        },
+        resetPasswordErrors() {
+            this.paswordErrors = [];
         }
     },
     mounted() {
