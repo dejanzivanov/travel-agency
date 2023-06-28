@@ -1,20 +1,29 @@
 <template>
-    <div>
+    <div class="border-edge p-3">
         <div class="container shaking-effect">
             <div>
                 <h1 class="text-center mt-3 text-white">Create New Post</h1>
             </div>
             <div class="mb-3">
                 <label :for="title" class="form-label label-white text-white">Title</label>
-                <input type="text" class="form-control" v-model="title" :id="title" name="title" required>
+                <input type="text" v-on:keydown="resetTitleErrors" class="form-control" v-model="title" :id="title" name="title" required>
+                <div v-for="error in titleErrors" :key="error">
+                    <span class="text-red">{{ error }}</span>
+                </div>
             </div>
             <div class="mb-3">
                 <label :for="description" class="form-label label-white text-white">Description</label>
-                <input type="text" class="form-control" v-model="description" :id="description" name="description" required>
+                <input type="text" v-on:keydown="resetDescriptionErrors" class="form-control" v-model="description" :id="description" name="description" required>
+                <div v-for="error in descriptionErrors" :key="error">
+                    <span class="text-red">{{ error }}</span>
+                </div>
             </div>
             <div class="mb-3">
                 <label for="content" class="form-label label-white text-white">Body Text</label>
-                <vue-editor id="content" v-model="content" :editorOptions="editorOptions"></vue-editor>
+                <vue-editor id="content" v-on:keydown="resetContentErrors" v-model="content" :editorOptions="editorOptions"></vue-editor>
+                <div v-for="error in contentErrors" :key="error">
+                    <span class="text-red">{{ error }}</span>
+                </div>
             </div>
             <div class="mb-3">
                 <label :for="image" class="form-label label-white text-white">Image</label>
@@ -24,20 +33,26 @@
                     </form>
 
                 </div>
+                <div v-for="error in imageErrors" :key="error">
+                    <span class="text-red">{{ error }}</span>
+                </div>
             </div>
             <div class="mb-3">
                 <label class="form-label label-white text-white">Type</label>
                 <div class="form-check">
-                    <input class="form-check-input" type="radio" name="type" id="news" value="news" v-model="type">
+                    <input class="form-check-input" @change="resetTypeErrors" type="radio" name="type" id="news" value="news" v-model="type">
                     <label class="form-check-label label-white text-white" for="news">
                         News
                     </label>
                 </div>
                 <div class="form-check">
-                    <input class="form-check-input" type="radio" name="type" id="post" value="post" v-model="type">
+                    <input class="form-check-input" @change="resetTypeErrors" type="radio" name="type" id="post" value="post" v-model="type">
                     <label class="form-check-label label-white text-white"  for="post">
                         Post
                     </label>
+                </div>
+                <div v-for="error in typeErrors" :key="error">
+                    <span class="text-red">{{ error }}</span>
                 </div>
             </div>
 
@@ -109,6 +124,11 @@ export default {
             file: '',
             success: '',
             published: false,
+            titleErrors: [],
+            descriptionErrors: [],
+            contentErrors: [],
+            imageErrors: [],
+            typeErrors: [],
 
             editorOptions: {
                 toolbar: [
@@ -155,35 +175,58 @@ export default {
         onChange(e)
         {
             this.file = e.target.files[0];
+            this.resetImageErrors();
         },
         createPost() {
             if (
                 !this.title || this.title.trim() === '' ||
                 !this.description || this.description.trim() === '' ||
                 !this.content || this.content.trim() === '' ||
-                !this.file || this.file.name.trim() === ''
+                !this.file || this.file.name.trim() === '' ||
+                !this.type || this.type.trim() === ''
             ) {
                 // console.log('Validation Error')
                 // $('#validationModal').modal('show');
                 if(!this.title || this.title.trim() === '')
                 {
-                    this.showWarningToast('Title is required');
+                    // this.showWarningToast('Title is required');
+                    // this.title
+                    if (!this.titleErrors.includes('Title is required')) {
+                        this.titleErrors.push('Title is required');
+                    }
+                    return;
                 }
                 if(!this.description || this.description.trim() === '')
                 {
-                    this.showWarningToast('Description is required');
+                    // this.showWarningToast('Description is required');
+                    if (!this.descriptionErrors.includes('Description is required')) {
+                        this.descriptionErrors.push('Description is required');
+                    }
+                    return;
                 }
                 if(!this.content || this.content.trim() === '')
                 {
-                    this.showWarningToast('Content is required');
+                    // this.showWarningToast('Content is required');
+                    if (!this.contentErrors.includes('Content is required')) {
+                        this.contentErrors.push('Content is required');
+                    }
+                    return;
                 }
                 if(!this.file || this.file.name.trim() === '')
                 {
-                    this.showWarningToast('Image is required');
+                    // this.showWarningToast('Image is required');
+                    if (!this.imageErrors.includes('Image is required')) {
+                        this.imageErrors.push('Image is required');
+                    }
+                    return;
                 }
                 if(!this.type || this.type.trim() === '')
                 {
-                    this.showWarningToast('Type is required');
+                    // this.showWarningToast('Type is required');
+                    if (!this.typeErrors.includes('Type is required')) {
+                        this.typeErrors.push('Type is required');
+                    }
+                    return;
                 }
 
             } else {
@@ -278,7 +321,47 @@ export default {
                 !this.content || this.content.trim() === '' ||
                 !this.file || this.file.name.trim() === ''
             ) {
-                this.showWarningToast('Please fill all the fields');
+                if(!this.title || this.title.trim() === '')
+                {
+                    // this.showWarningToast('Title is required');
+                    // this.title
+                    if (!this.titleErrors.includes('Title is required')) {
+                        this.titleErrors.push('Title is required');
+                    }
+                    return;
+                }
+                if(!this.description || this.description.trim() === '')
+                {
+                    // this.showWarningToast('Description is required');
+                    if (!this.descriptionErrors.includes('Description is required')) {
+                        this.descriptionErrors.push('Description is required');
+                    }
+                    return;
+                }
+                if(!this.content || this.content.trim() === '')
+                {
+                    // this.showWarningToast('Content is required');
+                    if (!this.contentErrors.includes('Content is required')) {
+                        this.contentErrors.push('Content is required');
+                    }
+                    return;
+                }
+                if(!this.file || this.file.name.trim() === '')
+                {
+                    // this.showWarningToast('Image is required');
+                    if (!this.imageErrors.includes('Content is required')) {
+                        this.imageErrors.push('Content is required');
+                    }
+                    return;
+                }
+                if(!this.type || this.type.trim() === '')
+                {
+                    // this.showWarningToast('Type is required');
+                    if (!this.typeErrors.includes('Content is required')) {
+                        this.typeErrors.push('Content is required');
+                    }
+                    return;
+                }
 
             } else {
                 // $('#confirmationModal').modal('show');
@@ -303,12 +386,38 @@ export default {
                     });
             }
 
-        }
+        },
+        resetTitleErrors()
+        {
+            this.titleErrors = [];
+        },
+        resetDescriptionErrors()
+        {
+            this.descriptionErrors = [];
+        },
+        resetContentErrors()
+        {
+            this.contentErrors = [];
+        },
+        resetImageErrors()
+        {
+            this.imageErrors = [];
+        },
+        resetTypeErrors()
+        {
+            this.typeErrors = [];
+        },
     }
 }
 </script>
 
 <style scoped>
+
+.border-edge
+{
+    border-radius: 0px;
+    border: 2px solid white;
+}
 .modal-content {
     outline: 2px solid white;
     outline-offset: -2px;

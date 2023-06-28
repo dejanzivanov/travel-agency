@@ -12,7 +12,7 @@
 
 <body>
 <div id="app">
-    <header-component :authenticated="{{ auth()->check() ? 'true' : 'false' }}"></header-component>
+    <header-component :authenticated="{{ auth()->check() ? 'true' : 'false' }}" :is_admin="<?php if (\App\Http\Controllers\AdminController::isAdmin()) { echo 'true'; } else { echo 'false'; }  ?>"></header-component>
     <?php $post = \App\Http\Controllers\BlogController::findPostById($id); $post = $post[0]; ?>
     <update-blog-component :post="{{ json_encode($post) }}"></update-blog-component>
 

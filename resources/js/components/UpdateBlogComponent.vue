@@ -1,20 +1,29 @@
 <template>
     <div>
-        <div class="container shaking-effect">
+        <div class="container shaking-effect border-edge mt-3 p-4">
             <div>
-                <h1 class="text-center mt-3">Edit Page </h1>
+                <h1 class="text-center ">Edit Page </h1>
             </div>
             <div class="mb-3">
                 <label :for="title" class="form-label label-white text-white">Title</label>
-                <input type="text" class="form-control" v-model="title" :id="title" name="title" required>
+                <input type="text" v-on:keydown="resetTitleErrors" class="form-control" v-model="title" :id="title" name="title" required>
+                <div v-for="error in titleErrors" :key="error">
+                    <span class="text-red">{{ error }}</span>
+                </div>
             </div>
             <div class="mb-3">
                 <label :for="description" class="form-label label-white text-white">Description</label>
-                <input type="text" class="form-control" v-model="description" :id="description" name="description" required>
+                <input type="text" v-on:keydown="resetDescriptionErrors" class="form-control" v-model="description" :id="description" name="description" required>
+                <div v-for="error in descriptionErrors" :key="error">
+                    <span class="text-red">{{ error }}</span>
+                </div>
             </div>
             <div class="mb-3">
                 <label for="bodyText" class="form-label label-white text-white">Body Text</label>
-                <vue-editor id="bodyText" @input="logContent" v-model="post.bodyText" :editorOptions="editorOptions"></vue-editor>
+                <vue-editor id="bodyText" v-on:keydown="resetContentErrors" @input="logContent" v-model="post.bodyText" :editorOptions="editorOptions"></vue-editor>
+                <div v-for="error in contentErrors" :key="error">
+                    <span class="text-red">{{ error }}</span>
+                </div>
             </div>
             <div class="mb-3">
                 <label :for="image" class="form-label label-white text-white">Image</label>
@@ -25,6 +34,9 @@
                         <input type="file" class="form-control"  :src=" this.stagod.image " width="100" height="100" v-on:change="onChange">
                     </form>
                 </div>
+                <div v-for="error in imageErrors" :key="error">
+                    <span class="text-red">{{ error }}</span>
+                </div>
             </div>
 
             <div v-if="this.stagod.image != null || this.stagod.image != undefined || this.stagod.image != '' || this.file != null || this.file != undefined || this.file != ''    ">
@@ -33,16 +45,19 @@
             <div class="mb-3">
                 <label class="form-label label-white text-white">Type</label>
                 <div class="form-check">
-                    <input class="form-check-input" type="radio" name="type" id="news" value="news" v-model="type">
+                    <input class="form-check-input" @change="resetTypeErrors" type="radio" name="type" id="news" value="news" v-model="type">
                     <label class="form-check-label label-white" for="news">
                         News
                     </label>
                 </div>
                 <div class="form-check">
-                    <input class="form-check-input" type="radio" name="type" :id="post" value="post" v-model="type">
+                    <input class="form-check-input" @change="resetTypeErrors" type="radio" name="type" :id="post" value="post" v-model="type">
                     <label class="form-check-label label-white" :for="post">
                         Post
                     </label>
+                </div>
+                <div v-for="error in typeErrors" :key="error">
+                    <span class="text-red">{{ error }}</span>
                 </div>
             </div>
             <div class="mb-4">
@@ -130,6 +145,11 @@ export default {
             stagod: this.post,
             imageHasBeenSelected: false,
             // image: this.post.image,
+            titleErrors: [],
+            descriptionErrors: [],
+            contentErrors: [],
+            imageErrors: [],
+            typeErrors: [],
 
             editorOptions: {
                 toolbar: [
@@ -211,22 +231,30 @@ export default {
         updatePost(postId) {
             if(this.title === '' || this.title === null || this.title === undefined)
             {
-                this.showWarningToast('Title is required');
+                if (!this.titleErrors.includes('Title is required')) {
+                    this.titleErrors.push('Title is required');
+                }
                 return;
             }
             if(this.description === '' || this.description === null || this.description === undefined)
             {
-                this.showWarningToast('Description is required');
+                if (!this.descriptionErrors.includes('Description is required')) {
+                    this.descriptionErrors.push('Description is required');
+                }
                 return;
             }
             if(this.content === '' || this.content === null || this.content === undefined)
             {
-                this.showWarningToast('Content is required');
+                if (!this.contentErrors.includes('Content is required')) {
+                    this.contentErrors.push('Content is required');
+                }
                 return;
             }
             if(this.type === '' || this.type === null || this.type === undefined)
             {
-                this.showWarningToast('Type is required');
+                if (!this.typeErrors.includes('Type is required')) {
+                    this.typeErrors.push('Type is required');
+                }
                 return;
             }
             if(this.status === '' || this.status === null || this.status === undefined)
@@ -237,7 +265,9 @@ export default {
 
             if(this.image === '' || this.image === null || this.image === undefined)
             {
-                this.showWarningToast('Image is required');
+                if (!this.imageErrors.includes('Image is required')) {
+                    this.imageErrors.push('Image is required');
+                }
                 return;
             }
 
@@ -367,7 +397,27 @@ export default {
                 icon: true,
                 rtl: false,
             });
-        }
+        },
+        resetTitleErrors()
+        {
+            this.titleErrors = [];
+        },
+        resetDescriptionErrors()
+        {
+            this.descriptionErrors = [];
+        },
+        resetContentErrors()
+        {
+            this.contentErrors = [];
+        },
+        resetImageErrors()
+        {
+            this.imageErrors = [];
+        },
+        resetTypeErrors()
+        {
+            this.typeErrors = [];
+        },
     }
 }
 </script>
@@ -384,6 +434,11 @@ export default {
     background: white;
 }
 
+.border-edge
+{
+    border-radius: 0px;
+    border: 2px solid white;
+}
 
 .quillWrapper > ql-editor {
     color: black!important;
