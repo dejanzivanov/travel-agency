@@ -173,9 +173,9 @@ export default {
     </div>
 </template>
 
-<style scoped>
+<style>
 
-#blog-table > tbody > tr > td.sorting_1 {
+ tbody > tr > td.sorting_1 {
     background-color: #999292 !important;
 }
 

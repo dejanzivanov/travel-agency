@@ -1,6 +1,6 @@
 <template>
     <div class="container">
-        <h1 class="text-center">Welcome to Insurance Purchasing</h1>
+        <h1 class="text-center text-white">Welcome to Insurance Purchasing</h1>
         <div class="row">
             <div class="col-md-4 pt-3 pb-3 m3-3">
                 <div class="card h-100 mb-3 m-3 p-3">
@@ -11,7 +11,7 @@
                     </div>
                     <div class="form-group">
                         <label for="last-name">Last Name:</label>
-                        <input type="text " v-on:keydown="resetLastNameErrors"  class="form-control" id="last-name" v-model="lastName">
+                        <input type="text" v-on:keydown="resetLastNameErrors"  class="form-control" id="last-name" v-model="lastName">
                         <div v-for="error in lastNameErrors" :key="error"><span class="text-red">{{ error }}</span></div>
                     </div>
                     <div class="form-group">
@@ -249,7 +249,7 @@ export default {
 
                     if (!document.getElementById('error-message-name-' + i))
                     {
-                        box.insertAdjacentHTML('afterend', '<div id="error-message-name-' + i + '"><span class="text-red">Name is required!</span></div>');
+                        box.insertAdjacentHTML('afterend', '<div id="error-message-name-' + i + '"><span class="text-red" style="color: red">Name is required!</span></div>');
                     }
 
                     return;
@@ -258,7 +258,7 @@ export default {
                 {
                     let box = document.getElementById("member-last-name-" + i);
                     if (!document.getElementById('error-message-last-name-' + i)) {
-                        box.insertAdjacentHTML('afterend', '<div id="error-message-last-name-' + i + '"><span class="text-red">Last Name is required!3</span></div>');
+                        box.insertAdjacentHTML('afterend', '<div id="error-message-last-name-' + i + '"><span class="text-red" style="color: red">Last Name is required!</span></div>');
                     }
                          return;
                 }
@@ -266,7 +266,7 @@ export default {
                 {
                     if (!document.getElementById('error-message-birth-date-' + i)) {
                         let box1 = document.getElementById("dependent-birth-date-" + i);
-                        box1.insertAdjacentHTML('beforeend', '<div id="error-message-birth-date-' + i + '"><span class="text-red">Date is required!3</span></div>');
+                        box1.insertAdjacentHTML('beforeend', '<div  id="error-message-birth-date-' + i + '"><span class="text-red" style="color: red">Date is required!</span></div>');
                     }
                     return;
                 }
@@ -351,3 +351,36 @@ export default {
     }
 };
 </script>
+
+
+<style scoped>
+
+
+.text-red {
+    color: red!important;
+}
+
+.form-control {
+    background-color: #222;
+    border: none;
+    color: #fff;
+}
+
+.form-control:focus {
+    background-color: #333;
+    color: #fff;
+}
+
+.btn-primary {
+    background-color: #007bff;
+    border: none;
+}
+
+.btn-primary:hover {
+    background-color: #0056b3;
+}
+
+.form-label {
+    color: #000;
+}
+</style>
