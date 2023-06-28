@@ -19,8 +19,8 @@ class Insurance extends Model
         $lastName = $request->lastName;
         $phone_number = $request->phoneNumber;
         $policy_type = $request->policyType;
-        $holiday_date_from = Carbon::parse($request->holidayDate[0])->toDateString();
-        $holiday_date_to = Carbon::parse($request->holidayDate[1])->toDateString();
+        $holiday_date_from = Carbon::parse($request->holidayDate[0])->addDay()->toDateString();;
+        $holiday_date_to = Carbon::parse($request->holidayDate[1])->addDay()->toDateString();;
         $group_members = $request->groupMembers;
 
         $id = DB::table('policy_holder')->insertGetId(

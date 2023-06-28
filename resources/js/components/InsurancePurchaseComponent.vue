@@ -17,11 +17,10 @@
                     <div class="form-group">
                         <label for="holiday-date">Holiday Duration:</label>
 
-                        <date-picker :disabled-date="disabledDate" class="form-control w-100"  @change="resetDateErrors" v-model="holidayDate" range format="DD.MM.YYYY." type="date" id="holiday-date"></date-picker>
+                        <date-picker  :disabled-date="disabledDate" class="form-control w-100"  @change="resetDateErrors" v-model="holidayDate" range format="DD.MM.YYYY." type="date" id="holiday-date"></date-picker>
                     </div>
                     <div class="form-group">
                         <label for="number-of-days">Number of Days:</label>
-<!--                        <p>{{ holidayDate[1] }}  {{ holidayDate[0] }}</p>-->
                         <p style="min-height: 40px" name="number-of-days pt-2" class="form-control h-50 mb-0 pt-0 ">{{ numberOfDays }}</p>
                         <div v-for="error in dateErrors" :key="error"><span class="text-red pt-2 mt-2">{{ error }}</span></div>
                     </div>
@@ -68,7 +67,6 @@
         </div>
         <div class="row mt-5 pt-5">
             <div class="d-flex justify-content-center align-items-center">
-<!--                <button type="button" class="btn btn-success" @click="purchase" :disabled="isPurchaseDisabled">Purchase</button>-->
                 <button type="button" class="btn btn-success" @click="purchase">Purchase</button>
             </div>
         </div>
@@ -116,8 +114,7 @@ export default {
                 this.numberOfDays = (this.holidayDate[1] - this.holidayDate[0]) / (1000 * 60 * 60 * 24);
             },
             deep: true
-        }
-
+        },
     },
     computed: {
         isLastMemberValid() {
@@ -223,7 +220,7 @@ export default {
                 }
                 return;
             }
-            if(this.holidayDate === '' || this.holidayDate === null || this.holidayDate === undefined)
+            if(this.holidayDate === '' || this.holidayDate === null || this.holidayDate === undefined || this.numberOfDays === '' || this.numberOfDays === null || this.numberOfDays === undefined || this.numberOfDays === 0)
             {
                 if (!this.dateErrors.includes('Date is required')) {
                     this.dateErrors.push('Date is required');
@@ -237,12 +234,8 @@ export default {
                 }
                 return;
             }
-
-            //ovde
-
-            const self = this;
-
-            for (let i = 0; i < this.groupMembers.length; i++) {
+            for (let i = 0; i < this.groupMembers.length - 1; i++) {
+                console.log(this.groupMembers.length)
                 if(this.groupMembers[i].name === '' || this.groupMembers[i].name === null || this.groupMembers[i].name === undefined)
                 {
                     let box = document.getElementById("member-name-" + i);
@@ -347,6 +340,17 @@ export default {
         },
         resetDependentsLastNameErrors() {
             this.dependentLastNameErrors = [];
+        },
+        disabledRangeStart(date) {
+            // const currentDate = new Date(); // Get the current date and time
+            // return date.getTime() < currentDate.getTime(); // Disable dates before the current moment
+            if(this.holidayDate.length > 0)
+            {
+                const firstSelectedDate = this.holidayDate[0];
+                this.disabledDate(firstSelectedDate);
+                return date < firstSelectedDate;
+            }
+            return false;
         },
     }
 };
